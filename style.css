@@ -1378,12 +1378,6 @@ a.bento-card:hover .mini-tag {
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, .35))
 }
 
-.meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: .5rem
-}
-
 .meta-label {
     font-size: .7rem;
     text-transform: uppercase;
@@ -1481,30 +1475,223 @@ a.bento-card:hover .mini-tag {
     overscroll-behavior-y: none;
 }
 
-/* --- HERO SECTION --- */
+/* =========================================
+   HERO PROJET (FINAL PREMIUM & CLEAN)
+   ========================================= */
+
 .project-hero {
     display: block;
-    /* AVANT : padding: 180px 5% 4rem 5%; */
-    /* MAINTENANT : On passe à 240px en haut pour décoller du menu */
-    padding: 240px 5% 2rem 5%; 
-    
-    text-align: center;
-    max-width: 1400px;
-    margin: 0 auto;
     position: relative;
+    padding-top: 200px; /* Espace pour le menu fixe */
+    padding-bottom: 4rem;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
+/* --- 1. TITRE PRINCIPAL --- */
+.project-hero h1 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6.5rem); /* Taille adaptative */
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+    /* Dégradé subtil blanc vers gris clair */
+    background: linear-gradient(180deg, #FFFFFF 0%, #B0B0B0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- 2. TAGS (BADGES) --- */
+.project-tags-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.project-tag {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    
+    padding: 8px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px; /* Forme de pilule */
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px);
+}
+
+/* --- 3. DESCRIPTION & BOUTON --- */
 .project-hero-content {
-    max-width: 900px;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+}
+
+.project-hero-description {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 auto 3rem auto;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem; /* Espace avant la barre d'infos */
+}
+
+/* --- 4. BARRE D'INFOS (Alignement corrigé) --- */
+.project-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes égales */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
     
-    /* AVANT : margin: 0 auto 5rem auto; */
-    /* MAINTENANT : On réduit la marge du bas à 3rem (environ 48px) */
-    margin: 0 auto 3rem auto; 
+    /* Bordures fines */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
     
+    /* ALIGNEMENT CLÉ : Tout vers le haut */
+    justify-content: flex-start; 
+    align-items: center; /* Centré horizontalement */
+    text-align: center;
+    
+    position: relative;
+    padding: 0 10px;
+}
+
+/* Titres (CLIENT, ANNÉE...) */
+.meta-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    opacity: 0.6;
+    
+    /* Espace fixe sous le titre pour garantir l'alignement */
+    margin-bottom: 1rem; 
+    margin-top: 5px;
+    line-height: 1;
+}
+
+/* Valeurs (Nom du client, 2024...) */
+.meta-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+}
+
+/* Séparateurs verticaux (Parfaits) */
+.meta-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Centrage vertical absolu */
+    height: 60%; /* Taille élégante */
+    width: 1px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* --- 5. IMAGE HERO --- */
+.project-hero-image {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
     position: relative;
     z-index: 2;
 }
 
+.project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    
+    /* Ombre diffuse premium */
+    box-shadow: 0 50px 100px -20px rgba(0,0,0,0.6);
+    
+    /* Petite animation d'apparition */
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* =========================================
+   RESPONSIVE (TABLETTE & MOBILE)
+   ========================================= */
+@media (max-width: 1024px) {
+    .project-hero {
+        padding-top: 140px;
+    }
+
+    .project-meta {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+        gap: 0; 
+        row-gap: 2rem; /* Espace vertical entre les lignes */
+        border-bottom: none; /* On retire la bordure globale du bas */
+    }
+    
+    .meta-item {
+        padding-bottom: 2rem;
+        /* On met une bordure sous chaque item */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    }
+    
+    /* On enlève les traits verticaux sur tablette/mobile */
+    .meta-item::after {
+        display: none;
+    }
+    
+    /* On enlève la bordure du bas pour les 2 derniers éléments */
+    .meta-item:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-tags-container {
+        gap: 8px;
+    }
+    
+    .project-meta {
+        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+        row-gap: 2rem;
+    }
+    
+    .meta-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .meta-item:last-child {
+        border-bottom: none;
+    }
+    
+    .project-hero-image {
+        padding: 0 1rem;
+    }
+}
+
+/* Animation simple */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 /* =========================================
    BOUTON "VISITER LE SITE"
    ========================================= */
@@ -1555,81 +1742,7 @@ a.bento-card:hover .mini-tag {
     color: #fff;
 }
 
-.project-category {
-    display: inline-block;
-    padding: 0.5rem 1.2rem;
-    background: rgba(255, 255, 255, 0.05); /* Fond un peu plus discret */
-    border: 1px solid var(--glass-border);
-    border-radius: 100px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-secondary); /* On garde la couleur violette */
-    
-    /* Changement des marges pour aller sous le titre */
-    margin-top: 1rem; 
-    margin-bottom: 2.5rem;
-    
-    backdrop-filter: blur(5px);
-}
 
-.project-hero h1 {
-    font-size: clamp(3.5rem, 10vw, 7.5rem);
-    margin-bottom: 2rem;
-    line-height: 1;
-    letter-spacing: -2px;
-}
-
-.project-hero-description {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--text-muted);
-    max-width: 700px;
-    margin: 0 auto 4rem auto;
-    line-height: 1.6;
-}
-
-/* Métadonnées */
-.project-meta {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto 4rem auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
-}
-
-.meta-item {
-    text-align: center;
-    display: block; /* Surcharge le display flex du global si nécessaire */
-}
-
-.meta-value {
-    font-size: 1rem;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Clash Display', sans-serif;
-    display: block;
-    margin-top: 0.5rem;
-}
-
-/* Image Hero */
-.project-hero-image {
-    width: 100vw;
-    max-width: 1800px;
-    margin-top: 2rem;
-    border-radius: 24px 24px 0 0;
-    overflow: hidden;
-    position: relative;
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-}
-
-.project-hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
 
 /* --- SECTION CONTEXTE --- */
 .context-section {
