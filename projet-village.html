@@ -1,78 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Village Motel | Olivier Pouchoy</title>
-    
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="/style.css">
+
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
+
 <body class="project-page">
-    
-    <script>window.PROJECT_PAGE = true;</script>
+    <div class="noise-overlay"></div>
 
-    <div class="preloader">
-        <div class="loader-text-wrapper">
-            <span class="loader-text base">Olivier</span>
-            <span class="loader-text fill">Olivier</span>
-        </div>
-    </div>
-
-    <nav class="desktop-nav">
-        <div class="logo"><a href="index.html">Olivier Pouchoy</a></div>
-        <button class="burger-btn" aria-label="Menu"><span></span><span></span></button>
-        <div class="links">
-            <div class="nav-backdrop"></div>
-            <a href="index.html#projets" class="nav-item">Projets</a>
-            <a href="index.html#infos" class="nav-item">Infos</a>
-            <a href="index.html#contact" class="nav-item" id="btn-contact">Contact</a>
-        </div>
-    </nav>
-
-    <div class="mobile-project-header" id="mobileHeader">
-        <div class="mobile-header-content">
-            <div class="mobile-header-left">
-                <h2 class="mobile-header-title">Village <span class="highlight">Motel</span></h2>
-                <div class="mobile-header-tags">
-                    <span class="mini-tag">WordPress</span>
-                    <span class="mini-tag">Elementor</span>
-                    <span class="mini-tag">UI Design</span>
-                </div>
-            </div>
-            <button class="info-button" onclick="openInfoDrawer()">Infos</button>
-        </div>
-    </div>
-
-    <div class="info-drawer" id="infoDrawer" onclick="closeInfoDrawer(event)">
-        <div class="info-drawer-content" onclick="event.stopPropagation()">
-            <div class="drawer-header">
-                <h3 class="drawer-title">Détails du projet</h3>
-                <button class="close-drawer" onclick="closeInfoDrawer()">✕</button>
-            </div>
-            <div class="sidebar-content">
-                <div class="project-meta">
-                    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Village Motel</span></div>
-                    <div class="meta-item"><span class="meta-label">Année</span><span class="meta-value">2024</span></div>
-                    <div class="meta-item"><span class="meta-label">Services</span><span class="meta-value">UI Design • WordPress</span></div>
-                </div>
-                <div class="project-description">
-                    <div class="description-block">
-                        <h3>Le Challenge</h3>
-                        <p>Le Village Motel avait besoin d'une refonte complète de son site web pour moderniser son image. L'ancien site était obsolète et ne reflétait pas la qualité des services.</p>
-                    </div>
-                    <div class="description-block">
-                        <h3>La Solution</h3>
-                        <p>J'ai conçu une interface épurée "Luxe accessible". Le site développé sur WordPress avec Elementor permet au client d'être autonome.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="organic-lines-container">
+        <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
+            <path class="organic-path" d="M-50,800 C300,900 500,500 1000,600 C1400,700 1300,100 1550,50" />
+            <path class="organic-path" d="M1500,400 C1100,100 800,900 400,600 C100,300 -50,500 -100,400" />
+        </svg>
     </div>
 
     <div class="mobile-menu-overlay">
@@ -83,142 +37,204 @@
         </nav>
     </div>
 
-    <main class="project-container">
-        <div class="project-wrapper">
-            <div class="project-layout">
-                
-                <aside class="project-info-sidebar">
-                    <div class="sidebar-content">
-                        <a href="index.html#projets" class="back-link"><span class="arrow-left">←</span> Retour</a>
-
-                        <div class="project-header">
-                            <h1>Village <span class="highlight">Motel</span></h1>
-                            <p class="project-intro">Refonte complète de site hôtelier avec système de réservation intégré.</p>
-                        </div>
-
-                        <div class="project-meta">
-                            <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Village Motel</span></div>
-                            <div class="meta-item"><span class="meta-label">Année</span><span class="meta-value">2024</span></div>
-                            <div class="meta-item"><span class="meta-label">Rôle</span><span class="meta-value">Design UI/UX • Intégration</span></div>
-                            <div class="meta-item">
-                                <span class="meta-label">Outils</span>
-                                <div class="project-tags">
-                                    <span class="tag">WordPress</span>
-                                    <span class="tag">Elementor</span>
-                                    <span class="tag">Figma</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="project-description">
-                            <div class="description-block">
-                                <h3>Le Challenge</h3>
-                                <p>Le Village Motel avait besoin d'une refonte complète de son site web pour moderniser son image. L'ancien site était obsolète et ne reflétait pas la qualité des services.</p>
-                            </div>
-                            <div class="description-block">
-                                <h3>La Solution</h3>
-                                <p>Conception d'une interface épurée mettant en valeur les chambres. Le site est full responsive et optimisé pour le SEO local.</p>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-                <section class="project-gallery-scroll">
-                    <div class="gallery-image">
-                        <img src="assets/thumb-village-motel.webp" alt="Page d'accueil">
-                    </div>
-                    
-                    <div class="gallery-image">
-                        <img src="https://placehold.co/1200x800/121212/333?text=Details+Chambres" alt="Vue Détails">
-                    </div>
-                    
-                    <div class="gallery-image">
-                        <img src="https://placehold.co/1200x1400/121212/333?text=Page+Mobile" alt="Vue Mobile">
-                    </div>
-                </section>
-
-            </div>
+    <nav class="desktop-nav">
+        <div class="logo"><a href="index.html">Olivier Pouchoy</a></div>
+        <button class="burger-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+        </button>
+        <div class="links">
+            <div class="nav-backdrop"></div>
+            <a href="index.html#projets" class="nav-item">Projets</a>
+            <a href="index.html#infos" class="nav-item">Infos</a>
+            <a href="index.html#contact" class="nav-item" id="btn-contact">Contact</a>
         </div>
+    </nav>
+    </div>
 
-        <div class="project-footer">
-            <a href="projet-dewalt.html" class="next-project-nav">
-                <div class="container">
-                    <span class="next-label">Projet Suivant</span>
-                    <h2 class="next-title">Best Of DeWalt <span class="arrow">→</span></h2>
+    <!-- HERO PROJET -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+
+            <h1 class="gradient-text">Village Motel</h1>
+
+            <span class="project-category">WordPress • Elementor • UX/UI</span>
+
+            <p class="project-hero-description">
+                Site vitrine bilingue pour un hôtel familial. Un projet complet alliant design moderne et système de
+                réservation sur mesure.
+            </p>
+
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-value">Village Motel</span>
                 </div>
-                <div class="next-bg-overlay"></div>
-            </a>
-        </div>
-        
-        <footer class="main-footer container" style="border-top: none;">
-            <div class="footer-links">
-                <a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Behance</a>
+                <div class="meta-item">
+                    <span class="meta-label">Année</span>
+                    <span class="meta-value">2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Rôle</span>
+                    <span class="meta-value">Design & Développement</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Type</span>
+                    <span class="meta-value">Site Vitrine</span>
+                </div>
             </div>
-            <p class="copyright">© 2025 Olivier Pouchoy.</p>
-        </footer>
-    </main>
+            <div class="hero-actions">
+                <a href="https://village-motel.com" target="_blank" rel="noopener noreferrer" class="visit-site-btn">
+                    Visiter le site
+                    <span class="visit-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Image Hero principale -->
+        <div class="project-hero-image">
+            <img src="assets/thumb-village-motel.png" alt="Aperçu du site Village Motel">
+        </div>
+
+        <div class="glow-container">
+            <div class="glow-blob blob-purple"></div>
+            <div class="glow-blob blob-blue"></div>
+        </div>
+    </section>
+
+    <!-- SECTION CONTEXTE -->
+    <section class="context-section">
+        <h2>Le Contexte</h2>
+        <p>
+            Le Village Motel, situé à Tournus, souhaitait moderniser son image et disposer d'un site clair, immersif et
+            facile à gérer. J'ai accompagné le client du brief à la mise en ligne, en réalisant la conception complète
+            sur Figma puis le développement sur WordPress avec Elementor.
+        </p>
+        <p>
+            Le site a été conçu en deux langues (français et anglais), optimisé pour la performance et le référencement,
+            et entièrement responsive. Depuis la mise en ligne, j'assure la maintenance complète du site : mises à jour,
+            ajustements visuels et évolutions de contenu.
+        </p>
+    </section>
+
+    <!-- SECTION STICKY SCROLL - LE DÉFI -->
+    <section class="sticky-scroll-section">
+        <div class="sticky-container">
+            <!-- CONTENU GAUCHE (STICKY) -->
+            <div class="sticky-content">
+                <h2>Le Défi</h2>
+                <p>
+                    Le principal défi a été la création d'un formulaire de réservation avancé, capable de gérer un grand
+                    volume de demandes tout en restant fluide et fiable.
+                </p>
+
+                <h3>Les objectifs</h3>
+                <ul>
+                    <li>Moderniser l'identité visuelle de l'hôtel</li>
+                    <li>Créer une expérience immersive et intuitive</li>
+                    <li>Développer un système de réservation performant</li>
+                    <li>Assurer une navigation bilingue fluide</li>
+                    <li>Optimiser le référencement naturel</li>
+                </ul>
+
+                <h3>Ma solution</h3>
+                <p>
+                    J'ai travaillé à la fois sur l'expérience utilisateur et la stabilité technique pour garantir une
+                    utilisation sans erreur, autant pour le client que pour les visiteurs. Le site offre désormais une
+                    interface moderne, des performances optimales et une gestion simplifiée.
+                </p>
+            </div>
+
+            <!-- IMAGES DROITE (SCROLL) -->
+
+            <div class="scroll-images">
+                <div class="scroll-image-item">
+                    <img src="assets/projet-village/frame1.png" alt="Page d'accueil Village Motel">
+                </div>
+                <div class="scroll-image-item">
+                    <img src="assets/projet-village/frame2.png" alt="Système de réservation">
+                </div>
+                <div class="scroll-image-item">
+                    <img src="assets/projet-village/frame3.png" alt="Pages chambres">
+                </div>
+                <div class="scroll-image-item">
+                    <img src="assets/projet-village/frame4.png" alt="Version mobile responsive">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    </div>
+    </section>
+    <section class="performance-section">
+        <div class="performance-container">
+
+            <div class="perf-col-left">
+                <h3>Stack Technique</h3>
+                <div class="skills-tags compact">
+                    <span class="skill-tag">Figma</span>
+                    <span class="skill-tag">WordPress</span>
+                    <span class="skill-tag">Elementor</span>
+                    <span class="skill-tag">SEO</span>
+                </div>
+            </div>
+
+            <div class="perf-col-right">
+                <h3>Impact</h3>
+                <div class="results-list">
+                    <div class="result-item">
+                        <span class="result-value">+180%</span>
+                        <span class="result-desc">Réservations directes</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-value">100%</span>
+                        <span class="result-desc">Satisfaction client</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-value">x2</span>
+                        <span class="result-desc">Temps de visite</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <a href="projet-unidade.html" class="next-project-section">
+        <div class="next-project-container">
+            <span class="next-project-label">Projet Suivant</span>
+            <div class="next-project-content">
+                <h2 class="next-project-title">
+                    UNIDADE Jiu-Jitsu
+                    <span class="next-project-arrow">→</span>
+                </h2>
+            </div>
+        </div>
+    </a>
+
+    <section class="contact-cta-section">
+        <h2>Un projet en tête ?</h2>
+        <p class="contact-cta-description">
+            Discutons de vos objectifs et créons ensemble quelque chose d'unique.
+        </p>
+        <a href="index.html#contact" class="contact-cta-btn">
+            Me contacter
+            <span class="arrow">↗</span>
+        </a>
+    </section>
+
+    <footer class="project-footer">
+        <div class="footer-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Behance</a>
+        </div>
+        <p class="copyright">© 2025 Olivier Pouchoy. Tous droits réservés.</p>
+    </footer>
 
     <script src="script.js"></script>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                    
-                    // Animation d'apparition des images
-                    gsap.utils.toArray('.gallery-image').forEach((img) => {
-                        gsap.to(img, {
-                            opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
-                            scrollTrigger: { trigger: img, start: "top 85%" }
-                        });
-                    });
-
-                    // Gestion Sidebar Sticky (Desktop uniquement)
-                    const sidebar = document.querySelector('.project-info-sidebar');
-                    const gallery = document.querySelector('.project-gallery-scroll');
-                    
-                    if (sidebar && gallery && window.innerWidth > 1024) {
-                        // Arrête le sticky quand la galerie est finie
-                        ScrollTrigger.create({
-                            trigger: ".project-layout",
-                            start: "top top",
-                            end: "bottom bottom",
-                            onUpdate: (self) => {
-                                const galleryBottom = gallery.getBoundingClientRect().bottom;
-                                const sidebarHeight = sidebar.offsetHeight;
-                                // Si la galerie est finie, on change le positionnement
-                                if (galleryBottom < sidebarHeight + 100) {
-                                    sidebar.style.top = (galleryBottom - sidebarHeight) + "px";
-                                } else {
-                                    sidebar.style.top = "100px";
-                                }
-                            }
-                        });
-                    }
-
-                    // Header Mobile Sticky
-                    const mobileHeader = document.getElementById('mobileHeader');
-                    if (mobileHeader && window.innerWidth <= 1024) {
-                        window.addEventListener('scroll', () => {
-                            if (window.scrollY > 100) mobileHeader.classList.add('visible');
-                            else mobileHeader.classList.remove('visible');
-                        });
-                    }
-                }
-            }, 500);
-        });
-
-        // Fonctions Drawer Mobile
-        function openInfoDrawer() {
-            document.getElementById('infoDrawer').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeInfoDrawer(e) {
-            if(!e || e.target.id === 'infoDrawer' || e.target.classList.contains('close-drawer')) {
-                document.getElementById('infoDrawer').classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        }
-    </script>
+    <script src="script-projet.js"></script>
 </body>
+
 </html>

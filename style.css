@@ -4,95 +4,80 @@
     --text-muted: #9CA3AF;
     --accent-primary: #4F46E5;
     --accent-secondary: #8B5CF6;
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.1)
 }
 
-/* --- RESET & BASE --- */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
+
+/* =========================================
+   RESET & BASE (CORRIGÉ POUR STICKY)
+   ========================================= */
 
 html {
-    scroll-behavior: smooth;
-    overflow-y: scroll;
-}
-
-/* Stabilisation Lenis */
-html.lenis,
-html.lenis body {
+    /* On enlève 'height: 100%' et 'overflow: auto' qui cassaient le sticky */
     height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-    overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
+    /* On cache le scroll horizontal au niveau racine */
+    overflow-x: hidden;
+    /* On laisse le scroll vertical se faire naturellement */
+    overflow-y: visible;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    font-family: Inter, sans-serif;
+    
+    /* CRUCIAL : On passe l'overflow du body en visible */
+    /* L'overflow-x est déjà géré par le html au-dessus */
+    overflow: visible; 
+    
+    width: 100%;
+    position: relative;
 }
 
-/* Accélération matérielle */
+/* Si tu utilises Lenis, on garde ça pour la compatibilité */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
 .bento-card,
-.cta-btn,
-.links a,
 .cv-btn,
+.links a,
 .magnetic-button {
     will-change: transform;
     backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased
 }
 
-/* --- TYPOGRAPHIE --- */
-h1,
-h2,
-h3,
+.loader-text,
 .logo,
 .mobile-link,
 .stat-number,
-.next-title,
-.loader-text {
-    font-family: 'Clash Display', sans-serif;
+h1,
+h2,
+h3 {
+    font-family: 'Clash Display', sans-serif
 }
 
 h1 {
     font-size: clamp(3rem, 6vw, 6rem);
     line-height: 1.1;
-    font-weight: 600;
+    font-weight: 600
 }
 
-/* Titres de section (Style général Desktop) */
-.section-title,
-.contact-title {
+.contact-title,
+.section-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 4rem;
     line-height: 1.1;
-    color: white;
+    color: #fff
 }
 
-/* Cas particulier : Titres dans les blocs de texte (Page Projet) */
-.story-block .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* --- TEXTURE GRAIN (NOISE) --- */
 .noise-overlay {
     position: fixed;
     top: -50%;
@@ -100,59 +85,58 @@ h1 {
     width: 200%;
     height: 200%;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.02;
+    opacity: .02;
     pointer-events: none;
     z-index: 99999;
-    animation: noise 0.2s infinite;
+    animation: noise .2s infinite
 }
 
 @keyframes noise {
     0% {
-        transform: translate(0, 0);
+        transform: translate(0, 0)
     }
 
     10% {
-        transform: translate(-5%, -5%);
+        transform: translate(-5%, -5%)
     }
 
     20% {
-        transform: translate(-10%, 5%);
+        transform: translate(-10%, 5%)
     }
 
     30% {
-        transform: translate(5%, -10%);
+        transform: translate(5%, -10%)
     }
 
     40% {
-        transform: translate(-5%, 15%);
+        transform: translate(-5%, 15%)
     }
 
     50% {
-        transform: translate(-10%, 5%);
+        transform: translate(-10%, 5%)
     }
 
     60% {
-        transform: translate(15%, 0);
+        transform: translate(15%, 0)
     }
 
     70% {
-        transform: translate(0, 10%);
+        transform: translate(0, 10%)
     }
 
     80% {
-        transform: translate(-15%, 0);
+        transform: translate(-15%, 0)
     }
 
     90% {
-        transform: translate(10%, 5%);
+        transform: translate(10%, 5%)
     }
 
     100% {
-        transform: translate(5%, 0);
+        transform: translate(5%, 0)
     }
 }
 
-/* --- PRELOADER (TEXT FILL) --- */
 .preloader {
     position: fixed;
     top: 0;
@@ -163,7 +147,7 @@ h1 {
     z-index: 999999;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center
 }
 
 .loader-text-wrapper {
@@ -172,7 +156,7 @@ h1 {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center
 }
 
 .loader-text {
@@ -184,47 +168,45 @@ h1 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .base {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-    z-index: 1;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, .3);
+    z-index: 1
 }
 
 .fill {
     z-index: 2;
     color: transparent;
-    background: linear-gradient(90deg, #ffffff 0%, #ffffff 45%, transparent 55%, transparent 100%);
+    background: linear-gradient(90deg, #fff 0, #fff 45%, transparent 55%, transparent 100%);
     background-size: 250% 100%;
     background-position: 100% 0;
     -webkit-background-clip: text;
-    background-clip: text;
+    background-clip: text
 }
 
-/* --- NAVIGATION (SLIDING PILL) --- */
 .desktop-nav {
     display: flex;
     align-items: center;
     width: fit-content;
     justify-content: center;
     gap: 2rem;
-    padding: 0.8rem 1.5rem;
+    padding: .8rem 1.5rem;
     position: fixed;
     top: 20px;
     left: 50%;
     z-index: 10001;
-    background: rgba(11, 12, 21, 0.6);
+    background: rgba(11, 12, 21, .6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 100px;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .3);
     flex-wrap: nowrap;
     white-space: nowrap;
     opacity: 0;
-    visibility: hidden;
-    /* Caché pour l'anim intro */
+    visibility: hidden
 }
 
 .logo {
@@ -234,14 +216,14 @@ h1 {
     z-index: 10005;
     pointer-events: auto;
     white-space: nowrap;
-    flex-shrink: 0;
+    flex-shrink: 0
 }
 
 .logo a {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    display: block;
+    display: block
 }
 
 .links {
@@ -249,10 +231,10 @@ h1 {
     display: flex;
     align-items: center;
     gap: 0;
-    background: transparent;
+    background: 0 0;
     border: none;
     border-radius: 100px;
-    padding: 4px;
+    padding: 4px
 }
 
 .nav-backdrop {
@@ -260,12 +242,12 @@ h1 {
     top: 4px;
     left: 4px;
     height: calc(100% - 8px);
-    width: 0px;
+    width: 0;
     background: var(--accent-primary);
     border-radius: 100px;
     z-index: 0;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    pointer-events: none;
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+    pointer-events: none
 }
 
 .nav-item {
@@ -274,20 +256,19 @@ h1 {
     color: var(--text-muted);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.6rem 1.5rem;
+    font-size: .95rem;
+    padding: .6rem 1.5rem;
     border-radius: 100px;
-    transition: color 0.3s ease;
+    transition: color .3s ease;
     display: block;
     text-align: center;
-    border: none;
+    border: none
 }
 
 .nav-item:hover {
-    color: white;
+    color: #fff
 }
 
-/* --- HERO --- */
 .hero {
     min-height: 92vh;
     display: flex;
@@ -298,66 +279,47 @@ h1 {
     position: relative;
     padding: 0 1rem;
     overflow: hidden;
-    z-index: 1;
+    z-index: 1
 }
 
 .hero::after {
-    /* Masque de fusion en bas */
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 250px;
-    background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
+    background: linear-gradient(to bottom, transparent 0, var(--bg-color) 100%);
     z-index: 0;
-    pointer-events: none;
+    pointer-events: none
 }
 
-.hero h1,
-.hero .hero-subtitle {
+.hero .hero-subtitle,
+.hero h1 {
     opacity: 0;
-    visibility: hidden;
+    visibility: hidden
 }
 
-/* Effet Spotlight Texte */
 .hero-content {
     display: flex;
     flex-direction: column;
-    /* Empile les éléments verticalement */
     align-items: center;
-    /* CENTRE tout horizontalement */
-
     position: relative;
-    z-index: 2;
+    z-index: 2
 }
 
-/* 2. Le style du grand titre (CORRIGÉ) */
 h1.reveal-text {
     color: transparent;
-    /* Nécessaire pour l'effet */
-
-    /* --- CORRECTION ICI --- */
-    /* On définit des valeurs par défaut (, 50%) pour x et y si la souris n'a pas bougé */
-    /* On change la couleur de fin : #ffffff (Centre) vers #52525b (Bords = Gris Zinc) */
-    /* Avant c'était transparent, maintenant c'est gris visible */
-    background-image: radial-gradient(circle 300px at var(--cursor-x, 50%) var(--cursor-y, 50%),
-            #ffffff 0%,
-            #52525b 100%);
-    /* ---------------------- */
-
+    background-image: radial-gradient(circle 300px at var(--cursor-x, 50%) var(--cursor-y, 50%), #fff 0, #52525b 100%);
     -webkit-background-clip: text;
     background-clip: text;
-
     will-change: background-position;
     cursor: default;
-
-    /* Sécurité : on s'assure qu'il est visible */
-    visibility: visible;
+    visibility: visible
 }
 
 .gradient-text {
-    background: linear-gradient(120deg, var(--accent-primary) 0%, #a855f7 25%, var(--accent-secondary) 50%, #a855f7 75%, var(--accent-primary) 100%);
+    background: linear-gradient(120deg, var(--accent-primary) 0, #a855f7 25%, var(--accent-secondary) 50%, #a855f7 75%, var(--accent-primary) 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -367,12 +329,12 @@ h1.reveal-text {
     z-index: 2;
     position: relative;
     animation: textShine 5s linear infinite;
-    filter: drop-shadow(0 0 15px rgba(79, 70, 229, 0.3));
+    filter: drop-shadow(0 0 15px rgba(79, 70, 229, .3))
 }
 
 @keyframes textShine {
     to {
-        background-position: 200% center;
+        background-position: 200% center
     }
 }
 
@@ -384,10 +346,9 @@ h1.reveal-text {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.6;
+    line-height: 1.6
 }
 
-/* Blobs Liquides */
 .glow-container {
     position: absolute;
     top: 0;
@@ -396,7 +357,7 @@ h1.reveal-text {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    pointer-events: none;
+    pointer-events: none
 }
 
 .glow-blob {
@@ -407,91 +368,86 @@ h1.reveal-text {
     height: 400px;
     border-radius: 50%;
     filter: blur(140px);
-    opacity: 0.3;
+    opacity: .3;
     mix-blend-mode: screen;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .blob-purple {
-    background: #8B5CF6;
+    background: #8b5cf6
 }
 
 .blob-blue {
-    background: #4F46E5;
+    background: #4f46e5;
     width: 500px;
-    height: 500px;
+    height: 500px
 }
 
-/* --- SECTION PROJETS (BENTO) --- */
 .projects-section {
     padding: 8rem 5%;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color)
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    width: 100%;
+    width: 100%
 }
 
 .highlight {
     color: var(--accent-secondary);
-    margin-left: 0px;
+    margin-left: 0
 }
 
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 400px;
-    gap: 24px;
+    gap: 24px
 }
 
 a.bento-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, .03);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     overflow: hidden;
     position: relative;
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: inherit;
+    color: inherit
 }
 
 .span-2 {
-    grid-column: span 2;
+    grid-column: span 2
 }
 
 a.bento-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent-primary);
-    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(79, 70, 229, .3)
 }
 
-/* --- IMAGE DE CARTE (FUSIONNÉE) --- */
 .card-image {
     width: 100%;
     height: 100%;
     position: relative;
-    
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    
-    /* Le masque pour l'intégration douce */
-    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    
-    transition: transform 0.6s ease;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%);
+    mask-image: radial-gradient(ellipse at center, #000 40%, transparent 80%);
+    transition: transform .6s ease
 }
 
-/* On supprime le ::after s'il existe encore */
-.card-image::after { display: none; }
+.card-image::after {
+    display: none
+}
 
 a.bento-card:hover .card-image {
-    transform: scale(1.05);
+    transform: scale(1.05)
 }
 
 .card-content {
@@ -500,22 +456,21 @@ a.bento-card:hover .card-image {
     left: 0;
     width: 100%;
     padding: 2rem;
-    background: linear-gradient(to top, rgba(11, 12, 21, 0.95), transparent);
-    z-index: 2;
+    background: linear-gradient(to top, rgba(11, 12, 21, .95), transparent);
+    z-index: 2
 }
 
-/* --- A PROPOS --- */
 .about-section {
     padding: 10rem 5%;
     position: relative;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .about-glow-1,
 .about-glow-2 {
     position: absolute;
     filter: blur(50px);
-    pointer-events: none;
+    pointer-events: none
 }
 
 .about-glow-1 {
@@ -523,7 +478,7 @@ a.bento-card:hover .card-image {
     left: 10%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(79, 70, 229, .2) 0, transparent 70%)
 }
 
 .about-glow-2 {
@@ -531,9 +486,9 @@ a.bento-card:hover .card-image {
     left: 50%;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(139, 92, 246, .3) 0, transparent 60%);
     z-index: -1;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
 }
 
 .about-grid {
@@ -542,7 +497,7 @@ a.bento-card:hover .card-image {
     gap: 6rem;
     align-items: center;
     position: relative;
-    z-index: 1;
+    z-index: 1
 }
 
 .about-text p {
@@ -550,35 +505,35 @@ a.bento-card:hover .card-image {
     line-height: 1.7;
     margin-bottom: 2rem;
     font-size: 1.1rem;
-    max-width: 90%;
+    max-width: 90%
 }
 
 .lead-text {
     font-size: 1.4rem;
-    color: white !important;
-    font-weight: 500;
+    color: #fff !important;
+    font-weight: 500
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 1.5rem;
-    margin-top: 3rem;
+    margin-top: 3rem
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, .03);
     border: 1px solid var(--glass-border);
     padding: 1.5rem;
     border-radius: 20px;
     text-align: center;
     backdrop-filter: blur(10px);
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform .3s, border-color .3s
 }
 
 .stat-card:hover {
     border-color: var(--accent-primary);
-    transform: translateY(-5px);
+    transform: translateY(-5px)
 }
 
 .stat-number {
@@ -586,14 +541,14 @@ a.bento-card:hover .card-image {
     font-weight: 700;
     color: var(--accent-secondary);
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: .9rem;
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1px
 }
 
 .about-image-wrapper {
@@ -601,11 +556,11 @@ a.bento-card:hover .card-image {
     height: 650px;
     border-radius: 32px;
     padding: 10px;
-    background: linear-gradient(45deg, rgba(79, 70, 229, 0.3), transparent 60%);
+    background: linear-gradient(45deg, rgba(79, 70, 229, .3), transparent 60%);
     will-change: transform, opacity;
     opacity: 0;
     visibility: hidden;
-    transform: scale(0.95);
+    transform: scale(.95)
 }
 
 .about-image {
@@ -615,12 +570,12 @@ a.bento-card:hover .card-image {
     background-position: center;
     border-radius: 24px;
     filter: grayscale(100%) contrast(1.1);
-    transition: filter 0.5s ease;
-    box-shadow: 0 20px 40px -20px rgba(139, 92, 246, 0.5);
+    transition: filter .5s ease;
+    box-shadow: 0 20px 40px -20px rgba(139, 92, 246, .5)
 }
 
 .about-image-wrapper:hover .about-image {
-    filter: grayscale(0%) contrast(1);
+    filter: grayscale(0) contrast(1)
 }
 
 .floating-badge {
@@ -628,17 +583,16 @@ a.bento-card:hover .card-image {
     bottom: 50px;
     right: -30px;
     background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-    color: white;
+    color: #fff;
     padding: 1rem 2.5rem;
     border-radius: 50px;
     font-weight: 600;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+    z-index: 2
 }
 
-/* Bouton CV */
 .cv-wrapper {
-    margin-top: 3rem;
+    margin-top: 3rem
 }
 
 .cv-btn {
@@ -649,101 +603,97 @@ a.bento-card:hover .card-image {
     background: var(--accent-primary);
     border: none;
     border-radius: 50px;
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.05rem;
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, .3);
+    transition: all .3s cubic-bezier(.25, .8, .25, 1)
 }
 
 .icon-download {
     font-size: 1.3rem;
-    transition: transform 0.3s ease;
+    transition: transform .3s ease
 }
 
 .cv-btn:hover {
     background: var(--accent-secondary);
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 30px -10px rgba(139, 92, 246, 0.6);
+    box-shadow: 0 12px 30px -10px rgba(139, 92, 246, .6)
 }
 
 .cv-btn:hover .icon-download {
-    transform: translateY(3px);
+    transform: translateY(3px)
 }
 
-/* --- MARQUEE (CORRECTION DÉFILEMENT) --- */
 .skills-section {
     padding: 4rem 0;
     border-top: 1px solid var(--glass-border);
     border-bottom: 1px solid var(--glass-border);
-    background: transparent;
-    overflow: hidden; /* Masque ce qui dépasse */
+    background: 0 0;
+    overflow: hidden;
     position: relative;
     z-index: 1;
-    width: 100%; /* S'assure que la section prend toute la largeur */
+    width: 100%
 }
 
 .marquee-wrapper {
     width: 100%;
     overflow: hidden;
-    white-space: nowrap; /* Interdit le retour à la ligne */
-    display: flex; /* Permet d'aligner le contenu */
+    white-space: nowrap;
+    display: flex
 }
 
 .marquee-content {
-    display: flex; /* Les items sont côte à côte */
+    display: flex;
     align-items: center;
-    /* Important : Le contenu doit être assez large */
     min-width: 100%;
-    flex-shrink: 0; /* Empêche le contenu de s'écraser */
+    flex-shrink: 0
 }
 
-/* Style du texte */
 .marquee-content span {
     font-family: 'Clash Display', sans-serif;
     font-size: clamp(2rem, 4vw, 4rem);
-    color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, .15);
     margin: 0 2rem;
     font-weight: 600;
-    transition: color 0.3s;
-    flex-shrink: 0; /* Important pour que le texte ne se coupe pas */
+    transition: color .3s;
+    flex-shrink: 0
 }
 
 .marquee-content span:hover {
-    color: var(--accent-primary);
+    color: var(--accent-primary)
 }
 
-/* --- CONTACT --- */
 .contact-section {
     padding: 8rem 5% 2rem 5%;
     text-align: center;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center
 }
 
 .magnetic-button {
     display: inline-block;
     padding: 1.5rem 4rem;
     background: var(--accent-primary);
-    color: white;
+    color: #fff;
     border-radius: 100px;
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600;
-    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 20px rgba(79, 70, 229, .4);
+    transition: all .3s cubic-bezier(.25, .8, .25, 1);
     margin-bottom: 8rem;
-    margin-bottom: 0;
+    margin-bottom: 0
 }
 
 .magnetic-button:hover {
     background: var(--accent-secondary);
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
-    color: white;
+    box-shadow: 0 15px 30px -5px rgba(139, 92, 246, .6);
+    color: #fff
 }
 
 .main-footer {
@@ -754,7 +704,7 @@ a.bento-card:hover .card-image {
     align-items: center;
     color: var(--text-muted);
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1rem
 }
 
 .footer-links a {
@@ -762,23 +712,22 @@ a.bento-card:hover .card-image {
     color: var(--text-muted) !important;
     font-size: 1.1rem;
     margin-right: 2rem;
-    transition: all 0.3s ease;
-    font-family: 'Clash Display', sans-serif;
+    transition: all .3s ease;
+    font-family: 'Clash Display', sans-serif
 }
 
 .footer-links a:hover {
-    color: white !important;
+    color: #fff !important;
     transform: translateY(-2px);
-    display: inline-block;
+    display: inline-block
 }
 
-/* --- MENU BURGER --- */
 .burger-btn {
     display: none;
     position: relative;
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, .05);
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 50%;
@@ -788,30 +737,23 @@ a.bento-card:hover .card-image {
     justify-content: center;
     align-items: center;
     gap: 6px;
-    transition: all 0.3s ease;
+    transition: all .3s ease
 }
 
 .burger-btn span {
     display: block;
     width: 24px;
     height: 2px;
-    background-color: white;
-    transition: transform 0.3s;
+    background-color: #fff;
+    transition: transform .3s
 }
 
-.burger-btn.active {
-    background: var(--accent-primary);
-    border-color: var(--accent-primary);
+.burger-btn:hover span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg)
 }
 
-.burger-btn:hover span:nth-child(1),
-.burger-btn.active span:nth-child(1) {
-    transform: translateY(4px) rotate(45deg);
-}
-
-.burger-btn:hover span:nth-child(2),
-.burger-btn.active span:nth-child(2) {
-    transform: translateY(-4px) rotate(-45deg);
+.burger-btn:hover span:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg)
 }
 
 .mobile-menu-overlay {
@@ -828,7 +770,7 @@ a.bento-card:hover .card-image {
     justify-content: center;
     align-items: center;
     visibility: hidden;
-    opacity: 0;
+    opacity: 0
 }
 
 .mobile-nav-links {
@@ -836,31 +778,19 @@ a.bento-card:hover .card-image {
     width: auto !important;
     height: auto !important;
     padding: 0 !important;
-    background: transparent !important;
+    background: 0 0 !important;
     backdrop-filter: none !important;
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    text-align: center;
+    text-align: center
 }
 
 .mobile-link {
     font-size: 3rem;
-    color: white;
+    color: #fff;
     text-decoration: none;
-    overflow: hidden;
-}
-
-/* --- PAGE PROJET --- */
-.project-hero {
-    position: relative;
-    height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-top: -80px;
-    padding-top: 80px;
+    overflow: hidden
 }
 
 .hero-bg-image {
@@ -872,282 +802,158 @@ a.bento-card:hover .card-image {
     background-size: cover;
     background-position: center;
     z-index: 1;
-    opacity: 0.4;
+    opacity: .4;
     filter: blur(5px) grayscale(30%);
-    transform: scale(1.05);
+    transform: scale(1.05)
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
-}
-
-
-.project-title {
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-}
-
-.project-subtitle {
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.grid-2-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    z-index: 2
 }
 
 .body-text {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--text-muted);
-}
-
-.gallery-item {
-    margin-bottom: 4rem;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.02);
-}
-
-.gallery-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-bottom: 4rem;
-}
-
-.next-project-nav {
-    display: block;
-    position: relative;
-    padding: 10rem 0;
-    text-decoration: none;
-    background: #08090f;
-    overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.next-project-nav .container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-}
-
-.next-label {
-    display: block;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-}
-
-.next-title {
-    font-family: 'Clash Display', sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 700;
-    color: white;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+    color: var(--text-muted)
 }
 
 .arrow {
     display: inline-block;
-    transition: transform 0.3s ease;
+    transition: transform .3s ease
 }
 
-.next-bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, var(--accent-primary), transparent);
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.4s ease;
-}
-
-.next-project-nav:hover .next-bg-overlay {
-    opacity: 0.1;
-}
-
-.next-project-nav:hover .next-title {
-    transform: translateX(10px);
-}
-
-.next-project-nav:hover .arrow {
-    transform: translateX(20px);
-}
-
-/* --- SCROLLBAR --- */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 10px
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color);
+    background: var(--bg-color)
 }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
     border-radius: 10px;
-    border: 2px solid var(--bg-color);
+    border: 2px solid var(--bg-color)
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-secondary);
+    background: var(--accent-secondary)
 }
 
 html {
     scrollbar-width: thin;
-    scrollbar-color: var(--accent-primary) var(--bg-color);
+    scrollbar-color: var(--accent-primary) var(--bg-color)
 }
 
-
-/* =========================================
-   MEDIA QUERIES (RESPONSIVE)
-   ========================================= */
-
-/* TABLETTE (1024px) */
-@media (max-width: 1024px) {
+@media (max-width:1024px) {
     .burger-btn {
         display: flex;
-        flex-shrink: 0;
+        flex-shrink: 0
     }
 
-    .desktop-nav .links,
-    .desktop-nav .cta-btn {
-        display: none;
+    .desktop-nav .links {
+        display: none
     }
 
-    /* Menu Full Width sur Tablette */
     .desktop-nav {
         width: 90%;
         left: 50%;
         transform: translateX(-50%);
         justify-content: space-between;
         gap: 0;
-        padding: 0.8rem 1.5rem;
+        padding: .8rem 1.5rem;
         z-index: 10002;
         white-space: nowrap;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap
     }
 
     .logo {
-        flex-shrink: 0;
+        flex-shrink: 0
     }
 
     .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr)
     }
 
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 2rem
     }
 
     .about-image-wrapper {
         height: 400px;
-        order: -1;
+        order: -1
     }
 }
 
-/* MOBILE (768px) */
-@media (max-width: 768px) {
-
-    /* 1. Titre */
+@media (max-width:768px) {
     .section-title {
         margin-bottom: 3rem;
         line-height: 1.3;
-        font-size: 2.5rem;
+        font-size: 2.5rem
     }
 
-    /* 2. Bento Grid Optimisée Mobile */
     .bento-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
-        grid-auto-rows: auto;
+        grid-auto-rows: auto
     }
 
     .span-2 {
         grid-column: span 2;
-        height: 320px;
+        height: 320px
     }
 
     a.bento-card:not(.span-2) {
-        height: 220px;
+        height: 220px
     }
 
     a.bento-card:not(.span-2) .card-content {
-        padding: 1rem;
+        padding: 1rem
     }
 
     a.bento-card:not(.span-2) h3 {
-        font-size: 0.95rem;
+        font-size: .95rem;
         line-height: 1.2;
-        margin-bottom: 0.3rem;
+        margin-bottom: .3rem;
         white-space: normal;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow: ellipsis
     }
 
     a.bento-card:not(.span-2) p {
-        font-size: 0.75rem;
-        opacity: 0.8;
-        line-height: 1.2;
+        font-size: .75rem;
+        opacity: .8;
+        line-height: 1.2
     }
 
-    /* 3. Espacements */
-    .projects-section,
     .about-section,
-    .contact-section {
-        padding: 4rem 1.5rem;
+    .contact-section,
+    .projects-section {
+        padding: 4rem 1.5rem
     }
 
-    /* 4. Section À Propos */
     .about-grid {
-        gap: 3rem;
+        gap: 3rem
     }
 
     .about-image-wrapper {
         height: 350px;
-        margin-bottom: 1rem;
+        margin-bottom: 1rem
     }
 
     .floating-badge {
         bottom: 20px;
         right: 0;
-        padding: 0.8rem 1.5rem;
-        font-size: 0.8rem;
+        padding: .8rem 1.5rem;
+        font-size: .8rem
     }
 
-    /* 5. Stats */
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 1rem
     }
 
     .stat-card {
@@ -1156,155 +962,99 @@ html {
         align-items: center;
         justify-content: space-between;
         text-align: left;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.5rem
     }
 
     .stat-number {
         font-size: 2rem;
         margin: 0 1rem 0 0;
-        line-height: 1;
+        line-height: 1
     }
 
     .stat-label {
-        font-size: 0.8rem;
-        line-height: 1.2;
+        font-size: .8rem;
+        line-height: 1.2
     }
 
-    /* 6. Divers */
     .logo {
-        font-size: 1.2rem;
+        font-size: 1.2rem
     }
 
     .main-footer {
         flex-direction: column;
-        text-align: center;
-    }
-
-    .cursor-glow {
-        display: none;
+        text-align: center
     }
 
     .content-text {
         position: static;
-        margin-bottom: 2rem;
-    }
-
-    .project-cover-section {
-        height: 40vh;
+        margin-bottom: 2rem
     }
 
     .content-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr
     }
 
     .loader-text {
-        font-size: 11vw;
+        font-size: 11vw
     }
 
     .loader-text-wrapper {
-        padding: 0 20px;
+        padding: 0 20px
     }
 
     .cv-wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: center
     }
 
-    .section-padding {
-        padding: 4rem 0;
-    }
-
-    .section-padding-bottom {
-        padding-bottom: 4rem;
-    }
-
-    .next-project-nav {
-        padding: 6rem 0;
-    }
-
-    .project-hero {
-        height: 70vh;
-    }
-
-    .grid-2-cols,
-    .gallery-grid-2 {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    /* --- CORRECTION TAGS MOBILE --- */
     .card-tags {
         margin-bottom: 6px;
-        /* On réduit l'espace sous les tags */
         gap: 4px;
-        /* On les rapproche */
-        flex-wrap: wrap;
-        /* Permet de passer à la ligne si besoin */
+        flex-wrap: wrap
     }
 
     .mini-tag {
-        font-size: 0.6rem;
-        /* Texte minuscule et propre */
+        font-size: .6rem;
         padding: 3px 8px;
-        /* Padding ultra-fin */
-        border-width: 0.5px;
-        /* Bordure plus fine */
+        border-width: .5px;
         backdrop-filter: none;
-        /* Enlève le flou pour gagner en perf et lisibilité */
-        background: rgba(255, 255, 255, 0.1);
-        /* Fond simple */
+        background: rgba(255, 255, 255, .1)
     }
 
-    /* On remonte un peu le contenu global de la carte pour gagner de la place */
     .card-content {
-        padding: 1rem !important;
-        /* Force un padding réduit */
+        padding: 1rem !important
     }
-
 }
 
-/* --- TAGS BENTO (FLOTTANTS EN HAUT) --- */
 .card-tags {
-    position: absolute; /* Flotte par-dessus l'image */
+    position: absolute;
     top: 1.5rem;
     left: 1.5rem;
-    z-index: 10; /* Au premier plan */
-    
+    z-index: 10;
     display: flex;
     gap: 8px;
-    pointer-events: none; /* Permet de cliquer sur la carte à travers les tags */
+    pointer-events: none
 }
 
 .mini-tag {
-    font-size: 0.7rem;
-    /* Un poil plus petit pour l'élégance */
+    font-size: .7rem;
     font-weight: 600;
-    /* Plus gras pour la lisibilité */
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: .5px;
     padding: 6px 12px;
-    /* Plus d'air intérieur */
     border-radius: 50px;
-
-    /* --- CORRECTION CONTRASTE --- */
-    /* Fond très léger pour détacher du noir */
-    background: rgba(255, 255, 255, 0.07);
-    /* Bordure plus visible */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Texte blanc cassé (plus lisible que le gris) */
-    color: rgba(255, 255, 255, 0.9);
-
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .2);
+    color: rgba(255, 255, 255, .9);
     backdrop-filter: blur(4px);
-    transition: all 0.3s ease;
+    transition: all .3s ease
 }
 
-/* Au survol de la carte, les tags s'allument en violet */
 a.bento-card:hover .mini-tag {
     background: var(--accent-primary);
-    color: white;
+    color: #fff;
     border-color: var(--accent-primary);
-    transform: translateY(-2px);
-    /* Petit saut sympa */
+    transform: translateY(-2px)
 }
 
 .contact-actions {
@@ -1312,27 +1062,27 @@ a.bento-card:hover .mini-tag {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 8rem;
+    margin-bottom: 8rem
 }
 
 .copy-email-btn {
-    background: transparent;
+    background: 0 0;
     border: 1px solid var(--glass-border);
     color: var(--text-muted);
-    padding: 0.5rem 1rem;
+    padding: .5rem 1rem;
     border-radius: 50px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: .9rem;
     display: flex;
     align-items: center;
     gap: 8px;
     position: relative;
-    transition: all 0.3s;
+    transition: all .3s
 }
 
 .copy-email-btn:hover {
-    border-color: white;
-    color: white;
+    border-color: #fff;
+    color: #fff
 }
 
 .copy-feedback {
@@ -1341,101 +1091,33 @@ a.bento-card:hover .mini-tag {
     left: 50%;
     transform: translateX(-50%);
     background: var(--accent-secondary);
-    color: white;
+    color: #fff;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: .8rem;
     opacity: 0;
-    /* Caché par défaut */
-    transition: opacity 0.3s, transform 0.3s;
-    pointer-events: none;
+    transition: opacity .3s, transform .3s;
+    pointer-events: none
 }
 
-.copy-email-btn.copied .copy-feedback {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-5px);
-}
-
-/* --- ANIMATION "SOYEUSE" (Desktop) --- */
-@media (min-width: 1025px) {
-
+@media (min-width:1025px) {
     .bento-card p {
-        /* 1. État initial : Caché, écrasé et plus bas */
         opacity: 0;
         max-height: 0;
         overflow: hidden;
         transform: translateY(20px);
-        /* On le fait partir de plus bas */
         margin-top: 0;
-
-        /* 2. La Recette Secrète du Soyeux : */
-        /* On sépare les transitions pour les contrôler individuellement */
-        transition:
-            max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            /* Ouverture physique */
-            margin-top 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-            /* Espace */
-            opacity 0.8s ease-out,
-            /* Apparition lente (fade in) */
-            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        /* Glissement fluide */
+        transition: max-height .6s cubic-bezier(.16, 1, .3, 1), margin-top .6s cubic-bezier(.16, 1, .3, 1), opacity .8s ease-out, transform .8s cubic-bezier(.16, 1, .3, 1)
     }
 
     .bento-card:hover p {
-        /* 3. État au survol */
         opacity: 1;
         max-height: 100px;
-        /* On ouvre grand */
         transform: translateY(0);
-        margin-top: 0.8rem;
-        /* Un peu plus d'espace */
-
-        /* Petit délai sur l'opacité pour que le texte apparaisse 
-           seulement quand l'espace est déjà un peu ouvert */
-        transition-delay: 0s, 0s, 0.1s, 0s;
+        margin-top: .8rem;
+        transition-delay: 0s, 0s, .1s, 0s
     }
 }
-
-/* --- BOUTON RETOUR (NETTOYAGE COMPLET) --- */
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    
-    /* On force la suppression de tout fond ou bordure */
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    backdrop-filter: none !important;
-    
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    
-    margin-bottom: 3rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/* Au survol : Pas de fond, juste le texte qui s'allume */
-.back-link:hover {
-    background: transparent !important; /* Sécurité anti-fond moche */
-    color: white;
-    transform: translateX(-5px);
-}
-
-.arrow-left {
-    font-size: 1.2rem;
-    color: var(--accent-secondary);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.back-link:hover .arrow-left {
-    transform: translateX(-5px);
-}
-/* --- STYLE SPÉCIFIQUE PROJET 2 (DEWALT - PLAN INDUSTRIEL) --- */
 
 .dewalt-tech-bg {
     width: 100%;
@@ -1445,48 +1127,36 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* 1. Fond de base : Gris Anthracite */
-    background-color: #1a1a1c;
+    background-color: #1a1a1c
 }
 
-/* Le Spot Lumineux : On garde la lumière d'ambiance */
 .dewalt-tech-bg::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    
-    /* Le spot jaune passe PAR DESSUS la grille pour l'illuminer au centre */
-    background: radial-gradient(
-        circle at 50% 40%, 
-        rgba(202, 156, 14, 0.15) 0%, /* Jaune un peu plus présent */
-        transparent 70%
-    );
-    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 40%, rgba(202, 156, 14, .15) 0, transparent 70%);
+    z-index: 0
 }
 
-/* L'Objet (Catalogue) - Reste inchangé */
 .floating-obj {
     position: relative;
     z-index: 1;
-    height: 100%; 
+    height: 100%;
     width: auto;
     max-width: none;
     object-fit: contain;
     transform: translateY(0);
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-    transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.7s ease-out; 
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .6));
+    transition: transform .7s cubic-bezier(.2, .8, .2, 1), filter .7s ease-out
 }
 
-/* Animation au survol - Reste inchangé */
 .bento-card:hover .floating-obj {
     transform: translateY(-10px) scale(1.05) rotate(-2deg);
-    filter: drop-shadow(0 0 30px rgba(202, 156, 14, 0.5));
+    filter: drop-shadow(0 0 30px rgba(202, 156, 14, .5))
 }
-
-/* =========================================
-   STYLE PROJET 3 (GOLF - HALO VERT)
-   ========================================= */
 
 .golf-studio {
     width: 100%;
@@ -1496,45 +1166,24 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* Fond : Noir profond très légèrement teinté vert */
-    background-color: #020503; 
-    
-    /* Lumière d'ambiance très subtile au centre */
-    background-image: radial-gradient(
-        circle at 50% 50%, 
-        rgba(34, 197, 94, 0.05) 0%, 
-        transparent 70%
-    );
+    background-color: #020503;
+    background-image: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, .05) 0, transparent 70%)
 }
 
-/* La Balle */
 .floating-ball {
-    width: 170%; /* Taille idéale pour la balle */
+    width: 170%;
     height: auto;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    
-    /* Ombre portée au sol (Noir) pour l'ancrage */
-    filter: drop-shadow(0 25px 30px rgba(0,0,0,0.8));
-    
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s ease;
+    filter: drop-shadow(0 25px 30px rgba(0, 0, 0, .8));
+    transition: transform .6s cubic-bezier(.25, .8, .25, 1), filter .4s ease
 }
 
-/* Animation au survol : LE HALO VERT */
 .bento-card:hover .floating-ball {
-    /* La balle monte et tourne */
     transform: translateY(-10px) scale(1.05);
-    
-    /* L'EFFET HALO : Une ombre verte qui épouse le contour */
-    /* Couleur : Vert Emeraude (#10b981) */
-    filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.6));
+    filter: drop-shadow(0 0 25px rgba(16, 185, 129, .6))
 }
-
-/* =========================================
-   STYLE PROJET 1 (UNIDADE - SPORT & CLEAN)
-   ========================================= */
 
 .unidade-studio {
     width: 100%;
@@ -1544,43 +1193,24 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* Fond de base : Noir profond */
-    background-color: #0B0C15;
-    
-    /* L'Éclairage : Blanc Pur -> Bleu Nuit -> Noir */
-    background-image: radial-gradient(
-        circle at 50% 55%, 
-        rgba(255, 255, 255, 0.12) 0%,   /* 1. Cœur Blanc froid (plus intense) */
-        rgba(31, 43, 69, 0.4) 40%,      /* 2. Le Bleu Nuit d'Unidade */
-        transparent 85%                 /* 3. Fondu vers le noir */
-    );
+    background-color: #0b0c15;
+    background-image: radial-gradient(circle at 50% 55%, rgba(255, 255, 255, .12) 0, rgba(31, 43, 69, .4) 40%, transparent 85%)
 }
 
-/* L'objet flottant (inchangé) */
 .unidade-studio .floating-obj {
-    height: 90%; 
+    height: 90%;
     width: auto;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.7));
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.6s ease;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, .7));
+    transition: transform .6s cubic-bezier(.25, .8, .25, 1), filter .6s ease
 }
 
-/* Animation au survol : HALO BLEU */
 .bento-card:hover .unidade-studio .floating-obj {
-    /* Petit mouvement de montée + zoom */
     transform: translateY(-8px) scale(1.02);
-    
-    /* L'EFFET HALO : Une ombre colorée centrée qui épouse la forme */
-    /* On utilise un bleu intense pour que ça ressorte bien */
-    filter: drop-shadow(0 0 30px rgba(65, 105, 225, 0.6));
+    filter: drop-shadow(0 0 30px rgba(65, 105, 225, .6))
 }
-
-/* =========================================
-   STYLE PROJET 5 (BILL APP - TECH STUDIO)
-   ========================================= */
 
 .billapp-studio {
     width: 100%;
@@ -1590,56 +1220,33 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* 1. Le Fond : Noir profond teinté de bleu nuit */
-    background-color: #0a0b10; 
-    
-    /* 2. L'Éclairage : Un spot Bleu Ciel / Blanc très diffus venant du haut */
-    background-image: radial-gradient(
-        circle at 50% 30%, 
-        rgba(200, 220, 255, 0.12) 0%, /* Lumière douce d'écran */
-        transparent 70%
-    );
+    background-color: #0a0b10;
+    background-image: radial-gradient(circle at 50% 30%, rgba(200, 220, 255, .12) 0, transparent 70%)
 }
 
-/* Le conteneur de l'image */
 .billapp-studio .mockup-duo {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
-/* L'Image (Le Duo) */
 .billapp-studio .img-desktop {
-    width: 95%; /* On prend bien la largeur */
+    width: 95%;
     height: auto;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    
-    /* On descend un peu l'image pour le centrage visuel */
     transform: translateY(5%);
-    
-    /* Ombre portée réaliste */
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-    
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.5s ease;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .6));
+    transition: transform .6s cubic-bezier(.25, .8, .25, 1), filter .5s ease
 }
 
-/* Animation au survol : HALO BLEU CLAIR */
 .bento-card:hover .billapp-studio .img-desktop {
-    /* Monte et zoom légèrement */
     transform: translateY(0) scale(1.1);
-    
-    /* LE HALO : Une lueur "Cyan/Bleu ciel" qui suit les contours */
-    filter: drop-shadow(0 0 25px rgba(100, 200, 255, 0.5));
+    filter: drop-shadow(0 0 25px rgba(100, 200, 255, .5))
 }
-
-/* =========================================
-   STYLE PROJET 6 (COVERING - ROUGE SUBTIL)
-   ========================================= */
 
 .covering-studio {
     width: 100%;
@@ -1649,88 +1256,52 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* Fond : Noir très profond, à peine teinté de rouge */
-    background-color: #0a0202; 
-    
-    /* L'Éclairage : Un spot Rouge beaucoup plus doux */
-    background-image: radial-gradient(
-        circle at 50% 50%, 
-        rgba(220, 20, 60, 0.08) 0%, /* Opacité réduite (0.08) pour la subtilité */
-        transparent 70%
-    );
+    background-color: #0a0202;
+    background-image: radial-gradient(circle at 50% 50%, rgba(220, 20, 60, .08) 0, transparent 70%)
 }
 
-/* L'Objet (La Voiture) */
 .floating-car {
-    width: 115%; /* Grande taille conservée */
+    width: 115%;
     max-width: none;
     height: auto;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    
-    /* Positionnement */
     transform: translateY(5%);
-    
-    /* Ombre au sol (noir, pas rouge) pour l'ancrage */
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
-    
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, .8));
+    transition: transform .5s cubic-bezier(.2, .8, .2, 1), filter .5s ease
 }
 
-/* Animation au survol */
 .bento-card:hover .floating-car {
-    transform: scale(1.05) translateY(0%);
-    
-    /* LE HALO ROUGE (ADOUCI) */
-    /* On réduit l'opacité de 0.7 à 0.4 pour un effet "reflet" plutôt que "néon" */
-    filter: drop-shadow(0 0 25px rgba(220, 20, 60, 0.4));
+    transform: scale(1.05) translateY(0);
+    filter: drop-shadow(0 0 25px rgba(220, 20, 60, .4))
 }
 
-/* --- LIGNES ORGANIQUES --- */
 .organic-lines-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 0; /* Derrière le contenu */
+    z-index: 0;
     pointer-events: none;
-    opacity: 0.4; /* Ajustement global */
+    opacity: .4
 }
 
 .organic-lines {
     width: 100%;
-    height: 100%;
+    height: 100%
 }
 
 .organic-path {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.08); /* Blanc très subtil (8%) */
+    stroke: rgba(255, 255, 255, .08);
     stroke-width: 1.5px;
-    vector-effect: non-scaling-stroke; /* Garde la finesse même si on étire le SVG */
-    
-    /* L'astuce pour l'animation : Pointillés espacés */
-    /* On va animer l'espace entre les traits */
-    stroke-dasharray: 1000 1000; /* Trait de 1000px, Trou de 1000px */
-    stroke-dashoffset: 1000;     /* Au début, on est dans le "trou" (invisible) */
-}
-
-.tech-lines line {
-    /* AVANT : stroke: rgba(255, 255, 255, 0.03); */
-    
-    /* MAINTENANT : On monte à 12% ou 15% pour les voir */
-    stroke: rgba(255, 255, 255, 0.15); 
-    
-    /* On passe à 1.5px ou 2px si tu veux un effet plus marqué */
-    stroke-width: 0.5px; 
-    
     vector-effect: non-scaling-stroke;
-    transform-origin: top;
+    stroke-dasharray: 1000 1000;
+    stroke-dashoffset: 1000
 }
 
-/* --- INDICATEUR SCROLL --- */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -1739,53 +1310,46 @@ a.bento-card:hover .mini-tag {
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 0.7;
-    transition: opacity 0.3s;
+    opacity: .7;
+    transition: opacity .3s
 }
 
-/* La forme de la souris */
 .mouse {
     width: 30px;
     height: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 5px
 }
 
-/* La petite bille qui bouge */
 .wheel {
     width: 4px;
     height: 8px;
-    background: var(--accent-secondary); /* Violet */
+    background: var(--accent-secondary);
     border-radius: 2px;
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    animation: scroll 1.5s infinite;
+    animation: scroll 1.5s infinite
 }
 
-/* L'animation de la bille */
 @keyframes scroll {
     0% {
         opacity: 1;
-        top: 10px;
+        top: 10px
     }
+
     100% {
         opacity: 0;
-        top: 30px; /* Elle descend et disparait */
+        top: 30px
     }
 }
 
-/* Optionnel : On le cache si on scrolle un peu (via JS) ou au survol */
 .scroll-indicator:hover {
-    opacity: 1;
+    opacity: 1
 }
-
-/* =========================================
-   STYLE PROJET 4 (VILLAGE MOTEL - SILVER MONOCHROME)
-   ========================================= */
 
 .village-studio {
     width: 100%;
@@ -1795,270 +1359,44 @@ a.bento-card:hover .mini-tag {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    
-    /* Fond : Un gris anthracite très profond (Presque noir) */
-    background-color: #121212; 
-    
-    /* Éclairage : Un spot Blanc/Argent pur, très diffus */
-    background-image: radial-gradient(
-        circle at 50% 50%, 
-        rgba(255, 255, 255, 0.10) 0%, /* Blanc léger au centre */
-        rgba(20, 20, 20, 0.5) 50%,    /* Fondu gris */
-        transparent 90%
-    );
+    background-color: #121212;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .1) 0, rgba(20, 20, 20, .5) 50%, transparent 90%)
 }
 
-/* L'objet flottant */
 .village-studio .floating-obj {
-    width: 85%; 
+    width: 85%;
     height: auto;
     object-fit: contain;
     position: relative;
     z-index: 1;
-    
-    /* Ombre portée neutre */
-    filter: drop-shadow(0 25px 40px rgba(0,0,0,0.8));
-    
-    /* On ajoute un tout petit peu de contraste pour faire ressortir le N&B */
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.6s ease;
+    filter: drop-shadow(0 25px 40px rgba(0, 0, 0, .8));
+    transition: transform .6s cubic-bezier(.25, .8, .25, 1), filter .6s ease
 }
 
-/* --- ANIMATION AU SURVOL --- */
 .bento-card:hover .village-studio .floating-obj {
     transform: translateY(-8px) scale(1.02);
-    
-    /* LE HALO : Une lueur Blanche/Argentée "Glace" */
-    /* C'est très propre et "Premium" */
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.35));
-}
-
-/* =========================================
-   TEMPLATE PAGE PROJET (UNIVERSEL)
-   ========================================= */
-
-/* Solution radicale : Position Fixed pour Sidebar */
-body.project-page {
-    overflow-x: hidden;
-}
-
-main.project-container {
-    display: block !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    position: relative !important;
-    overflow: visible !important;
-}
-
-/* WRAPPER PRINCIPAL */
-.project-wrapper {
-    padding-top: 120px;
-    width: 100%;
-    position: relative;
-    min-height: 100vh;
-}
-
-/* LAYOUT (Split Screen) */
-.project-layout {
-    display: flex;
-    gap: 0;
-    width: 100%;
-    position: relative;
-    min-height: calc(100vh - 120px);
-}
-
-/* COLONNE GAUCHE (Infos Fixes) */
-.project-info-sidebar {
-    width: 42%;
-    position: fixed;
-    left: 0;
-    top: 100px;
-    height: calc(100vh - 120px);
-    padding: 1.5rem 3% 2rem 6%;
-    overflow-y: hidden; /* Pas de scroll ici */
-    z-index: 10;
-    display: flex;
-    align-items: flex-start;
-}
-
-.sidebar-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
-}
-
-.project-info-sidebar .back-link {
-    margin-bottom: 2rem;
-}
-
-.project-header {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.project-header h1 {
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    line-height: 1.1;
-    margin: 0;
-    font-family: 'Clash Display', sans-serif;
-    color: white;
-}
-
-.project-intro {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-/* MÉTADONNÉES (Client, Année...) */
-.project-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-    padding: 1.3rem 0;
-    border-top: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, .35))
 }
 
 .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: .5rem
 }
 
 .meta-label {
-    font-size: 0.7rem;
+    font-size: .7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: var(--text-muted);
-    font-weight: 600;
-}
-
-.meta-value {
-    font-size: 0.9rem;
-    color: var(--text-main);
-    font-weight: 500;
-    line-height: 1.4;
-}
-
-/* TAGS DANS LA SIDEBAR */
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 0.5rem;
-}
-
-.project-tags .tag {
-    font-size: 0.75rem;
-    padding: 6px 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    color: var(--text-main);
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.project-tags .tag:hover {
-    background: var(--accent-primary);
-    border-color: var(--accent-primary);
-    transform: translateY(-2px);
-}
-
-/* DESCRIPTION (Challenge / Solution) */
-.project-description {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.description-block h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.6rem;
-    color: var(--text-main);
-    font-family: 'Clash Display', sans-serif;
-}
-
-.description-block p {
-    color: var(--text-muted);
-    line-height: 1.6;
-    font-size: 0.88rem;
-}
-
-/* COLONNE DROITE (Galerie Scrollable) */
-.project-gallery-scroll {
-    width: 58%;
-    margin-left: 42%; /* Laisse la place à la sidebar fixe */
-    padding: 3rem 6% 4rem 3%;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    min-height: 200vh;
-}
-
-.gallery-image {
-    width: 100%;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    
-    /* Préparation animation GSAP */
-    opacity: 0;
-    transform: translateY(30px);
-    will-change: transform, opacity;
-}
-
-.gallery-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-.gallery-image:hover img {
-    transform: scale(1.02);
-}
-
-/* FOOTER DE NAVIGATION (Projet Suivant) */
-.project-footer {
-    width: 100%;
-    margin-top: 0;
-    clear: both;
-}
-
-/* --- MOBILE STICKY HEADER & DRAWER --- */
-.mobile-project-header {
-    display: none;
-    position: fixed;
-    top: 70px; /* Juste sous la nav principale */
-    left: 0;
-    right: 0;
-    background: rgba(11, 12, 21, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 0.8rem 1.5rem;
-    z-index: 9000;
-    transform: translateY(-150%);
-    transition: transform 0.3s ease;
-}
-
-.mobile-project-header.visible {
-    transform: translateY(0);
+    font-weight: 600
 }
 
 .mobile-header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-}
-
-.mobile-header-left {
-    flex: 1;
-    min-width: 0;
+    gap: 1rem
 }
 
 .mobile-header-title {
@@ -2069,7 +1407,7 @@ main.project-container {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: white;
+    color: #fff
 }
 
 .mobile-header-tags {
@@ -2078,107 +1416,852 @@ main.project-container {
     margin-top: 4px;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scrollbar-width: none;
+    scrollbar-width: none
 }
 
 .mobile-header-tags .mini-tag {
-    font-size: 0.65rem;
+    font-size: .65rem;
     padding: 3px 8px;
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .info-button {
     background: var(--accent-primary);
     border: none;
-    color: white;
-    padding: 0.5rem 1rem;
+    color: #fff;
+    padding: .5rem 1rem;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: .8rem;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.3s ease;
+    transition: all .3s ease
 }
 
-/* Drawer (Modal Infos Mobile) */
-.info-drawer {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+@keyframes bounce {
+
+    0%,
+    100%,
+    20%,
+    50%,
+    80% {
+        transform: translateY(0)
+    }
+
+    40% {
+        transform: translateY(-10px)
+    }
+
+    60% {
+        transform: translateY(-5px)
+    }
 }
 
-.info-drawer.open {
+.desktop-nav {
+    z-index: 10005 !important
+}
+
+@media (min-width:1025px) {
+
+    body,
+    html,
+    main {
+        overflow-x: hidden;
+        overflow-y: auto
+    }
+}
+
+/* ==========================================================================
+   STYLES PAGE PROJET (Template Global)
+   ========================================================================== */
+
+/* Structure de base pour éviter les rebonds */
+.project-page {
+    background-color: var(--bg-color);
+    overscroll-behavior-y: none;
+}
+
+/* --- HERO SECTION --- */
+.project-hero {
     display: block;
-    opacity: 1;
+    /* AVANT : padding: 180px 5% 4rem 5%; */
+    /* MAINTENANT : On passe à 240px en haut pour décoller du menu */
+    padding: 240px 5% 2rem 5%; 
+    
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
 }
 
-.info-drawer-content {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: var(--bg-color);
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    max-height: 85vh;
-    overflow-y: auto;
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+.project-hero-content {
+    max-width: 900px;
+    
+    /* AVANT : margin: 0 auto 5rem auto; */
+    /* MAINTENANT : On réduit la marge du bas à 3rem (environ 48px) */
+    margin: 0 auto 3rem auto; 
+    
+    position: relative;
+    z-index: 2;
 }
 
-.info-drawer.open .info-drawer-content {
-    transform: translateY(0);
-}
+/* =========================================
+   BOUTON "VISITER LE SITE"
+   ========================================= */
 
-.drawer-header {
+.hero-actions {
+    margin-bottom: 3rem; /* Espace avant les métadonnées */
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.visit-site-btn {
+    display: inline-flex;
     align-items: center;
+    gap: 12px;
+    padding: 1rem 2.5rem;
+    
+    /* Style Glassmorphism */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif; /* Ou Clash Display si tu préfères */
+    font-weight: 500;
+    font-size: 1rem;
+    
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.visit-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    color: var(--accent-primary); /* La flèche en violet */
+}
+
+/* --- EFFET AU SURVOL --- */
+.visit-site-btn:hover {
+    background: rgba(79, 70, 229, 0.15); /* Fond violet très léger */
+    border-color: var(--accent-primary); /* Bordure violette */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+}
+
+.visit-site-btn:hover .visit-arrow {
+    transform: translate(3px, -3px); /* La flèche part vers le haut-droite */
+    color: #fff;
+}
+
+.project-category {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05); /* Fond un peu plus discret */
+    border: 1px solid var(--glass-border);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-secondary); /* On garde la couleur violette */
+    
+    /* Changement des marges pour aller sous le titre */
+    margin-top: 1rem; 
+    margin-bottom: 2.5rem;
+    
+    backdrop-filter: blur(5px);
+}
+
+.project-hero h1 {
+    font-size: clamp(3.5rem, 10vw, 7.5rem);
+    margin-bottom: 2rem;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.project-hero-description {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+    line-height: 1.6;
+}
+
+/* Métadonnées */
+.project-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 4rem auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.meta-item {
+    text-align: center;
+    display: block; /* Surcharge le display flex du global si nécessaire */
+}
+
+.meta-value {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Clash Display', sans-serif;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Image Hero */
+.project-hero-image {
+    width: 100vw;
+    max-width: 1800px;
+    margin-top: 2rem;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.project-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- SECTION CONTEXTE --- */
+.context-section {
+    padding: 10rem 5%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.context-section h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 3rem;
+    background: linear-gradient(to right, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.context-section p {
+    color: var(--text-muted);
+    line-height: 1.9;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+/* =========================================
+   SECTION STICKY SCROLL (CORRECTIF)
+   ========================================= */
+
+.sticky-scroll-section {
+    position: relative;
+    padding: 8rem 5%;
+    /* CRUCIAL : Si tu mets overflow: hidden ici, le sticky casse */
+    overflow: visible; 
+}
+
+/* --- LE CONTENEUR (ÉCART AGRANDI) --- */
+.sticky-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    
+    /* C'EST ICI QUE ÇA SE JOUE : */
+    /* On passe de 4rem à 10rem (ou 8rem si tu trouves ça trop grand) */
+    /* Cela pousse les images vers la droite et réduit leur largeur naturelle */
+    gap: 10rem; 
+    
+    max-width: 95%;
+    width: 1800px; 
+    margin: 0 auto;
+    position: relative;
+}
+/* --- COLONNE GAUCHE (TEXTE) --- */
+.sticky-content {
+    /* ON FIGE LA LARGEUR DU TEXTE */
+    /* Au lieu de %, on met une taille fixe confortable pour la lecture */
+    width: 450px; 
+    flex-shrink: 0; /* INTERDICTION de rétrécir, quoi qu'il arrive */
+    
+    height: fit-content;
+    padding-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.sticky-content h2 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 2rem;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.sticky-content h3 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.sticky-content p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1.15rem;
     margin-bottom: 1.5rem;
 }
 
-.close-drawer {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
+.sticky-content ul {
+    list-style: none;
+    padding: 0;
 }
 
-/* --- RESPONSIVE QUERIES --- */
+.sticky-content li {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 1.1rem;
+}
+
+.sticky-content li::before {
+    content: "→";
+    color: var(--accent-primary);
+    position: absolute; left: 0;
+}
+
+/* --- COLONNE DROITE (IMAGES) --- */
+.scroll-images {
+    /* ON LUI DIT DE MANGER TOUT LE RESTE DE LA PLACE */
+    flex-grow: 1; 
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15vh;
+    padding-top: 2rem;
+    min-width: 0; /* Sécurité Flexbox pour les images */
+}
+/* --- LE STYLE DE L'IMAGE --- */
+.scroll-image-item {
+    width: 100%;
+    /* On s'assure qu'il n'y a aucune bordure ou fond parasite */
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.scroll-image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    
+    /* Optionnel : Si l'image devient trop haute, on peut limiter sa hauteur */
+    /* max-height: 85vh; */
+    /* object-fit: cover; */
+}
+
+/* Petit effet de zoom "premium" au survol */
+.scroll-image-item:hover img {
+    transform: scale(1.02);
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.7));
+}
+
+/* --- RESPONSIVE (Sticky Section) --- */
+
+
 @media (max-width: 1024px) {
-    .project-wrapper { padding-top: 90px; }
-    .project-layout { flex-direction: column; min-height: auto; }
-    
-    /* On annule le fixed de la sidebar sur tablette/mobile */
-    .project-info-sidebar {
-        position: relative !important;
-        width: 100%;
-        top: 0 !important; left: 0 !important;
-        height: auto;
-        padding: 2.5rem 5%;
+    .sticky-container {
+        flex-direction: column; /* On empile verticalement */
+        gap: 4rem; /* Espace entre le texte et les images */
     }
     
-    .project-gallery-scroll {
-        width: 100%;
-        margin-left: 0;
-        padding: 2rem 5% 4rem 5%;
-        gap: 2rem;
-        min-height: auto;
+    .sticky-content {
+        width: 100%; /* Le texte prend toute la largeur */
+        position: relative !important; /* CRUCIAL : On force le texte à ne plus flotter */
+        top: auto !important;
+        left: auto !important;
+        margin-bottom: 3rem; /* Espace sous le texte avant les images */
+        height: auto !important;
     }
     
-    .mobile-project-header { display: block; }
+    .scroll-images {
+        width: 100%; /* Les images prennent toute la largeur */
+        gap: 4rem; /* Espace réduit entre les images sur mobile */
+        padding-top: 0;
+    }
+}
+
+/* =========================================
+   SECTION PERFORMANCE & STACK (Redesign)
+   ========================================= */
+
+.performance-section {
+    padding: 8rem 5%;
+    border-top: 1px solid var(--glass-border);
+    background: radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.05) 0%, transparent 40%);
+}
+
+.performance-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+    gap: 6rem; /* Grand espace entre les deux colonnes */
+    align-items: start;
+}
+
+.performance-section h3 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.performance-section p {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+/* --- LES TAGS (Stack Technique) --- */
+.skills-tags.compact {
+    display: flex;
+    flex-wrap: wrap; /* Important : permet aux tags de passer à la ligne */
+    gap: 16px; /* Espace net entre chaque tag */
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.8rem 1.5rem; /* Plus gros padding pour aérer */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 100px; /* Forme de pilule parfaite */
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+/* Effet au survol des tags */
+.skill-tag:hover {
+    background: rgba(79, 70, 229, 0.15); /* Fond violet subtil */
+    border-color: var(--accent-primary); /* Bordure violette */
+    color: #fff;
+    transform: translateY(-3px); /* Légère lévitation */
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.2);
+}
+
+/* --- LA LISTE D'IMPACT (Droite) --- */
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* On gère l'espace via le padding des items */
+}
+
+.result-item {
+    display: grid;
+    /* CORRECTIF MAJEUR : Au lieu de bloquer à 140px, on dit "au moins 160px, mais agrandis si besoin" */
+    grid-template-columns: minmax(160px, auto) 1fr; 
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--glass-border);
+    transition: background 0.3s ease;
+}
+
+/* ... (Garde .result-item:first-child et :last-child comme avant) ... */
+
+.result-value {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    
+    background: linear-gradient(135deg, #fff 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+    
+    /* CORRECTIF COUPURE */
+    line-height: 1.3;
+    padding-right: 1rem; /* Ajoute un vrai espace de sécurité à droite */
+    width: fit-content; /* Force la boîte à englober tout le texte + le padding */
+    display: inline-block;
+}
+
+.result-desc {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding-left: 1rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .performance-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    
+    .performance-section {
+        padding: 4rem 5%;
+    }
+
+    .result-item {
+        grid-template-columns: 1fr; /* On empile sur mobile */
+        gap: 0.5rem;
+        text-align: left;
+    }
+
+    .result-value {
+        font-size: 2.5rem;
+    }
+
+    .result-desc {
+        padding-left: 0;
+    }
+}
+
+/* =========================================
+   PROJET SUIVANT (VERSION AVEC FOND STYLÉ)
+   ========================================= */
+
+a.next-project-section {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    color: inherit;
+    border-top: 1px solid var(--glass-border);
+    padding: 8rem 5%; 
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Pour contenir l'effet de fond */
+
+    /* --- LE NOUVEAU FOND --- */
+    /* Un dégradé très subtil en fond */
+    background: linear-gradient(to bottom, rgba(11, 12, 21, 0.5), rgba(79, 70, 229, 0.05));
+    /* Effet de flou par-dessus le bruit de fond global */
+    backdrop-filter: blur(10px);
+    /* Une transition douce pour l'effet de survol */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- EFFET AU SURVOL (PLUS LUMINEUX) --- */
+a.next-project-section:hover {
+    /* Le fond devient légèrement plus clair et plus teinté */
+    background: linear-gradient(to bottom, rgba(11, 12, 21, 0.7), rgba(139, 92, 246, 0.15));
+    /* La bordure du haut s'illumine */
+    border-top-color: var(--accent-primary);
+    /* Une ombre portée douce apparaît pour donner de la profondeur */
+    box-shadow: 0 -10px 30px rgba(79, 70, 229, 0.1);
+}
+
+.next-project-label {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    display: block;
+    /* On s'assure que le texte est au-dessus du fond */
+    position: relative;
+    z-index: 2;
+}
+
+a.next-project-section .next-project-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 600;
+    color: #fff !important;
+    margin: 0;
+    line-height: 1.1;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    /* On s'assure que le texte est au-dessus du fond */
+    position: relative;
+    z-index: 2;
+}
+
+a.next-project-section:hover .next-project-title,
+a.next-project-section:hover .next-project-title span {
+    color: var(--accent-secondary) !important;
+}
+
+a.next-project-section .next-project-arrow {
+    display: inline-block;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: var(--accent-primary);
+    transition: transform 0.3s ease;
+    /* On s'assure que le texte est au-dessus du fond */
+    position: relative;
+    z-index: 2;
+}
+
+a.next-project-section:hover .next-project-arrow {
+    transform: translateX(15px);
+}
+
+/* AJOUT D'UN "GLOW" SUBTIL EN ARRIÈRE-PLAN */
+/* Crée une tache de lumière colorée qui bouge au survol */
+a.next-project-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 40%;
+    background: var(--accent-primary);
+    opacity: 0; /* Invisible par défaut */
+    filter: blur(100px); /* Très flou */
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: all 0.6s ease;
+    z-index: 1; /* Derrière le texte */
+    pointer-events: none;
+}
+
+a.next-project-section:hover::before {
+    opacity: 0.2; /* Apparaît doucement */
+    transform: translate(-50%, -50%) scale(1.2); /* Grandit légèrement */
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    a.next-project-section {
+        padding: 6rem 5%;
+    }
+
+    a.next-project-section .next-project-title {
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 3rem;
+    }
+
+    .next-project-arrow {
+        transform: rotate(90deg);
+        margin-top: 1rem;
+        font-size: 2.5rem !important;
+    }
+
+    a.next-project-section:hover .next-project-arrow {
+        transform: rotate(90deg) translateY(5px);
+    }
+    
+    /* On réduit l'effet de glow sur mobile pour la perf */
+    a.next-project-section::before {
+        width: 60%;
+        height: 60%;
+        filter: blur(80px);
+    }
+}
+
+/* --- CONTACT CTA & FOOTER --- */
+.contact-cta-section {
+    padding: 8rem 5% 4rem 5%;
+    text-align: center;
+}
+
+.contact-cta-description {
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.contact-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem 3rem;
+    background: var(--accent-primary);
+    border: none;
+    border-radius: 100px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.contact-cta-btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
+}
+
+.project-footer {
+    padding: 2rem 5%;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* --- RESPONSIVE PROJET --- */
+@media (max-width: 1024px) {
+    .project-meta { grid-template-columns: repeat(2, 1fr); }
+    
+    .sticky-container { flex-direction: column; }
+    
+    .sticky-content {
+        width: 100%;
+        position: relative;
+        top: 0;
+        margin-bottom: 4rem;
+    }
+    
+    .scroll-images { width: 100%; gap: 4rem; }
 }
 
 @media (max-width: 768px) {
-    .project-wrapper { padding-top: 80px; }
-    .project-info-sidebar { padding: 2rem 1.5rem; }
-    .sidebar-content { gap: 1.8rem; }
-    .project-header h1 { font-size: 1.8rem; }
-    .project-gallery-scroll { padding: 1.5rem 1.5rem 3rem 1.5rem; gap: 1.5rem; }
+    .project-hero h1 { font-size: 15vw; }
+    
+    .project-hero-image {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .performance-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .next-project-title {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .next-project-arrow {
+        transform: rotate(90deg);
+        margin-top: 1rem;
+    }
+
+    /* Correctif pour que le lien prenne toute la place sans casser le style */
+a.next-project-section {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+}
+
+    .next-project-section:hover .next-project-arrow {
+        transform: rotate(90deg) translateY(5px);
+    }
+
+    .project-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* --- ACCESSIBILITÉ --- */
+@media (prefers-reduced-motion: reduce) {
+    .skill-tag, .result-card, .scroll-image-item, .project-hero h1, .reveal-text {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* 1. ON CACHE LA SECTION CONTEXTE (Trop de blabla) */
+    /* On garde juste le Hero pour l'intro, ça suffit sur mobile */
+    .context-section {
+        display: none !important;
+    }
+
+    /* 2. ON INVERSE L'ORDRE : IMAGES D'ABORD, TEXTE APRÈS */
+    .sticky-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Les images passent en PREMIER (Haut de la pile) */
+    .scroll-images {
+        order: 1; 
+        width: 100%;
+        gap: 1.5rem !important; /* Espace réduit entre les images */
+        margin-top: 2rem; /* Petit espace après le Hero */
+        margin-bottom: 4rem; /* Espace avant le texte explicatif */
+    }
+
+    /* Le texte "Le Défi / Solution" passe en DEUXIÈME (Bas de la pile) */
+    .sticky-content {
+        order: 2;
+        width: 100%;
+        position: relative !important;
+        top: auto !important;
+        margin-bottom: 2rem;
+    }
+
+    /* --- OPTIMISATION VISUELLE DU TEXTE (Puisqu'il est en bas) --- */
+    /* On le rend plus discret pour qu'il ne fasse pas "pavé" */
+    .sticky-content h2 {
+        font-size: 2rem; /* Titre plus petit */
+        margin-bottom: 1rem;
+    }
+    
+    .sticky-content p {
+        font-size: 1rem;
+        opacity: 0.8;
+    }
+
+    /* On transforme la liste "Objectifs" en tags compacts (comme vu avant) */
+    .sticky-content ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0;
+        margin-bottom: 2rem;
+    }
+
+    .sticky-content li {
+        width: auto;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    
+    .sticky-content li::before { content: none; }
+
+    /* On cache le titre "Solution" pour alléger, on garde juste le paragraphe encadré */
+    .sticky-content h3:last-of-type {
+        display: none;
+    }
+
+    .sticky-content h3:last-of-type + p {
+        background: rgba(79, 70, 229, 0.05);
+        border-left: 2px solid var(--accent-primary);
+        padding: 1rem;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.95rem;
+    }
 }
