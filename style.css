@@ -2509,3 +2509,27 @@ body.no-scroll .burger-btn {
     /* Optionnel : tu peux ajuster si tu veux un reflet jaune dans le texte */
     background-image: linear-gradient(135deg, #FFFFFF 0%, #FEB81C 100%);
 }
+
+/* --- FIX HAUTEUR IMAGES (Projet Émeraude & autres) --- */
+
+/* On cible les images dans la colonne de droite */
+.scroll-image-item img {
+    /* 1. On impose une hauteur max relative à l'écran */
+    max-height: 80vh; /* L'image ne dépassera jamais 80% de la hauteur de ton écran */
+    
+    /* 2. On laisse la largeur s'adapter pour garder les proportions */
+    width: auto; 
+    max-width: 100%; /* Elle ne doit pas non plus dépasser sa colonne */
+    
+    /* 3. On centre l'image si elle devient plus petite que la colonne */
+    display: block;
+    margin: 0 auto;
+    
+    /* 4. On s'assure que l'image reste nette */
+    object-fit: contain;
+}
+
+/* Optionnel : Ajout d'un petit arrondi pour les JPEGs (plus élégant) */
+.scroll-image-item img {
+    border-radius: 30px;
+}
