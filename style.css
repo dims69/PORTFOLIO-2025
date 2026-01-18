@@ -1504,6 +1504,12 @@ a.bento-card:hover .mini-tag {
     -webkit-text-fill-color: transparent;
 }
 
+.hero-actions {
+    margin-bottom: 3rem; /* Espace avant les métadonnées */
+    display: flex;
+    justify-content: center;
+}
+
 /* --- 2. TAGS (BADGES) --- */
 .project-tags-container {
     display: flex;
@@ -1692,56 +1698,35 @@ a.bento-card:hover .mini-tag {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
 }
-/* =========================================
-   BOUTON "VISITER LE SITE"
-   ========================================= */
 
-.hero-actions {
-    margin-bottom: 3rem; /* Espace avant les métadonnées */
+/* --- LE CONTENEUR DU BOUTON (DANS LE STICKY) --- */
+.sticky-action {
+    /* 1. ESPACEMENT : On le pousse vers le bas pour le détacher du texte */
+    margin-top: 3rem; 
+    
+    /* 2. ALIGNEMENT : On force l'alignement à GAUCHE */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; 
+    width: 100%;
 }
 
-.visit-site-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 1rem 2.5rem;
-    
-    /* Style Glassmorphism */
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 100px;
-    
+/* Style spécifique pour ce bouton (un peu plus compact que celui du Hero) */
+.visit-site-btn.small {
+    padding: 0.8rem 2rem;
+    font-size: 0.95rem;
+    background: var(--accent-primary); /* Fond violet plein pour bien ressortir */
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
+    border-radius: 50px;
     text-decoration: none;
-    font-family: 'Inter', sans-serif; /* Ou Clash Display si tu préfères */
-    font-weight: 500;
-    font-size: 1rem;
-    
-    backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s ease;
 }
 
-.visit-arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-    color: var(--accent-primary); /* La flèche en violet */
-}
-
-/* --- EFFET AU SURVOL --- */
-.visit-site-btn:hover {
-    background: rgba(79, 70, 229, 0.15); /* Fond violet très léger */
-    border-color: var(--accent-primary); /* Bordure violette */
+.visit-site-btn.small:hover {
+    background: var(--accent-secondary);
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
 }
-
-.visit-site-btn:hover .visit-arrow {
-    transform: translate(3px, -3px); /* La flèche part vers le haut-droite */
-    color: #fff;
-}
-
 
 
 /* --- SECTION CONTEXTE --- */
@@ -1796,61 +1781,76 @@ a.bento-card:hover .mini-tag {
     margin: 0 auto;
     position: relative;
 }
-/* --- COLONNE GAUCHE (TEXTE) --- */
+/* --- COLONNE GAUCHE (TEXTE) - VERSION OPTIMISÉE --- */
 .sticky-content {
-    /* ON FIGE LA LARGEUR DU TEXTE */
-    /* Au lieu de %, on met une taille fixe confortable pour la lecture */
     width: 450px; 
-    flex-shrink: 0; /* INTERDICTION de rétrécir, quoi qu'il arrive */
-    
-    height: fit-content;
-    padding-bottom: 2rem;
+    flex-shrink: 0;
     position: relative;
     z-index: 2;
+    padding-bottom: 1rem; /* Un peu moins de vide en bas */
+    
+    /* ON AGRANDIT LA ZONE VERTICALE */
+    /* On utilise presque toute la hauteur dispo (moins le menu en haut) */
+    max-height: calc(100vh - 120px); 
+    overflow-y: auto; /* Scroll si vraiment nécessaire */
+    scrollbar-width: none;
 }
 
+.sticky-content::-webkit-scrollbar { display: none; }
+
+/* TITRE */
 .sticky-content h2 {
     font-family: 'Clash Display', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 2rem;
+    font-size: 3rem; 
+    /* On réduit la marge sous le titre pour gagner de la place */
+    margin-bottom: 1rem; 
     line-height: 1.1;
     color: #fff;
 }
 
+/* SOUS-TITRES (OBJECTIFS, SOLUTION) */
 .sticky-content h3 {
     font-family: 'Clash Display', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     color: var(--accent-secondary);
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+    
+    /* C'est ICI qu'on gagne de la place : on réduit l'écart avant le titre */
+    margin-top: 2rem; 
+    margin-bottom: 0.8rem;
     letter-spacing: 1px;
 }
 
+/* PARAGRAPHES */
 .sticky-content p {
     color: var(--text-muted);
-    line-height: 1.8;
-    font-size: 1.15rem;
-    margin-bottom: 1.5rem;
+    line-height: 1.6; /* Un tout petit peu plus serré (c'était 1.7) */
+    font-size: 1.05rem; 
+    margin-bottom: 1rem; /* Marge réduite entre les paragraphes */
 }
 
+/* LISTE À PUCES */
 .sticky-content ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sticky-content li {
     color: var(--text-muted);
-    margin-bottom: 1rem;
+    /* On colle un peu plus les puces entre elles */
+    margin-bottom: 0.6rem; 
     padding-left: 1.5rem;
     position: relative;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
 }
 
 .sticky-content li::before {
     content: "→";
     color: var(--accent-primary);
-    position: absolute; left: 0;
+    position: absolute; 
+    left: 0;
+    top: 2px;
 }
 
 /* --- COLONNE DROITE (IMAGES) --- */
@@ -1999,30 +1999,29 @@ a.bento-card:hover .mini-tag {
     transition: background 0.3s ease;
 }
 
-/* ... (Garde .result-item:first-child et :last-child comme avant) ... */
-
 .result-value {
     font-family: 'Clash Display', sans-serif;
-    font-size: 3rem;
+    /* On réduit un peu la taille (c'était 4rem) pour que le texte tienne bien */
+    font-size: 2.5rem; 
     font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    padding: 0;
     
+    /* On garde le beau dégradé */
     background: linear-gradient(135deg, #fff 0%, var(--accent-secondary) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent; 
-    
-    /* CORRECTIF COUPURE */
-    line-height: 1.3;
-    padding-right: 1rem; /* Ajoute un vrai espace de sécurité à droite */
-    width: fit-content; /* Force la boîte à englober tout le texte + le padding */
-    display: inline-block;
 }
 
-.result-desc {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    font-weight: 400;
-    padding-left: 1rem;
+/* On ajuste l'espacement pour que les 3 blocs respirent bien */
+.results-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem; /* Espace équilibré */
+    width: 100%;
 }
 
 /* --- RESPONSIVE --- */
