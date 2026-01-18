@@ -29,27 +29,8 @@
         </svg>
     </div>
 
-    <div class="mobile-menu-overlay">
-        <nav class="mobile-nav-links">
-            <a href="index.html#projets" class="mobile-link">Projets</a>
-            <a href="index.html#infos" class="mobile-link">À Propos</a>
-            <a href="index.html#contact" class="mobile-link">Contact</a>
-        </nav>
-    </div>
-
-    <nav class="desktop-nav">
-        <div class="logo"><a href="index.html">Olivier Pouchoy</a></div>
-        <button class="burger-btn" aria-label="Menu">
-            <span></span>
-            <span></span>
-        </button>
-        <div class="links">
-            <div class="nav-backdrop"></div>
-            <a href="index.html#projets" class="nav-item">Projets</a>
-            <a href="index.html#infos" class="nav-item">Infos</a>
-            <a href="index.html#contact" class="nav-item" id="btn-contact">Contact</a>
-        </div>
-    </nav>
+    <!-- HEADER COMPONENT - Remplace l'ancien header statique -->
+    <app-header></app-header>
 
     <section class="project-hero dewalt-hero">
         <div class="project-hero-content">
@@ -107,34 +88,34 @@
     <section class="sticky-scroll-section">
         <div class="sticky-container">
             <div class="sticky-content">
-    <h2>Le Défi</h2>
-    <p>
-        Produire ces catalogues trois fois par an demande une grosse organisation. 
-        Le challenge est de tenir le rythme intense de production tout en renouvelant le design à chaque édition, 
-        sans jamais faire d'erreur sur les nombreuses références techniques.
-    </p>
+                <h2>Le Défi</h2>
+                <p>
+                    Produire ces catalogues trois fois par an demande une grosse organisation. 
+                    Le challenge est de tenir le rythme intense de production tout en renouvelant le design à chaque édition, 
+                    sans jamais faire d'erreur sur les nombreuses références techniques.
+                </p>
 
-    <h3>Les Enjeux</h3>
-    <ul>
-        <li>Tenir la cadence (3 gros catalogues / an)</li>
-        <li>Travailler efficacement en équipe</li>
-        <li>Proposer des mises en page modernes</li>
-        <li>Être rigoureux sur les détails techniques</li>
-    </ul>
+                <h3>Les Enjeux</h3>
+                <ul>
+                    <li>Tenir la cadence (3 gros catalogues / an)</li>
+                    <li>Travailler efficacement en équipe</li>
+                    <li>Proposer des mises en page modernes</li>
+                    <li>Être rigoureux sur les détails techniques</li>
+                </ul>
 
-    <h3>Mon Rôle</h3>
-    <p>
-        Je suis intervenu en soutien sur la création des visuels et la mise en page du catalogue. 
-        En parallèle, j'ai assuré une partie du suivi client, participant aux points d'étape réguliers pour valider les avancées. 
-        Cette double implication a permis de fluidifier les échanges et de garantir une livraison conforme, dans les temps.
-    </p>
+                <h3>Mon Rôle</h3>
+                <p>
+                    Je suis intervenu en soutien sur la création des visuels et la mise en page du catalogue. 
+                    En parallèle, j'ai assuré une partie du suivi client, participant aux points d'étape réguliers pour valider les avancées. 
+                    Cette double implication a permis de fluidifier les échanges et de garantir une livraison conforme, dans les temps.
+                </p>
 
-    <div class="sticky-action">
-        <a href="https://bynder.sbdinc.com/m/4a9da5265b80c903/original/DW_Best-Of-51-Janvier-Aout-2026-FR_DMK1.pdf" target="_blank" class="visit-site-btn small">
-            Voir le catalogue <span class="visit-arrow">↗</span>
-        </a>
-    </div>
-</div>
+                <div class="sticky-action">
+                    <a href="https://bynder.sbdinc.com/m/4a9da5265b80c903/original/DW_Best-Of-51-Janvier-Aout-2026-FR_DMK1.pdf" target="_blank" class="visit-site-btn small">
+                        Voir le catalogue <span class="visit-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="scroll-images">
                 <div class="scroll-image-item">
@@ -208,39 +189,10 @@
         </div>
     </a>
 
-       <section id="contact" class="contact-section">
-        <div class="container">
-            <p class="contact-label">Un projet en tête ?</p>
-            <h2 class="contact-title">Travaillons<br>Ensemble</h2>
-            <div class="contact-actions">
-                <a href="mailto:olivier.p.fr@outlook.fr" class="magnetic-button">
-                    Me contacter <span class="arrow">↗</span>
-                </a>
-                <button class="copy-email-btn" onclick="copyEmail()">
-                    <span id="email-text">olivier.p.fr@outlook.fr</span>
-                    <span class="icon-copy">📋</span>
-                    <span class="copy-feedback">Copié !</span>
-                </button>
-            </div>
-            <footer class="main-footer">
-                <div class="footer-links">
-                    <a href="#">LinkedIn</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Behance</a>
-                </div>
-                <p class="copyright">© 2025 Olivier Pouchoy. Tous droits réservés.</p>
-            </footer>
-        </div>
+    <!-- ✅ FOOTER COMPONENT - Remplace l'ancien footer statique -->
+    <section id="contact" class="contact-section">
+        <app-footer></app-footer>
     </section>
-
-    <footer class="project-footer">
-        <div class="footer-links">
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-            <a href="#">Behance</a>
-        </div>
-        <p class="copyright">© 2025 Olivier Pouchoy. Tous droits réservés.</p>
-    </footer>
 
     <script src="script.js"></script>
     <script src="script-projet.js"></script>

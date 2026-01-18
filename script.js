@@ -1,11 +1,182 @@
-document.addEventListener("DOMContentLoaded", () => {
+// ========================================================
+// 1. WEB COMPONENTS (Header & Footer) - NOUVELLE APPROCHE
+// ========================================================
 
+class HeaderComponent extends HTMLElement {
+    connectedCallback() {
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Header non trouvé');
+                return response.text();
+            })
+            .then(html => {
+                this.innerHTML = html;
+                this.initBurgerMenu();
+                window.dispatchEvent(new CustomEvent('header-loaded'));
+            })
+            .catch(error => {
+                console.error('Erreur chargement header:', error);
+            });
+    }
+
+    initBurgerMenu() {
+        const burgerBtn = this.querySelector('.burger-btn');
+        const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (burgerBtn && mobileOverlay) {
+            // Menu Mobile avec GSAP
+            const menuTimeline = gsap.timeline({ paused: true })
+                .to(mobileOverlay, { duration: 0.5, autoAlpha: 1, ease: "power3.inOut" })
+                .from(mobileLinks, { y: 50, opacity: 0, duration: 0.6, stagger: 0.1, ease: "power4.out" }, "-=0.2");
+
+            burgerBtn.addEventListener('click', () => {
+                burgerBtn.classList.toggle('active');
+                if (burgerBtn.classList.contains('active')) {
+                    if (window.lenis) window.lenis.stop();
+                    menuTimeline.play();
+                } else {
+                    menuTimeline.reverse();
+                    if (window.lenis) window.lenis.start();
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    burgerBtn.classList.remove('active');
+                    menuTimeline.reverse();
+                    if (window.lenis) window.lenis.start();
+                });
+            });
+        }
+    }
+}
+
+class FooterComponent extends HTMLElement {
+    connectedCallback() {
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Footer non trouvé');
+                return response.text();
+            })
+            .then(html => {
+                this.innerHTML = html;
+                this.initEmailCopy();
+                this.initSocialMagnetic();
+                window.dispatchEvent(new CustomEvent('footer-loaded'));
+                
+                if (window.ScrollTrigger) {
+                    ScrollTrigger.refresh();
+                }
+            })
+            .catch(error => {
+                console.error('Erreur chargement footer:', error);
+            });
+    }
+
+    initEmailCopy() {
+        const copyBtn = this.querySelector('.copy-email-btn');
+        
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const email = 'olivier.p.fr@outlook.fr';
+                const feedback = copyBtn.querySelector('.copy-feedback');
+
+                navigator.clipboard.writeText(email).then(() => {
+                    copyBtn.classList.add('copied');
+                    
+                    if (feedback) {
+                        feedback.style.opacity = '1';
+                    }
+
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copied');
+                        if (feedback) {
+                            feedback.style.opacity = '0';
+                        }
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Erreur lors de la copie:', err);
+                });
+            });
+        }
+    }
+
+    initSocialMagnetic() {
+        const socialLinks = this.querySelectorAll('.footer-links a');
+        if (window.matchMedia("(pointer: fine)").matches && socialLinks.length > 0) {
+            socialLinks.forEach(link => {
+                const xTo = gsap.quickTo(link, "x", { duration: 0.3, ease: "power2.out" });
+                const yTo = gsap.quickTo(link, "y", { duration: 0.3, ease: "power2.out" });
+
+                link.addEventListener('mousemove', (e) => {
+                    const rect = link.getBoundingClientRect();
+                    const x = (e.clientX - (rect.left + rect.width / 2)) * 0.5;
+                    const y = (e.clientY - (rect.top + rect.height / 2)) * 0.5;
+                    xTo(x);
+                    yTo(y);
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
+                });
+            });
+        }
+    }
+}
+
+// Enregistrer les Web Components
+customElements.define('app-header', HeaderComponent);
+customElements.define('app-footer', FooterComponent);
+
+// ========================================================
+// 2. CŒUR DU SITE - INITIALISATION
+// ========================================================
+
+document.addEventListener("DOMContentLoaded", initWebsite);
+
+function initWebsite() {
+    // Attendre que les composants soient chargés avant de lancer l'app
+    let headerLoaded = false;
+    let footerLoaded = false;
+
+    const checkAndRun = () => {
+        if (headerLoaded && footerLoaded) {
+            runApp();
+        }
+    };
+
+    window.addEventListener('header-loaded', () => {
+        headerLoaded = true;
+        checkAndRun();
+    });
+
+    window.addEventListener('footer-loaded', () => {
+        footerLoaded = true;
+        checkAndRun();
+    });
+
+    // Si pas de composants sur la page (fallback)
+    setTimeout(() => {
+        if (!headerLoaded && !footerLoaded) {
+            console.log('Composants non détectés, lancement direct');
+            runApp();
+        }
+    }, 1000);
+}
+
+// ========================================================
+// 3. APPLICATION PRINCIPALE
+// ========================================================
+
+function runApp() {
+    
     // --------------------------------------------------------
-    // 1. CONFIGURATION (LENIS & GSAP)
+    // CONFIGURATION (LENIS & GSAP)
     // --------------------------------------------------------
 
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const isProjectPage = document.body.classList.contains('project-page'); // Détection page projet
+    const isProjectPage = document.body.classList.contains('project-page');
 
     let lenis;
     if (!isMobile && typeof Lenis !== 'undefined') {
@@ -14,8 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smooth: true
         });
-        // On ne stop pas Lenis tout de suite si on a déjà visité, 
-        // le preloader gère ça plus bas.
+        window.lenis = lenis; // Rendre accessible globalement
     }
 
     gsap.registerPlugin(ScrollTrigger);
@@ -32,44 +202,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --------------------------------------------------------
-    // 2. GESTION DU PRELOADER (Global)
+    // GESTION DU PRELOADER
     // --------------------------------------------------------
 
     const preloaderElement = document.querySelector(".preloader");
     const hasVisited = sessionStorage.getItem("hasVisited");
 
-    // Fonction de démarrage selon la page
     function startSite() {
         if (lenis) lenis.start();
         initScrollLines();
 
-        // Lancement conditionnel des animations
         if (isProjectPage) {
-            // Les animations projet sont gérées par script-projet.js
             console.log('Page projet détectée');
         } else {
             initHomePageAnimations();
             playHomeHeroAnimations();
+            initScrollSpy(); 
         }
     }
 
     if (hasVisited) {
-        // VISITEUR DÉJÀ VENU
         if (preloaderElement) preloaderElement.style.display = "none";
-
-        // Setup immédiat des éléments masqués par défaut
+        
+        // Initialisation immédiate des états (set)
         gsap.set(".desktop-nav", { yPercent: 0, xPercent: -50, autoAlpha: 1 });
         gsap.set(".scroll-indicator", { y: 0, autoAlpha: 0.7 });
-
-        // Pour l'accueil
-        gsap.set("h1.reveal-text", { y: 0, autoAlpha: 1 });
-        gsap.set(".hero-subtitle", { y: 0, autoAlpha: 1 });
+        if (!isProjectPage) {
+            gsap.set("h1.reveal-text", { y: 0, autoAlpha: 1 });
+            gsap.set(".hero-subtitle", { y: 0, autoAlpha: 1 });
+        }
 
         startSite();
 
     } else {
-        // PREMIÈRE VISITE (Animation Preloader)
-        if (lenis) lenis.stop(); // Bloque le scroll pendant le chargement
+        if (lenis) lenis.stop();
 
         const tlLoader = gsap.timeline({
             onComplete: () => {
@@ -78,13 +244,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        if (document.querySelector(".fill")) {
+        const fillElement = document.querySelector(".fill");
+        if (fillElement) {
             tlLoader.to(".fill", {
                 backgroundPosition: "0% 0",
                 duration: 2.5,
                 ease: "power4.inOut"
-            })
-                .to({}, { duration: 0.1 });
+            });
         }
 
         if (preloaderElement) {
@@ -92,24 +258,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 yPercent: -100,
                 duration: 0.8,
                 ease: "power4.inOut"
-            });
+            }, fillElement ? ">" : null); 
         }
 
-        // On lance l'intro Hero un peu avant la fin du rideau noir
         tlLoader.add(() => {
             if (!isProjectPage) playHomeHeroAnimations();
-            // Les animations projet sont gérées par script-projet.js
         }, "-=0.7");
     }
 
     // --------------------------------------------------------
-    // 3. FONCTIONS D'ANIMATIONS (ACCUEIL)
+    // ANIMATIONS
     // --------------------------------------------------------
 
     function initScrollLines() {
         const paths = document.querySelectorAll('.organic-path');
-        if (!paths.length) return;
-
         paths.forEach((path) => {
             const length = path.getTotalLength();
             gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
@@ -127,33 +289,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function playHomeHeroAnimations() {
-        // Sécurité : si on n'est pas sur l'accueil, on arrête
         if (!document.querySelector('.hero')) return;
 
         const tl = gsap.timeline();
         gsap.set(".desktop-nav", { xPercent: -50 });
 
         tl.fromTo(".desktop-nav",
-            { yPercent: -200, xPercent: -50, autoAlpha: 0 },
-            { yPercent: 0, xPercent: -50, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
+            { yPercent: -200, autoAlpha: 0 }, 
+            { yPercent: 0, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
         );
 
-        if (document.querySelector("h1.reveal-text")) {
-            tl.fromTo("h1.reveal-text",
+        const h1 = document.querySelector("h1.reveal-text");
+        if (h1) {
+            tl.fromTo(h1,
                 { y: 40, autoAlpha: 0 },
                 { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.05, ease: "power4.out" }, "-=0.7"
             );
         }
 
-        if (document.querySelector(".hero-subtitle")) {
-            tl.fromTo(".hero-subtitle",
+        const sub = document.querySelector(".hero-subtitle");
+        if (sub) {
+            tl.fromTo(sub,
                 { y: 20, autoAlpha: 0 },
                 { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "-=0.5"
             );
         }
 
-        if (document.querySelector(".scroll-indicator")) {
-            gsap.fromTo(".scroll-indicator",
+        const scrollInd = document.querySelector(".scroll-indicator");
+        if (scrollInd) {
+            gsap.fromTo(scrollInd,
                 { y: -10, autoAlpha: 0 },
                 { y: 0, autoAlpha: 0.7, duration: 0.5, ease: "power2.out", delay: 0.3 }
             );
@@ -184,42 +348,45 @@ document.addEventListener("DOMContentLoaded", () => {
         if (window.matchMedia("(pointer: fine)").matches && heroContent) {
             heroContent.addEventListener('mousemove', (e) => {
                 const rect = heroContent.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                heroContent.style.setProperty('--cursor-x', `${x}px`);
-                heroContent.style.setProperty('--cursor-y', `${y}px`);
+                heroContent.style.setProperty('--cursor-x', `${e.clientX - rect.left}px`);
+                heroContent.style.setProperty('--cursor-y', `${e.clientY - rect.top}px`);
             });
         }
     }
 
-    // Section About (Accueil)
+    // Animation About
     if (document.querySelector(".about-section")) {
-        const aboutTl = gsap.timeline({
+        gsap.from(".about-text .reveal-text", {
             scrollTrigger: {
                 trigger: ".about-section",
                 start: "top 70%",
                 toggleActions: "play none none reverse"
-            }
-        });
-        aboutTl.from(".about-text .reveal-text", {
+            },
             y: 30,
             autoAlpha: 0,
             duration: 1,
             stagger: 0.1,
             ease: "power3.out"
-        })
-            .to(".about-image-wrapper", {
-                autoAlpha: 1,
-                scale: 1,
-                duration: 1.5,
-                ease: "power2.out"
-            }, "-=0.8");
+        });
+        
+        gsap.to(".about-image-wrapper", {
+            scrollTrigger: {
+                trigger: ".about-section",
+                start: "top 70%",
+                toggleActions: "play none none reverse"
+            },
+            autoAlpha: 1,
+            scale: 1,
+            duration: 1.5,
+            ease: "power2.out"
+        });
     }
 
-    // Compteurs (Accueil)
-    gsap.utils.toArray(".counter").forEach(counter => {
-        const target = counter.getAttribute("data-target");
-        if (target) {
+    // Compteurs
+    const counters = gsap.utils.toArray(".counter");
+    if(counters.length > 0) {
+        counters.forEach(counter => {
+            const target = counter.getAttribute("data-target");
             gsap.to(counter, {
                 innerText: target,
                 duration: 2,
@@ -233,116 +400,55 @@ document.addEventListener("DOMContentLoaded", () => {
                     counter.innerText = Math.ceil(counter.innerText) + "+";
                 }
             });
-        }
-    });
-
-    // --------------------------------------------------------
-    // 6. INTERFACE (HEADER & MENU)
-    // --------------------------------------------------------
-
-    // Gestion Nav Backdrop
-    const navBackdrop = document.querySelector('.nav-backdrop');
-    const navItems = document.querySelectorAll('.nav-item');
-    const contactBtn = document.querySelector('#btn-contact');
-    const linksContainer = document.querySelector('.links');
-
-    function moveBackdropTo(element) {
-        if (!element || !navBackdrop) return;
-        const width = element.offsetWidth;
-        const left = element.offsetLeft;
-        navBackdrop.style.width = `${width}px`;
-        navBackdrop.style.left = `${left}px`;
+        });
     }
 
+    // --------------------------------------------------------
+    // SCROLLSPY OPTIMISÉ
+    // --------------------------------------------------------
 
+    function initScrollSpy() {
+        const sections = document.querySelectorAll('section[id]');
+        const navBackdrop = document.querySelector('.nav-backdrop');
+        const navItems = document.querySelectorAll('.nav-item');
 
-    // ScrollSpy (Uniquement si les sections existent)
-    const sections = document.querySelectorAll('section[id]');
-    function scrollSpy() {
-        if (sections.length === 0) return;
+        if (!navBackdrop || sections.length === 0) return;
 
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= (sectionTop - 300)) {
-                current = section.getAttribute('id');
-            }
-        });
-        if (current) {
-            const activeLink = document.querySelector(`.nav-item[href*="index.html#${current}"], .nav-item[href="#${current}"]`);
-            if (activeLink && navBackdrop) {
-                moveBackdropTo(activeLink);
+        const updateNav = (id) => {
+            const activeLink = document.querySelector(`.nav-item[href*="#${id}"]`);
+            
+            if (activeLink) {
+                navItems.forEach(el => el.style.color = "");
+                activeLink.style.color = "white";
+
+                const width = activeLink.offsetWidth;
+                const left = activeLink.offsetLeft;
+                navBackdrop.style.width = `${width}px`;
+                navBackdrop.style.left = `${left}px`;
+
                 if (activeLink.id === 'btn-contact') {
                     navBackdrop.style.background = "var(--accent-primary)";
                 } else {
                     navBackdrop.style.background = "rgba(255, 255, 255, 0.1)";
                 }
-                navItems.forEach(link => link.style.color = "");
-                activeLink.style.color = "white";
             }
-        }
-    }
-    window.addEventListener('scroll', scrollSpy);
+        };
 
-    // Menu Mobile
-    const burgerBtn = document.querySelector('.burger-btn');
-    const mobileMenu = document.querySelector('.mobile-menu-overlay');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-
-    if (burgerBtn && mobileMenu) {
-        const menuTimeline = gsap.timeline({ paused: true });
-        menuTimeline.to(mobileMenu, {
-            duration: 0.5,
-            autoAlpha: 1,
-            ease: "power3.inOut"
-        })
-            .from(mobileLinks, {
-                y: 50,
-                opacity: 0,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: "power4.out"
-            }, "-=0.2");
-
-        burgerBtn.addEventListener('click', () => {
-            burgerBtn.classList.toggle('active');
-            if (burgerBtn.classList.contains('active')) {
-                if (lenis) lenis.stop();
-                menuTimeline.play();
-            } else {
-                menuTimeline.reverse();
-                if (lenis) lenis.start();
-            }
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                burgerBtn.classList.remove('active');
-                menuTimeline.reverse();
-                if (lenis) lenis.start();
+        sections.forEach(section => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top center",
+                end: "bottom center",
+                onEnter: () => updateNav(section.id),
+                onEnterBack: () => updateNav(section.id)
             });
         });
     }
 
-    // Social Magnetic
-    const socialLinks = document.querySelectorAll('.footer-links a');
-    if (window.matchMedia("(pointer: fine)").matches) {
-        socialLinks.forEach(link => {
-            link.addEventListener('mousemove', (e) => {
-                const rect = link.getBoundingClientRect();
-                const x = (e.clientX - (rect.left + rect.width / 2)) * 0.5;
-                const y = (e.clientY - (rect.top + rect.height / 2)) * 0.5;
-                gsap.to(link, { x: x, y: y, duration: 0.3, ease: "power2.out" });
-            });
-            link.addEventListener('mouseleave', () => {
-                gsap.to(link, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
-            });
-        });
-    }
-
-    // Marquee Animation
-    if (document.querySelector(".marquee-content")) {
-        gsap.to(".marquee-content", {
+    // Marquee
+    const marqueeContent = document.querySelector(".marquee-content");
+    if (marqueeContent) {
+        gsap.to(marqueeContent, {
             xPercent: -100,
             repeat: -1,
             duration: 35,
@@ -353,27 +459,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // Scroll Indicator
     const scrollIndicator = document.querySelector('.scroll-indicator');
     if (scrollIndicator) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                gsap.to(scrollIndicator, { opacity: 0, duration: 0.3 });
-            } else {
-                gsap.to(scrollIndicator, { opacity: 0.7, duration: 0.3 });
-            }
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "50px top",
+            onEnter: () => gsap.to(scrollIndicator, { opacity: 0, duration: 0.3 }),
+            onLeaveBack: () => gsap.to(scrollIndicator, { opacity: 0.7, duration: 0.3 })
         });
     }
-});
-
-// Copy Email Function
-function copyEmail() {
-    const email = "olivier.p.fr@outlook.fr";
-    navigator.clipboard.writeText(email).then(() => {
-        const btn = document.querySelector('.copy-email-btn');
-        if (btn) {
-            btn.classList.add('copied');
-            setTimeout(() => { btn.classList.remove('copied'); }, 2000);
-        }
-    }).catch(err => {
-        console.error('Erreur lors de la copie:', err);
-    });
 }
 
+// ========================================================
+// 4. FONCTION GLOBALE (Fallback pour ancien code HTML)
+// ========================================================
+
+window.copyEmail = function(btnElement) {
+    const email = "olivier.p.fr@outlook.fr";
+    const btn = btnElement || document.querySelector('.copy-email-btn');
+
+    if(navigator.clipboard) {
+        navigator.clipboard.writeText(email).then(() => {
+            if (btn) {
+                btn.classList.add('copied');
+                setTimeout(() => { btn.classList.remove('copied'); }, 2000);
+            }
+        }).catch(err => console.error('Erreur copy:', err));
+    } else {
+        console.warn("Clipboard API non supportée");
+    }
+}
