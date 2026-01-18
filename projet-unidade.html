@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNIDADE Jiu-Jitsu | Olivier Pouchoy</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+</head>
+
+<body class="project-page">
+    <div class="noise-overlay"></div>
+
+    <div class="organic-lines-container">
+        <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
+            <path class="organic-path" d="M-50,800 C300,900 500,500 1000,600 C1400,700 1300,100 1550,50" />
+            <path class="organic-path" d="M1500,400 C1100,100 800,900 400,600 C100,300 -50,500 -100,400" />
+        </svg>
+    </div>
+
+    <div class="mobile-menu-overlay">
+        <nav class="mobile-nav-links">
+            <a href="index.html#projets" class="mobile-link">Projets</a>
+            <a href="index.html#infos" class="mobile-link">À Propos</a>
+            <a href="index.html#contact" class="mobile-link">Contact</a>
+        </nav>
+    </div>
+
+    <nav class="desktop-nav">
+        <div class="logo"><a href="index.html">Olivier Pouchoy</a></div>
+        <button class="burger-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+        </button>
+        <div class="links">
+            <div class="nav-backdrop"></div>
+            <a href="index.html#projets" class="nav-item">Projets</a>
+            <a href="index.html#infos" class="nav-item">Infos</a>
+            <a href="index.html#contact" class="nav-item" id="btn-contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="project-hero unidade-hero">
+        <div class="project-hero-content">
+
+            <h1 class="gradient-text">UNIDADE JJB</h1>
+
+            <div class="project-tags-container">
+                <span class="project-tag">WordPress / Elementor</span>
+                <span class="project-tag">UI/UX Design</span>
+                <span class="project-tag">API Sportigo</span>
+            </div>
+
+            <p class="project-hero-description">
+                Création du site de l'association Unidade JJB. Suite au changement de propriétaire, il fallait bâtir une 
+                nouvelle identité numérique alignée avec le nouveau logo et connecter le site aux outils de gestion du club.
+            </p>
+
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-value">UNIDADE Lyon</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Rôle</span>
+                    <span class="meta-value">Design & Intégration</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Outils</span>
+                    <span class="meta-value">Figma, WordPress</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Type</span>
+                    <span class="meta-value">Site Vitrine & Showroom</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-hero-image">
+            <img src="assets/projet-unidade/thumb-unidade.png" alt="Aperçu du site UNIDADE">
+        </div>
+
+        <div class="glow-container">
+            <div class="glow-blob blob-purple" style="background: #0044cc; opacity: 0.2;"></div>
+            <div class="glow-blob blob-blue" style="background: #ffffff; opacity: 0.1;"></div>
+        </div>
+    </section>
+
+    <section class="context-section">
+        <h2>Le Contexte</h2>
+        <p>
+            L'ancien club "One Jujitsu" a changé de propriétaire pour devenir UNIDADE. Ce changement impliquait une refonte totale de l'image de marque.
+            Le besoin n'était pas de modifier l'ancien site, mais de <strong>tout reconstruire</strong> pour coller à la nouvelle charte graphique 
+            et aux besoins spécifiques de l'association.
+        </p>
+    </section>
+
+    <section class="sticky-scroll-section">
+        <div class="sticky-container">
+            <div class="sticky-content">
+                <h2>Le Défi</h2>
+                <p>
+                    Le challenge était de concevoir un site vitrine efficace qui serve de hub central pour les adhérents, sans être un site e-commerce complexe.
+                    Il fallait intégrer les outils externes (Sportigo) de façon transparente et présenter les vêtements du club sans gérer de paiement en ligne.
+                </p>
+
+                <h3>Les Objectifs</h3>
+                <ul>
+                    <li>Création de la maquette (Figma) selon la nouvelle charte</li>
+                    <li>Intégration WordPress & Elementor</li>
+                    <li>Connexion API Sportigo (Planning & Réservations)</li>
+                    <li>Mise en place d'un Showroom produits (Non marchand)</li>
+                </ul>
+
+                <h3>Ma Solution</h3>
+                <p>
+                    J'ai d'abord prototypé l'interface sur <strong>Figma</strong> pour valider l'identité visuelle sportive et épurée. 
+                    Une fois le design validé, j'ai réalisé l'intégration sur <strong>WordPress</strong>. 
+                    Côté technique, j'ai connecté l'<strong>API Sportigo</strong> pour afficher le planning des cours en temps réel 
+                    et créé une page "Boutique" en mode catalogue pour que les membres puissent repérer les équipements avant d'acheter au club.
+                </p>
+
+                <div class="sticky-action">
+                    <a href="https://unidade.fr" target="_blank" class="visit-site-btn small">
+                        Voir le site en ligne <span class="visit-arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="scroll-images">
+
+                <div class="scroll-image-item">
+                    <a href="assets/projet-unidade/img1.png" data-fancybox="gallery" data-caption="Nouvelle identité visuelle">
+                        <img src="assets/projet-unidade/img1.png" alt="Homepage UNIDADE">
+                    </a>
+                </div>
+
+                <div class="scroll-image-item">
+                    <a href="assets/projet-unidade/img2.png" data-fancybox="gallery" data-caption="Intégration API Sportigo">
+                        <img src="assets/projet-unidade/img2.png" alt="Planning des cours">
+                    </a>
+                </div>
+
+                <div class="scroll-image-item">
+                    <a href="assets/projet-unidade/img3.png" data-fancybox="gallery" data-caption="Showroom équipements (Vitrine)">
+                        <img src="assets/projet-unidade/img3.png" alt="Boutique du club">
+                    </a>
+                </div>
+
+                <div class="scroll-image-item">
+                    <a href="assets/projet-unidade/img4.png" data-fancybox="gallery" data-caption="Navigation Mobile optimisée">
+                        <img src="assets/projet-unidade/img4.png" alt="Version Mobile">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="performance-section">
+        <div class="performance-container">
+
+            <div class="perf-content-centered">
+                <h3>Points Clés du Projet</h3>
+
+                <div class="results-grid">
+
+                    <div class="benefit-card">
+                        <h4 class="benefit-title">Identité Sur-Mesure</h4>
+                        <p class="benefit-desc">
+                            Passage de la maquette Figma au site final au pixel près, respectant la nouvelle charte 
+                            graphique du club pour une cohérence totale.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <h4 class="benefit-title">Connexion API</h4>
+                        <p class="benefit-desc">
+                            Le site n'est pas qu'une vitrine statique : il communique avec le logiciel métier (Sportigo) 
+                            pour afficher les créneaux à jour sans double saisie.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <h4 class="benefit-title">Boutique Showroom</h4>
+                        <p class="benefit-desc">
+                            Une solution adaptée à l'association : présentation claire des produits (Kimonos, Rashguards) 
+                            pour donner envie, sans la lourdeur de gestion d'un e-commerce.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <a href="projet-dewalt.html" class="next-project-section">
+        <div class="next-project-container">
+            <span class="next-project-label">Projet Suivant</span>
+            <div class="next-project-content">
+                <h2 class="next-project-title">
+                    DeWalt
+                    <span class="next-project-arrow">→</span>
+                </h2>
+            </div>
+        </div>
+    </a>
+
+         <section id="contact" class="contact-section">
+        <div class="container">
+            <p class="contact-label">Un projet en tête ?</p>
+            <h2 class="contact-title">Travaillons<br>Ensemble</h2>
+            <div class="contact-actions">
+                <a href="mailto:olivier.p.fr@outlook.fr" class="magnetic-button">
+                    Me contacter <span class="arrow">↗</span>
+                </a>
+                <button class="copy-email-btn" onclick="copyEmail()">
+                    <span id="email-text">olivier.p.fr@outlook.fr</span>
+                    <span class="icon-copy">📋</span>
+                    <span class="copy-feedback">Copié !</span>
+                </button>
+            </div>
+            <footer class="main-footer">
+                <div class="footer-links">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Behance</a>
+                </div>
+                <p class="copyright">© 2025 Olivier Pouchoy. Tous droits réservés.</p>
+            </footer>
+        </div>
+    </section>
+
+    <footer class="project-footer">
+        <div class="footer-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Behance</a>
+        </div>
+        <p class="copyright">© 2025 Olivier Pouchoy. Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="script-projet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script>
+      Fancybox.bind("[data-fancybox]", {
+        Images: { zoom: false },
+        on: {
+          init: () => {
+            document.documentElement.classList.add("no-scroll");
+            document.body.classList.add("no-scroll");
+          },
+          destroy: () => {
+            document.documentElement.classList.remove("no-scroll");
+            document.body.classList.remove("no-scroll");
+          }
+        }
+      });
+    </script>
+
+</body>
+</html>

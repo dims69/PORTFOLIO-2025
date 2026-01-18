@@ -376,3 +376,4 @@ function copyEmail() {
         console.error('Erreur lors de la copie:', err);
     });
 }
+

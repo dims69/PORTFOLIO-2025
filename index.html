@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,9 +14,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
+
 <body>
     <div class="noise-overlay"></div>
-    
+
     <div class="organic-lines-container">
         <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
             <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
@@ -54,11 +56,15 @@
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <h1 class="reveal-text">Design <span class="gradient-text">Impactant</span></h1>
-            <h1 class="reveal-text">Expérience <span class="gradient-text">Digitale</span></h1>
-            <p class="hero-subtitle">Graphiste & Webdesigner. Je crée des identités visuelles qui marquent.</p>
-        </div>
+    <div class="hero-content">
+    <h1 class="reveal-text">UI/UX <span class="gradient-text">Designer</span></h1>
+    
+    <h1 class="reveal-text">& Intégrateur <span class="gradient-text">Web</span></h1>
+    
+    <p class="hero-subtitle">
+        Je garantis une continuité parfaite entre votre image de marque et votre site internet.
+    </p>
+</div>
         <div class="scroll-indicator">
             <div class="mouse">
                 <div class="wheel"></div>
@@ -73,29 +79,29 @@
     <section id="projets" class="projects-section">
         <div class="container">
             <h2 class="section-title">Projets <span class="highlight">Sélectionnés</span></h2>
-            
+
             <div class="bento-grid">
 
-                 <a href="projet-unidade.html" class="bento-card span-2">
+                <a href="projet-laboratoire32.html" class="bento-card span-2">
                     <div class="card-tags">
-                        <span class="mini-tag">WordPress</span>
-                        <span class="mini-tag">Elementor</span>
-                        <span class="mini-tag">Responsive</span>
+                        <span class="project-tag">Wordpress</span>
+                <span class="project-tag">Figma</span>
+                <span class="project-tag">HTML/CSS/JS</span>
                     </div>
-                    <div class="card-visual-container unidade-studio">
-                        <img src="assets/thumb-unidade.png" alt="Mockup Unidade" class="floating-obj">
+                    <div class="card-visual-container labo-studio">
+                        <img src="assets/thumb-labo32.png" alt="Laboratoire 32" class="floating-obj">
                     </div>
                     <div class="card-content">
-                        <h3>UNIDADE Jiu-Jitsu</h3>
-                        <p>Site vitrine complet pour académie de JJB</p>
+                        <h3>Laboratoire 32</h3>
+                        <p>Site vitrine premium & Automatisation</p>
                     </div>
                 </a>
 
-
-                <a href="projet-dewalt.html" class="bento-card">
+                <a href="projet-bestof.html" class="bento-card">
                     <div class="card-tags">
                         <span class="mini-tag">Print</span>
                         <span class="mini-tag">Mise en page</span>
+                        <span class="mini-tag">Indesign</span>
                     </div>
                     <div class="card-visual-container dewalt-tech-bg">
                         <img src="assets/thumb-bestof.png" alt="Catalogue DeWalt" class="floating-obj">
@@ -120,38 +126,33 @@
                     </div>
                 </a>
 
-                
-               <a href="projet-village.html" class="bento-card span-2">
+                <a href="projet-village.html" class="bento-card span-2">
                     <div class="card-tags">
                         <span class="mini-tag">WordPress</span>
                         <span class="mini-tag">Elementor</span>
                         <span class="mini-tag">UI Design</span>
                     </div>
-
                     <div class="card-visual-container village-studio">
                         <img src="assets/thumb-village-motel.png" alt="Village Motel Mockup" class="floating-obj">
                     </div>
-                    
                     <div class="card-content">
                         <h3>Village Motel</h3>
                         <p>Refonte de site hôtelier & Système de réservation</p>
                     </div>
                 </a>
-               
 
-                <a href="projet-billapp.html" class="bento-card span-2">
+                <a href="projet-unidade.html" class="bento-card span-2">
                     <div class="card-tags">
                         <span class="mini-tag">WordPress</span>
-                        <span class="mini-tag">UI Design</span>
+                        <span class="mini-tag">Elementor</span>
+                        <span class="mini-tag">Responsive</span>
                     </div>
-                    <div class="card-visual-container billapp-studio">
-                        <div class="mockup-duo">
-                            <img src="assets/thumb-billapp.png" alt="Bill App Desktop" class="img-desktop">
-                        </div>
+                    <div class="card-visual-container unidade-studio">
+                        <img src="assets/thumb-unidade.png" alt="Mockup Unidade" class="floating-obj">
                     </div>
                     <div class="card-content">
-                        <h3>Bill App</h3>
-                        <p>Site vitrine sur mesure</p>
+                        <h3>UNIDADE Jiu-Jitsu</h3>
+                        <p>Site vitrine complet pour académie de JJB</p>
                     </div>
                 </a>
 
@@ -168,6 +169,7 @@
                         <p>Covering véhicule de fonction</p>
                     </div>
                 </a>
+
             </div>
         </div>
     </section>
@@ -175,32 +177,41 @@
     <section id="infos" class="about-section">
         <div class="about-glow-1"></div>
         <div class="container about-grid">
-            <div class="about-text">
-                <h2 class="section-title reveal-text">Plus que du<br><span class="highlight">Design</span></h2>
-                <p class="lead-text reveal-text">Je ne fais pas que "faire du joli". Je construis des systèmes visuels qui résolvent des problèmes.</p>
-                <p class="reveal-text">Mon approche combine une rigueur technique avec une sensibilité artistique moderne. Chaque pixel a une fonction précise.</p>
+         <div class="about-text">
+    <h2 class="section-title reveal-text">Un profil hybride<br><span class="highlight">Créatif & Technique</span></h2>
+    
+    <p class="lead-text reveal-text">
+        Je conçois des designs pensés pour le code.
+    </p>
 
-                <div class="stats-grid reveal-text">
-                    <div class="stat-card">
-                        <span class="stat-number counter" data-target="4">0</span>
-                        <span class="stat-label">Années d'expérience</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number counter" data-target="40">0</span>
-                        <span class="stat-label">Projets livrés</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">responsive</span>
-                    </div>
-                </div>
-                <div class="cv-wrapper reveal-text">
-                    <a href="assets/cv.pdf" target="_blank" class="cv-btn">
-                        Télécharger mon CV
-                        <span class="icon-download">↓</span>
-                    </a>
-                </div>
-            </div>
+    <p class="reveal-text">
+        Avec 4 ans d'expérience (Agence & Indépendant), j'ai acquis une vision 360° de la production. 
+        Mon background technique me permet de garantir la faisabilité de mes maquettes et d'assurer l'intégration finale. 
+        Du Print au Web en passant par le Motion, je suis un créatif opérationnel, prêt à renforcer votre équipe.
+    </p>
+
+    <div class="stats-grid reveal-text">
+        <div class="stat-card">
+            <span class="stat-number counter" data-target="4">0</span>
+            <span class="stat-label">Années d'expérience</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number counter" data-target="40">0</span>
+            <span class="stat-label">Projets réalisés</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Autonome</span>
+        </div>
+    </div>
+    
+    <div class="cv-wrapper reveal-text">
+        <a href="assets/cv.pdf" target="_blank" class="cv-btn">
+            Télécharger mon CV
+            <span class="icon-download">↓</span>
+        </a>
+    </div>
+</div>
             <div class="about-image-wrapper">
                 <div class="about-image" style="background-image: url('assets/profil.png');"></div>
                 <div class="about-glow-2"></div>
@@ -212,11 +223,27 @@
     <section class="skills-section">
         <div class="marquee-wrapper">
             <div class="marquee-content">
-                <span>Webflow</span> • <span>Figma</span> • <span>GSAP</span> • <span>UI Design</span> • <span>Motion</span> • <span>Branding</span> • <span>Adobe Creative Suite</span> • <span>HTML/CSS</span> • 
-            </div>
+    <span>Figma</span> • 
+    <span>WordPress</span> • 
+    <span>UI/UX</span> • 
+    <span>HTML/CSS</span> • 
+    <span>Motion</span> • 
+    <span>Webflow</span> • 
+    <span>Branding</span> • 
+    <span>SEO</span> • 
+    <span>Adobe Suite</span> • 
+</div>
             <div class="marquee-content">
-                <span>Webflow</span> • <span>Figma</span> • <span>GSAP</span> • <span>UI Design</span> • <span>Motion</span> • <span>Branding</span> • <span>Adobe Creative Suite</span> • <span>HTML/CSS</span> • 
-            </div>
+    <span>Figma</span> • 
+    <span>WordPress</span> • 
+    <span>UI/UX</span> • 
+    <span>HTML/CSS</span> • 
+    <span>Motion</span> • 
+    <span>Webflow</span> • 
+    <span>Branding</span> • 
+    <span>SEO</span> • 
+    <span>Adobe Suite</span> • 
+</div>
         </div>
     </section>
 
@@ -247,4 +274,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
