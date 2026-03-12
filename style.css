@@ -19,12 +19,31 @@
 }
 
 html {
-    height: auto;
+    height: 100%;
     overflow-x: hidden;
-    overflow-y: visible;
-    /* Crucial pour Sticky */
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
     scrollbar-width: thin;
-    scrollbar-color: var(--accent-primary) var(--bg-color);
+    scrollbar-color: var(--accent-primary) var(--bg-color, #050508);
+   
+}
+
+::-webkit-scrollbar {
+    width: 12px; /* Largeur confortable */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color, #050508); /* Fond noir (comme ton site) */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--accent-primary); /* Ton Violet */
+    border-radius: 6px; /* Arrondi */
+    border: 3px solid var(--bg-color, #050508); /* Crée un espace vide autour du violet */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8B5CF6; /* Violet plus clair au survol */
 }
 
 body {
@@ -32,9 +51,13 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     overflow: visible;
+    overflow-x: hidden;
+    min-height: 100vh;
     /* Crucial */
     width: 100%;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 html.lenis,
@@ -82,58 +105,6 @@ h1 {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-/* Preloader */
-
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--bg-color);
-    z-index: 999999;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-.loader-text-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-.loader-text {
-    font-size: clamp(2rem, 10vw, 8rem);
-    font-weight: 600;
-    line-height: 1;
-    white-space: nowrap;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-}
-
-.base {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, .3);
-    z-index: 1
-}
-
-.fill {
-    z-index: 2;
-    color: transparent;
-    background: linear-gradient(90deg, #fff 0, #fff 45%, transparent 55%, transparent 100%);
-    background-size: 250% 100%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text
 }
 
 /* =========================================
@@ -248,31 +219,33 @@ a {
    NAVIGATION (Desktop & Mobile)
    ========================================= */
 .desktop-nav {
-    display: flex;
+   display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centre le contenu */
     width: fit-content;
-    gap: 2rem;
-    padding: .8rem 1.5rem;
+    max-width: 95%; /* Sécurité pour mobile */
     position: fixed;
     top: 20px;
-    left: 50%;
     z-index: 10005;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     background: rgba(11, 12, 21, .6);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 100px;
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .3);
-    opacity: 0;
-    visibility: hidden;
-    /* Géré par JS */
+    padding: 0.8rem 1.5rem; /* Padding Desktop */
+    opacity: 1;
+    visibility: visible;
 }
 
 .logo {
     font-weight: 700;
     font-size: 1.5rem;
-    position: relative;
     z-index: 10005;
+    margin-right: 2rem;
 }
 
 .links {
@@ -280,132 +253,176 @@ a {
     align-items: center;
     position: relative;
     padding: 4px;
+    z-index: 1;
 }
 
 .nav-backdrop {
     position: absolute;
-    top: 4px;
+    top: 10%;
     left: 4px;
-    height: calc(100% - 8px);
+    height: 80%;
     width: 0;
     background: var(--accent-primary);
     border-radius: 100px;
-    z-index: 0;
-    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     pointer-events: none;
 }
 
 .nav-item {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 1.2rem;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 600;
+    color: var(--text-muted, #aaa);
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
     position: relative;
-    z-index: 1;
-    color: var(--text-muted);
-    font-weight: 500;
-    font-size: .95rem;
-    padding: .6rem 1.5rem;
-    transition: color .3s ease;
+    z-index: 2;
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-item.active {
     color: #fff;
 }
 
+
+
 /* Burger Menu */
 .burger-btn {
-    display: none;
+   display: none; /* Caché sur Desktop par défaut */
     width: 50px;
     height: 50px;
-    background: rgba(255, 255, 255, .05);
+    position: relative; /* Important pour le positionnement interne */
+    z-index: 10010; /* Toujours au-dessus de l'overlay */
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    z-index: 10001;
     cursor: pointer;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 6px; /* Espace entre les barres */
+    transition: border-color 0.3s ease;
 }
 
 .burger-btn span {
+   display: block;
     width: 24px;
     height: 2px;
     background-color: #fff;
-    transition: transform .3s;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Petit effet rebond */
+    position: absolute; /* On passe en absolu pour la croix parfaite */
 }
 
-.burger-btn:hover span:nth-child(1) {
-    transform: translateY(4px) rotate(45deg);
+/* État initial des barres (parallèles) */
+.burger-btn span:nth-child(1) {
+    transform: translateY(-4px); /* Barre du haut */
+}
+.burger-btn span:nth-child(2) {
+    transform: translateY(4px); /* Barre du bas */
 }
 
-.burger-btn:hover span:nth-child(2) {
-    transform: translateY(-4px) rotate(-45deg);
+/* --- ANIMATION CROIX (État .active) --- */
+.burger-btn.active span:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
 }
-
+.burger-btn.active span:nth-child(2) {
+    transform: translateY(0) rotate(-45deg);
+}
 .mobile-menu-overlay {
+    /* 1. Prend tout l'écran */
     position: fixed;
-    inset: 0;
-    background-color: var(--bg-color);
-    z-index: 10000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* 2. Couleur de fond (INDISPENSABLE) */
+    background-color: #0b0c15; /* Remplace par ta couleur sombre exacte si différente */
+    
+    /* 3. Z-Index : Très haut, mais SOUS le bouton burger */
+    z-index: 10009; 
+    
+    /* 4. Centrage des liens */
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
+    
+    /* 5. État initial pour GSAP (Caché) */
     opacity: 0;
+    visibility: hidden;
 }
 
+/* Le conteneur des liens */
 .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    text-align: center;
+    align-items: center;
+    gap: 2rem;
 }
 
+/* Les liens eux-mêmes */
 .mobile-link {
-    font-size: 3rem;
+    font-family: var(--font-heading, sans-serif); /* Ta typo titre */
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
     color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.mobile-link:hover {
+    color: var(--accent-primary, #4f46e5);
 }
 
 /* =========================================
-   Footer et Contact CTA (Corrigé)
+   FOOTER & CONTACT (Structure & Design)
    ========================================= */
 
-.contact-section {
+/* Le conteneur principal (Remplace .contact-section) */
+.footer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centre le bloc horizontalement */
+    padding: 2rem 1.5rem 2rem; /* Espace Haut | Cotés | Bas */
+    min-height: 80vh; /* Prend de la hauteur pour l'esthétique */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Centre verticalement si 80vh */
+    align-items: center; /* Centre tout verticalement */
+    justify-content: center;
     text-align: center;
-    min-height: 80vh;
-    padding-top: rem; /* Sécurité pour ne pas coller au header */
 }
 
-/* Ajout manquant pour espacer les boutons */
+/* Textes */
+.contact-label {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.contact-title {
+    font-family: var(--font-heading, sans-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    color: #fff;
+}
+
+/* Groupe des boutons */
 .contact-actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin-bottom: 6rem; /* Espace important avant la barre du bas */
     width: 100%;
+    margin-bottom: 5rem;
 }
 
-.main-footer {
-    width: 100%; /* CRUCIAL : Force la largeur max */
-    border-top: 1px solid var(--glass-border);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    display: flex;
-    justify-content: space-between; /* Ecarte gauche/droite */
-    align-items: center;
-    color: var(--text-muted);
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: auto; /* Pousse le footer tout en bas si besoin */
-}
-
-/* Le reste est bon, je remets juste les boutons pour correspondance */
-.contact-cta-btn, 
-.magnetic-button { /* J'ai ajouté ta classe HTML ici */
+/* --- BOUTONS (Ton design conservé) --- */
+.magnetic-button {
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -419,36 +436,30 @@ a {
     font-size: 1.1rem;
     box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    cursor: pointer; /* Important pour les balises <a> */
+    cursor: pointer;
 }
 
-.contact-cta-btn:hover, 
 .magnetic-button:hover {
     background: var(--accent-secondary);
     transform: translateY(-4px);
     box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
 }
 
-/* --- BOUTON COPY EMAIL (Style Stroke & Clean) --- */
 .copy-email-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--text-muted);
-    
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     cursor: pointer;
     font-size: 0.95rem;
     font-family: 'Inter', sans-serif;
-    
     transition: all 0.3s ease;
-    outline: none;
 }
 
 .copy-email-btn:hover {
@@ -463,19 +474,13 @@ a {
     color: #fff;
 }
 
-/* --- LE POP-UP "COPIÉ" À DROITE --- */
+/* --- FEEDBACK "COPIÉ" --- */
 .copy-feedback {
     position: absolute;
-    /* Positionnement Vertical : Centré */
     top: 50%;
-    
-    /* Positionnement Horizontal : À droite du bouton */
     left: 100%; 
-    margin-left: 15px; /* Espace entre le bouton et la bulle */
-    
-    /* État de départ de l'animation (légèrement décalé vers la gauche et invisible) */
+    margin-left: 15px;
     transform: translateY(-50%) translateX(-10px);
-    
     background-color: var(--accent-primary);
     color: #fff;
     padding: 6px 12px;
@@ -483,37 +488,78 @@ a {
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* Petite ombre pour le relief */
-    
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 10;
 }
 
-/* La petite flèche pointant vers la GAUCHE */
 .copy-feedback::after {
     content: '';
     position: absolute;
     top: 50%;
-    left: -5px; /* Collé au bord gauche de la bulle */
+    left: -5px;
     transform: translateY(-50%);
-    
-    /* Triangle pointant à gauche */
     border-width: 5px 5px 5px 0;
     border-style: solid;
-    /* Seule la bordure droite a une couleur */
     border-color: transparent var(--accent-primary) transparent transparent;
 }
 
-/* Apparition : La bulle glisse vers sa position finale */
 .copy-email-btn.copied .copy-feedback {
     opacity: 1;
     visibility: visible;
-    /* Position finale : centré verticalement, décalage horizontal à 0 */
     transform: translateY(-50%) translateX(0); 
+}
+
+/* --- BAS DE PAGE (Footer Links) --- */
+.main-footer {
+    width: 100%;
+    border-top: 1px solid var(--glass-border); /* Ta variable */
+    padding-top: 2rem;
+    
+    display: flex;
+    flex-direction: column; /* Mobile : Empilé */
+    align-items: center;    /* Mobile : Centré */
+    gap: 1.5rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.copyright {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+/* --- RESPONSIVE DESKTOP --- */
+@media (min-width: 768px) {
+
+    /* Boutons côte à côte */
+    .contact-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* Footer sur une seule ligne (gauche/droite ou centré selon goût) */
+    /* Ici je le garde centré car c'est plus joli pour un portfolio perso */
+    .main-footer {
+        flex-direction: column; 
+    }
 }
 
 /* =========================================
@@ -650,7 +696,11 @@ h1.reveal-text {
 
 .glow-container {
     position: absolute;
+    height: 100%;
+    width: 100%;
     inset: 0;
+    top: 0;
+    left: 0;
     overflow: hidden;
     z-index: -1;
     pointer-events: none;
@@ -737,9 +787,9 @@ h1.reveal-text {
 }
 
 .projects-section,
-.about-section,
-.contact-section {
-    padding:  8rem 5% 2rem 5%;
+.about-section
+ {
+    padding:  8rem 5% 8rem 5%;
 }
 
 .section-title,
@@ -1053,10 +1103,9 @@ a.bento-card:hover .mini-tag {
     border-radius: 32px;
     padding: 10px;
     background: linear-gradient(45deg, rgba(79, 70, 229, .3), transparent 60%);
-    will-change: transform, opacity;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(.95);
+    opacity: 1; 
+    visibility: visible;
+    transform: scale(1);
 }
 
 .about-image {
@@ -1065,20 +1114,21 @@ a.bento-card:hover .mini-tag {
     background-size: cover;
     background-position: center;
     border-radius: 24px;
-    filter: grayscale(100%) contrast(1.1);
+    
+    filter: grayscale(0%) contrast(1);
+    
     transition: filter .5s ease;
     box-shadow: 0 20px 40px -20px rgba(139, 92, 246, .5);
 }
 
 .about-image-wrapper:hover .about-image {
-    filter: grayscale(0) contrast(1);
+    filter: grayscale(100%) contrast(1.1);
 }
 
-/* Petit ajustement Mobile pour la sécurité */
 @media (max-width: 768px) {
     .cv-wrapper {
         margin-top: 3rem;
-        text-align: center; /* Centre le bouton sur mobile */
+        text-align: center;
     }
 }
 
@@ -1090,30 +1140,30 @@ a.bento-card:hover .mini-tag {
     overflow: hidden;
     position: relative;
     width: 100%;
+    display: flex; 
 }
 
 .marquee-wrapper {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    display: flex;
+    display: flex; 
+    width: fit-content; 
 }
 
 .marquee-content {
     display: flex;
     align-items: center;
-    min-width: 100%;
     flex-shrink: 0;
+
 }
 
 .marquee-content span {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 4vw, 4rem);
     color: rgba(255, 255, 255, .15);
-    margin: 0 2rem;
+    margin: 0 2rem; 
     font-weight: 600;
     transition: color .3s;
     flex-shrink: 0;
+    cursor: default; 
 }
 
 .marquee-content span:hover {
@@ -1129,6 +1179,7 @@ a.bento-card:hover .mini-tag {
 }
 
 .project-hero {
+    width: 100%;
     position: relative;
     padding-top: 200px;
     padding-bottom: 4rem;
@@ -1218,9 +1269,11 @@ a.bento-card:hover .mini-tag {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
+    box-sizing: border-box; 
     padding: 0 2rem;
     position: relative;
     z-index: 2;
+    
 }
 
 .project-hero-image img {
@@ -1229,9 +1282,11 @@ a.bento-card:hover .mini-tag {
     display: block;
     border-radius: 12px;
     box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.6);
-    animation: fadeInUp 0.8s ease-out;
+    
+   
+    transform: translateZ(0); 
+    will-change: transform;
 }
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -1287,19 +1342,16 @@ a.bento-card:hover .mini-tag {
 }
 
 .sticky-content {
-    width: 400px;
+    width: 35%;
     flex-shrink: 0;
     position: relative;
     z-index: 2;
     padding-bottom: 2rem;
     max-height: 85vh;
     overflow-y: auto;
-    scrollbar-width: none;
+
 }
 
-.sticky-content::-webkit-scrollbar {
-    display: none;
-}
 
 .sticky-content h2 {
     font-size: 3rem;
@@ -1378,7 +1430,7 @@ a.bento-card:hover .mini-tag {
 .performance-section h3 {
     font-size: clamp(2rem, 4vw, 3rem);
     color: #fff;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     font-weight: 600;
 }
 
@@ -1533,25 +1585,6 @@ a.next-project-section:hover::before {
    MEDIA QUERIES (Regroupées)
    ========================================= */
 @media (max-width:1024px) {
-
-    /* Layout général */
-    .burger-btn {
-        display: flex;
-        flex-shrink: 0;
-    }
-
-    .desktop-nav .links {
-        display: none;
-    }
-
-    .desktop-nav {
-        width: 90%;
-        transform: translateX(-50%);
-        justify-content: space-between;
-        gap: 0;
-        z-index: 10002;
-    }
-
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1789,21 +1822,63 @@ body.no-scroll .burger-btn {
     background-image: linear-gradient(135deg, #FFFFFF 0%, #FEB81C 100%);
 }
 
-/* Autres utilitaires */
-::-webkit-scrollbar {
-    width: 10px;
-}
 
-::-webkit-scrollbar-track {
-    background: var(--bg-color);
-}
+/* =========================================
+   MOBILE : BARRE COMPACTE EN HAUT
+   ========================================= */
 
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
-    border-radius: 10px;
-    border: 2px solid var(--bg-color);
-}
+@media (max-width: 768px) {
+    .desktop-nav {
+        /* 1. Disposition Verticale */
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        top: 15px; 
+        bottom: auto;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        min-width: 250px;
+        max-width: 90%;
+        padding: 0.8rem 1.2rem;
+        gap: 0.5rem;
+        z-index: 1000;
+        border-radius:25px;
+        background: rgba(11, 12, 21, 0.9);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 5px 20px -5px rgba(0,0,0,0.3);
+    }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-secondary);
+    /* --- LOGO --- */
+    .desktop-nav .logo {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.5rem; /* Espace réduit */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-right: 0;
+    }
+
+    .desktop-nav .logo a {
+        font-size: 1.rem; /* Nom plus petit */
+        display: block;
+    }
+
+    /* --- LIENS --- */
+    .links {
+        width: 100%;
+        justify-content: center; /* Centrés et groupés */
+        padding: 0;
+    }
+
+    .nav-backdrop {
+        display: none;
+    }
+
+    .nav-item {
+        font-size: 1rem; /* Liens plus petits */
+        padding: 0.3rem 0.5rem; /* Zone de clic ajustée */
+        color: rgba(255, 255, 255, 0.75);
+    }
 }

@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -29,39 +35,39 @@
         </svg>
     </div>
 
-    <app-header></app-header>
+    <div id="header-placeholder"></div>
 
     <section class="project-hero labo-hero">
         <div class="project-hero-content">
 
-            <h1 class="gradient-text">Laboratoire 32</h1>
+            <h1 class="gradient-text reveal">Laboratoire 32</h1>
 
-            <div class="project-tags-container">
-                <span class="project-tag">Wordpress</span>
-                <span class="project-tag">Figma</span>
-                <span class="project-tag">HTML/CSS/JS</span>
+            <div class="project-tags-container reveal-group">
+                <span class="project-tag reveal-item">Wordpress</span>
+                <span class="project-tag reveal-item">Figma</span>
+                <span class="project-tag reveal-item">HTML/CSS/JS</span>
             </div>
 
-            <p class="project-hero-description">
+            <p class="project-hero-description reveal">
                 Création d'un site vitrine premium et d'une plateforme de gestion de flux pour un prothésiste dentaire
                 d'excellence.
                 Une immersion digitale alliant savoir-faire artisanal, haute technologie et gain de productivité.
             </p>
 
-            <div class="project-meta">
-                <div class="meta-item">
+            <div class="project-meta reveal-group">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Client</span>
                     <span class="meta-value">Laboratoire 32</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Année</span>
                     <span class="meta-value">2025</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Rôle</span>
                     <span class="meta-value">Design & Dev</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Type</span>
                     <span class="meta-value">Site & Outil Métier</span>
                 </div>
@@ -69,7 +75,7 @@
         </div>
 
         <div class="project-hero-image">
-            <img src="assets/projet-labo32/thumb-labo32.webp" alt="Aperçu du site Laboratoire 32">
+            <img src="assets/projet-labo32/thumb-labo32.webp" alt="Aperçu du site Laboratoire 32" class="reveal">
         </div>
 
         <div class="glow-container">
@@ -79,43 +85,41 @@
     </section>
 
     <section class="context-section">
-        <h2>Le Contexte</h2>
-        <p>
+        <h2 class="reveal">Le Contexte</h2>
+        <p class="reveal">
             Le Laboratoire 32, basé à Champagne-au-Mont-d'Or, est spécialisé dans la prothèse dentaire "Made in France".
             Le client souhaitait la création complète de son identité digitale pour refléter l'excellence de son travail
-            artisanal
-            et sa maîtrise des technologies numériques (CFAO).
+            artisanal et sa maîtrise des technologies numériques (CFAO).
         </p>
     </section>
 
     <section class="sticky-scroll-section">
         <div class="sticky-container">
             <div class="sticky-content">
-                <h2>Le Défi</h2>
-                <p>
+                <h2 class="reveal">Le Défi</h2>
+                <p class="reveal">
                     L'enjeu était double : partir des couleurs du logo existant pour bâtir une charte graphique digitale
                     "Luxe & Tech",
                     tout en résolvant une problématique logistique majeure via l'automatisation des envois de fichiers.
                 </p>
 
-                <h3>Les objectifs</h3>
-                <ul>
+                <h3 class="reveal">Les objectifs</h3>
+                <ul class="reveal">
                     <li>Créer une identité visuelle "Dark & Gold" haut de gamme</li>
                     <li>Concevoir une navigation immersive (Effets WebGL)</li>
                     <li>Automatiser la réception des empreintes 3D</li>
                     <li>Connecter le site au serveur local (NAS) du client</li>
                 </ul>
 
-                <h3>Ma solution</h3>
-                <p>
+                <h3 class="reveal">Ma solution</h3>
+                <p class="reveal">
                     J'ai conçu un univers sombre ("Dark Mode") contrasté par des touches dorées et animé par Vanta.js
                     pour le côté technologique.
                     Côté métier, j'ai développé un "Espace Praticien" connecté : chaque fichier déposé sur le site est
-                    instantanément synchronisé
-                    sur le serveur local du laboratoire, supprimant toute gestion manuelle.
+                    instantanément synchronisé sur le serveur local du laboratoire, supprimant toute gestion manuelle.
                 </p>
 
-                <div class="sticky-action">
+                <div class="sticky-action reveal">
                     <a href="https://laboratoire32.fr" target="_blank" rel="noopener noreferrer"
                         class="visit-site-btn small">
                         Voir le site en live <span class="visit-arrow">↗</span>
@@ -125,27 +129,27 @@
 
             <div class="scroll-images">
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-labo32/frame1.webp" data-fancybox="gallery"
                         data-caption="Effets Vanta.js">
                         <img src="assets/projet-labo32/frame1.webp" alt="Effets Vanta.js">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-labo32/frame2.webp" data-fancybox="gallery" data-caption="Identité Dark & Gold">
                         <img src="assets/projet-labo32/frame2.webp" alt="Identité Dark & Gold">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-labo32/frame3.webp" data-fancybox="gallery"
                         data-caption="Stacking Cards au scroll">
                         <img src="assets/projet-labo32/frame3.webp" alt="Stacking Cards au scroll">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-labo32/frame4.webp" data-fancybox="gallery"
                         data-caption="Espace Praticien Automatisé">
                         <img src="assets/projet-labo32/frame4.webp" alt="Espace Praticien Automatisé">
@@ -160,20 +164,19 @@
         <div class="performance-container">
 
             <div class="perf-content-centered">
-                <h3>Résultats</h3>
+                <h3 class="reveal">Résultats</h3>
 
-                <div class="results-grid">
+                <div class="results-grid reveal-group">
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Image de Marque</h4>
                         <p class="benefit-desc">
                             Une direction artistique forte ("Bleu Pétrole & Or") qui positionne immédiatement la marque
-                            sur un segment haut de gamme,
-                            se distinguant nettement de la concurrence médicale classique.
+                            sur un segment haut de gamme, se distinguant nettement de la concurrence médicale classique.
                         </p>
                     </div>
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Immersion WebGL</h4>
                         <p class="benefit-desc">
                             L'intégration de Vanta.js (particules) et les effets de "Stacking Cards" créent une
@@ -182,7 +185,7 @@
                         </p>
                     </div>
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Productivité</h4>
                         <p class="benefit-desc">
                             L'automatisation complète du flux (Formulaire → API → OneDrive → NAS) fait gagner un temps
@@ -197,7 +200,7 @@
         </div>
     </section>
 
-    <a href="projet-village.html" class="next-project-section">
+    <a href="projet-village.html" class="next-project-section reveal">
         <div class="next-project-container">
             <span class="next-project-label">Projet Suivant</span>
             <div class="next-project-content">
@@ -209,34 +212,29 @@
         </div>
     </a>
 
-     <section id="contact" class="contact-section">
-        <app-footer></app-footer>
+    <section id="contact" class="contact-section">
+        <div id="footer-placeholder"></div>
     </section>
 
     <script src="script.js"></script>
     <script src="script-projet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-<script>
-  Fancybox.bind("[data-fancybox]", {
-    // Désactive le zoom si tu veux
-    Images: { zoom: false },
-
-    // LES ÉVÉNEMENTS
-    on: {
-      init: () => {
-        // On bloque tout (HTML + BODY)
-        document.documentElement.classList.add("no-scroll");
-        document.body.classList.add("no-scroll");
-      },
-      destroy: () => {
-        // On libère tout
-        document.documentElement.classList.remove("no-scroll");
-        document.body.classList.remove("no-scroll");
-      }
-    }
-  });
-</script>
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Images: { zoom: false },
+            on: {
+                init: () => {
+                    document.documentElement.classList.add("no-scroll");
+                    document.body.classList.add("no-scroll");
+                },
+                destroy: () => {
+                    document.documentElement.classList.remove("no-scroll");
+                    document.body.classList.remove("no-scroll");
+                }
+            }
+        });
+    </script>
 
 </body>
 

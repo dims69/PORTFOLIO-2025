@@ -12,7 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
@@ -29,46 +33,46 @@
         </svg>
     </div>
 
-    <app-header></app-header>
+    <div id="header-placeholder"></div>
 
     <section class="project-hero emeraude-hero">
         <div class="project-hero-content">
 
-            <h1 class="gradient-text">Émeraude Expérience</h1>
+            <h1 class="gradient-text reveal">Émeraude Expérience</h1>
 
-            <div class="project-tags-container">
-                <span class="project-tag">Branding</span>
-                <span class="project-tag">Stratégie de Marque</span>
-                <span class="project-tag">Direction Artistique</span>
+            <div class="project-tags-container reveal-group">
+                <span class="project-tag reveal-item">Branding</span>
+                <span class="project-tag reveal-item">Stratégie de Marque</span>
+                <span class="project-tag reveal-item">Direction Artistique</span>
             </div>
 
-            <p class="project-hero-description">
+            <p class="project-hero-description reveal">
                 Naissance d'une nouvelle marque pour le Groupe Loisirs Solutions.
                 L'objectif : fédérer trois golfs sous une identité commune pour offrir une expérience élargie, alliant
                 sport, gastronomie et convivialité.
             </p>
 
-            <div class="project-meta">
-                <div class="meta-item">
+            <div class="project-meta reveal-group">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Client</span>
                     <span class="meta-value">Groupe Loisirs Solutions</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Rôle</span>
                     <span class="meta-value">Direction Artistique</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Outils</span>
                     <span class="meta-value">Illustrator, Photoshop</span>
                 </div>
-                <div class="meta-item">
+                <div class="meta-item reveal-item">
                     <span class="meta-label">Livrables</span>
                     <span class="meta-value">Identité, Logo, Supports</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-hero-image">
+        <div class="project-hero-image reveal">
             <img src="assets/thumb-emeraude-experience.webp" alt="Branding Émeraude Experience">
         </div>
 
@@ -79,8 +83,8 @@
     </section>
 
     <section class="context-section">
-        <h2>Le Contexte</h2>
-        <p>
+        <h2 class="reveal">Le Contexte</h2>
+        <p class="reveal">
             Emeraude Expérience est la nouvelle marque ombrelle regroupant les golfs du Groupe Loisirs Solutions.
             L'ambition était de créer une dynamique commune entre trois établissements géographiquement proches,
             afin de mutualiser les moyens et d'offrir une vision de groupe solide, sans gommer la personnalité de chaque
@@ -91,31 +95,31 @@
     <section class="sticky-scroll-section">
         <div class="sticky-container">
             <div class="sticky-content">
-                <h2>Le Défi</h2>
-                <p>
+                <h2 class="reveal">Le Défi</h2>
+                <p class="reveal">
                     L'enjeu était double : fédérer les 3 golfs sous une même bannière et casser l'image parfois fermée
                     de ce sport.
                     Il fallait créer une identité qui rassure les golfeurs habitués, tout en montrant aux débutants et
                     aux familles qu'ils sont les bienvenus.
                 </p>
 
-                <h3>Les Piliers</h3>
-                <ul>
+                <h3 class="reveal">Les Piliers</h3>
+                <ul class="reveal">
                     <li><strong>Accessibilité :</strong> Un golf décomplexé et ouvert à tous.</li>
                     <li><strong>Services :</strong> Mettre en avant le cadre et la restauration.</li>
                     <li><strong>Cohérence :</strong> Une marque unique pour 3 lieux différents.</li>
                     <li><strong>Convivialité :</strong> Accueillir aussi les non-golfeurs.</li>
                 </ul>
 
-                <h3>Ma Solution</h3>
-                <p>
+                <h3 class="reveal">Ma Solution</h3>
+                <p class="reveal">
                     J'ai proposé une identité visuelle sobre et naturelle. Le logo (une feuille formant un “E”) évoque
                     simplement le cadre verdoyant et la fluidité du swing.
                     Côté couleurs, l'association du vert profond et du doré installe une image de qualité (premium),
                     mais qui reste chaleureuse pour ne pas intimider les nouveaux visiteurs.
                 </p>
 
-                <div class="sticky-action">
+                <div class="sticky-action reveal">
                     <a href="assets/projet-emeraude/charte-emeraude.pdf" target="_blank" class="visit-site-btn small">
                         Voir la charte graphique (PDF) <span class="visit-arrow">↗</span>
                     </a>
@@ -124,34 +128,34 @@
 
             <div class="scroll-images">
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-emeraude/frame1.webp" data-fancybox="gallery"
                         data-caption="Le Symbole : Nature & Mouvement">
                         <img src="assets/projet-emeraude/frame1.webp" alt="Logo Émeraude">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-emeraude/frame2.webp" data-fancybox="gallery"
                         data-caption="Univers de marque & Couleurs">
                         <img src="assets/projet-emeraude/frame2.webp" alt="Charte Graphique">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-emeraude/frame3.webp" data-fancybox="gallery"
                         data-caption="Signalétique sur les parcours">
                         <img src="assets/projet-emeraude/frame3.webp" alt="Signalétique Golf">
                     </a>
                 </div>
 
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-emeraude/frame4.webp" data-fancybox="gallery"
                         data-caption="Déclinaison textile & Goodies">
                         <img src="assets/projet-emeraude/frame4.webp" alt="Merchandising">
                     </a>
                 </div>
-                <div class="scroll-image-item">
+                <div class="scroll-image-item reveal">
                     <a href="assets/projet-emeraude/frame5.webp" data-fancybox="gallery"
                         data-caption="Déclinaison textile & Goodies">
                         <img src="assets/projet-emeraude/frame5.webp" alt="Merchandising">
@@ -166,11 +170,11 @@
         <div class="performance-container">
 
             <div class="perf-content-centered">
-                <h3>L'Impact du Branding</h3>
+                <h3 class="reveal">L'Impact du Branding</h3>
 
-                <div class="results-grid">
+                <div class="results-grid reveal-group">
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Synergie Créée</h4>
                         <p class="benefit-desc">
                             Une identité forte qui permet aux trois golfs de communiquer d'une seule voix ("Ensemble, on
@@ -179,7 +183,7 @@
                         </p>
                     </div>
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Cible Élargie</h4>
                         <p class="benefit-desc">
                             En cassant les codes élitistes via un design plus "Nature & Bien-être", la marque attire
@@ -187,7 +191,7 @@
                         </p>
                     </div>
 
-                    <div class="benefit-card">
+                    <div class="benefit-card reveal-item">
                         <h4 class="benefit-title">Image Premium</h4>
                         <p class="benefit-desc">
                             Une cohérence visuelle totale (du web à la signalétique) qui positionne immédiatement
@@ -201,7 +205,7 @@
         </div>
     </section>
 
-    <a href="projet-unidade.html" class="next-project-section">
+    <a href="projet-unidade.html" class="next-project-section reveal">
         <div class="next-project-container">
             <span class="next-project-label">Projet Suivant</span>
             <div class="next-project-content">
@@ -214,7 +218,7 @@
     </a>
 
     <section id="contact" class="contact-section">
-        <app-footer></app-footer>
+        <div id="footer-placeholder"></div>
     </section>
 
     <script src="script.js"></script>

@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio | Designer Graphique</title>
+    <title>Olivier Pouchoy | UI/UX Designer & Intégrateur WordPress</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
@@ -27,196 +31,199 @@
         </svg>
     </div>
 
-    <div class="preloader">
-        <div class="loader-text-wrapper">
-            <span class="loader-text base">Olivier Pouchoy</span>
-            <span class="loader-text fill">Olivier Pouchoy</span>
-        </div>
+    <div class="mobile-menu-overlay">
+        <nav class="mobile-nav-links">
+            <a href="#projets" class="mobile-link">Projets</a>
+            <a href="#infos" class="mobile-link">À Propos</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </nav>
     </div>
 
-    <div id="global-header"></div>
+    <div id="header-placeholder"></div>
 
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="reveal-text">UI/UX <span class="gradient-text">Designer</span></h1>
+            <h1 class="reveal-text">& Intégrateur <span class="gradient-text">Web</span></h1>
 
-    <main>
-        
-        <header class="hero">
-            <div class="hero-content">
-                <h1 class="reveal-text">UI/UX <span class="gradient-text">Designer</span></h1>
-                <h1 class="reveal-text">& Intégrateur <span class="gradient-text">Web</span></h1>
-                <p class="hero-subtitle">
-                    Je garantis une continuité parfaite entre votre image de marque et votre site internet.
-                </p>
+            <p class="hero-subtitle">
+                Je garantis une continuité parfaite entre votre image de marque et votre site internet.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
             </div>
-            <div class="scroll-indicator">
-                <div class="mouse"><div class="wheel"></div></div>
-            </div>
-            <div class="glow-container">
-                <div class="glow-blob blob-purple"></div>
-                <div class="glow-blob blob-blue"></div>
-            </div>
-        </header>
+        </div>
+        <div class="glow-container">
+            <div class="glow-blob blob-purple"></div>
+            <div class="glow-blob blob-blue"></div>
+        </div>
+    </header>
 
-        <section id="projets" class="projects-section">
-            <div class="container">
-                <h2 class="section-title">Projets <span class="highlight">Sélectionnés</span></h2>
+    <section id="projets" class="projects-section">
+        <div class="container">
+            <h2 class="section-title reveal">Projets <span class="highlight">Sélectionnés</span></h2>
 
-                <div class="bento-grid">
+            <div class="bento-grid reveal-group">
 
-                    <a href="projet-laboratoire32.html" class="bento-card span-2">
-                        <div class="card-tags">
-                            <span class="project-tag">Wordpress</span>
-                            <span class="project-tag">Figma</span>
-                            <span class="project-tag">HTML/CSS/JS</span>
-                        </div>
-                        <div class="card-visual-container labo-studio">
-                            <img src="assets/thumb-labo32.webp" alt="Laboratoire 32" class="floating-obj">
-                        </div>
-                        <div class="card-content">
-                            <h3>Laboratoire 32</h3>
-                            <p>Site vitrine premium & Automatisation</p>
-                        </div>
-                    </a>
-
-                    <a href="projet-bestof.html" class="bento-card">
-                        <div class="card-tags">
-                            <span class="mini-tag">Print</span>
-                            <span class="mini-tag">Mise en page</span>
-                            <span class="mini-tag">Indesign</span>
-                        </div>
-                        <div class="card-visual-container dewalt-tech-bg">
-                            <img src="assets/thumb-bestof.webp" alt="Catalogue DeWalt" class="floating-obj">
-                        </div>
-                        <div class="card-content">
-                            <h3>Best Of DeWalt</h3>
-                            <p>Design et exécution graphique du catalogue annuel</p>
-                        </div>
-                    </a>
-
-                    <a href="projet-emeraude.html" class="bento-card">
-                        <div class="card-tags">
-                            <span class="mini-tag">Branding</span>
-                            <span class="mini-tag">Identité</span>
-                        </div>
-                        <div class="card-visual-container golf-studio">
-                            <img src="assets/thumb-emeraude-experience.webp" alt="Balle Emeraude" class="floating-ball">
-                        </div>
-                        <div class="card-content">
-                            <h3>Emeraude Expérience</h3>
-                            <p>Identité visuelle et produits dérivés</p>
-                        </div>
-                    </a>
-
-                    <a href="projet-village.html" class="bento-card span-2">
-                        <div class="card-tags">
-                            <span class="mini-tag">WordPress</span>
-                            <span class="mini-tag">Elementor</span>
-                            <span class="mini-tag">UI Design</span>
-                        </div>
-                        <div class="card-visual-container village-studio">
-                            <img src="assets/thumb-village-motel.webp" alt="Village Motel Mockup" class="floating-obj">
-                        </div>
-                        <div class="card-content">
-                            <h3>Village Motel</h3>
-                            <p>Refonte de site hôtelier & Système de réservation</p>
-                        </div>
-                    </a>
-
-                    <a href="projet-unidade.html" class="bento-card span-2">
-                        <div class="card-tags">
-                            <span class="mini-tag">WordPress</span>
-                            <span class="mini-tag">Elementor</span>
-                            <span class="mini-tag">Responsive</span>
-                        </div>
-                        <div class="card-visual-container unidade-studio">
-                            <img src="assets/thumb-unidade.webp" alt="Mockup Unidade" class="floating-obj">
-                        </div>
-                        <div class="card-content">
-                            <h3>UNIDADE Jiu-Jitsu</h3>
-                            <p>Site vitrine complet pour académie de JJB</p>
-                        </div>
-                    </a>
-
-                    <a href="projet-covering.html" class="bento-card">
-                        <div class="card-tags">
-                            <span class="mini-tag">Covering</span>
-                            <span class="mini-tag">Branding</span>
-                        </div>
-                        <div class="card-visual-container covering-studio">
-                            <img src="assets/thumb-covering.webp" alt="Covering Voiture" class="floating-car">
-                        </div>
-                        <div class="card-content">
-                            <h3>Covering Ford Focus</h3>
-                            <p>Covering véhicule de société</p>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-        </section>
-
-        <section id="infos" class="about-section">
-            <div class="about-glow-1"></div>
-            <div class="container about-grid">
-                <div class="about-text">
-                    <h2 class="section-title reveal-text">Un profil hybride<br><span class="highlight">Créatif & Technique</span></h2>
-                    
-                    <p class="lead-text reveal-text">
-                        Je conçois des designs pensés pour le code.
-                    </p>
-
-                    <p class="reveal-text">
-                        Avec 4 ans d'expérience, j'ai acquis une vision 360° de la production. 
-                        Mon background technique me permet de garantir la faisabilité de mes maquettes et d'assurer l'intégration finale. 
-                        Du Print au Web en passant par le Motion, je suis un créatif opérationnel, prêt à renforcer votre équipe.
-                    </p>
-
-                    <div class="stats-grid reveal-text">
-                        <div class="stat-card">
-                            <span class="stat-number counter" data-target="4">0</span>
-                            <span class="stat-label">Années d'expérience</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number counter" data-target="40">0</span>
-                            <span class="stat-label">Projets réalisés</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Autonome</span>
-                        </div>
+                <a href="projet-laboratoire32.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="project-tag">Wordpress</span>
+                        <span class="project-tag">Figma</span>
+                        <span class="project-tag">HTML/CSS/JS</span>
                     </div>
-                    
-                    <div class="cv-wrapper reveal-text">
-                        <a href="assets/cv.pdf" target="_blank" class="cv-btn">
-                            Télécharger mon CV
-                            <span class="icon-download">↓</span>
-                        </a>
+                    <div class="card-visual-container labo-studio">
+                        <img src="assets/thumb-labo32.webp" alt="Laboratoire 32" class="floating-obj">
                     </div>
-                </div>
-                <div class="about-image-wrapper">
-                    <div class="about-image" style="background-image: url('assets/profil.webp');"></div>
-                    <div class="about-glow-2"></div>
-                </div>
+                    <div class="card-content">
+                        <h3>Laboratoire 32</h3>
+                        <p>Site vitrine premium & Automatisation</p>
+                    </div>
+                </a>
+
+                <a href="projet-bestof.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Print</span>
+                        <span class="mini-tag">Mise en page</span>
+                        <span class="mini-tag">Indesign</span>
+                    </div>
+                    <div class="card-visual-container dewalt-tech-bg">
+                        <img src="assets/thumb-bestof.webp" alt="Catalogue DeWalt" class="floating-obj">
+                    </div>
+                    <div class="card-content">
+                        <h3>Best Of DeWalt</h3>
+                        <p>Design et exécution graphique du catalogue annuel</p>
+                    </div>
+                </a>
+
+                <a href="projet-emeraude.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Branding</span>
+                        <span class="mini-tag">Identité</span>
+                    </div>
+                    <div class="card-visual-container golf-studio">
+                        <img src="assets/thumb-emeraude-experience.webp" alt="Balle Emeraude" class="floating-ball">
+                    </div>
+                    <div class="card-content">
+                        <h3>Emeraude Expérience</h3>
+                        <p>Identité visuelle et produits dérivés</p>
+                    </div>
+                </a>
+
+                <a href="projet-village.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">Elementor</span>
+                        <span class="mini-tag">UI Design</span>
+                    </div>
+                    <div class="card-visual-container village-studio">
+                        <img src="assets/thumb-village-motel.webp" alt="Village Motel Mockup" class="floating-obj">
+                    </div>
+                    <div class="card-content">
+                        <h3>Village Motel</h3>
+                        <p>Refonte de site hôtelier & Système de réservation</p>
+                    </div>
+                </a>
+
+                <a href="projet-unidade.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">Elementor</span>
+                        <span class="mini-tag">Responsive</span>
+                    </div>
+                    <div class="card-visual-container unidade-studio">
+                        <img src="assets/thumb-unidade.webp" alt="Mockup Unidade" class="floating-obj">
+                    </div>
+                    <div class="card-content">
+                        <h3>UNIDADE Jiu-Jitsu</h3>
+                        <p>Site vitrine complet pour académie de JJB</p>
+                    </div>
+                </a>
+
+                <a href="projet-covering.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Covering</span>
+                        <span class="mini-tag">Branding</span>
+                    </div>
+                    <div class="card-visual-container covering-studio">
+                        <img src="assets/thumb-covering.webp" alt="Covering Voiture" class="floating-car">
+                    </div>
+                    <div class="card-content">
+                        <h3>Covering Ford Focus</h3>
+                        <p>Covering véhicule de société</p>
+                    </div>
+                </a>
+
             </div>
-        </section>
-
-        <section class="skills-section">
-            <div class="marquee-wrapper">
-                <div class="marquee-content">
-                    <span>Figma</span> • <span>WordPress</span> • <span>UI/UX</span> • <span>HTML/CSS</span> • 
-                    <span>Motion</span> • <span>Webflow</span> • <span>Branding</span> • <span>SEO</span> • <span>Adobe Suite</span> • 
-                </div>
-                <div class="marquee-content">
-                    <span>Figma</span> • <span>WordPress</span> • <span>UI/UX</span> • <span>HTML/CSS</span> • 
-                    <span>Motion</span> • <span>Webflow</span> • <span>Branding</span> • <span>SEO</span> • <span>Adobe Suite</span> • 
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <section id="contact" class="contact-section">
-        <div id="global-footer" style="width: 100%;"></div>
+        </div>
     </section>
+
+    <section id="infos" class="about-section">
+        <div class="about-glow-1"></div>
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2 class="section-title reveal">Un profil hybride<br><span class="highlight">Créatif &
+                        Technique</span></h2>
+
+                <p class="lead-text reveal">
+                    Je conçois des designs pensés pour le code.
+                </p>
+
+                <p class="reveal">
+                    Avec 4 ans d'expérience, j'ai acquis une vision 360° de la production.
+                    Mon background technique me permet de garantir la faisabilité de mes maquettes et d'assurer
+                    l'intégration finale.
+                    Du Print au Web en passant par le Motion, je suis un créatif opérationnel, prêt à renforcer votre
+                    équipe.
+                </p>
+
+                <div class="stats-grid reveal-group">
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number counter" data-target="4">0</span>
+                        <span class="stat-label">Années d'expérience</span>
+                    </div>
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number counter" data-target="40">0</span>
+                        <span class="stat-label">Projets réalisés</span>
+                    </div>
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Autonome</span>
+                    </div>
+                </div>
+
+                <div class="cv-wrapper reveal">
+                    <a href="assets/cv.pdf" target="_blank" class="cv-btn">
+                        Télécharger mon CV
+                        <span class="icon-download">↓</span>
+                    </a>
+                </div>
+            </div>
+            <div class="about-image-wrapper reveal">
+                <div class="about-image" style="background-image: url('assets/profil.webp');"></div>
+                <div class="about-glow-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span>Figma</span> •
+                <span>WordPress</span> •
+                <span>UI/UX</span> •
+                <span>HTML/CSS</span> •
+                <span>Motion</span> •
+                <span>Webflow</span> •
+                <span>Branding</span> •
+                <span>SEO</span> •
+                <span>Adobe Suite</span> •
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
 </body>

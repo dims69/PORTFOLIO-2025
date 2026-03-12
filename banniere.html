@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bannière LinkedIn - Olivier Pouchoy</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0B0C15; /* */
+            --accent-primary: #4F46E5; /* */
+            --accent-secondary: #8B5CF6; /* */
+            --text-muted: #9CA3AF; /* */
+            --glass-border: rgba(255, 255, 255, 0.1); /* */
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #1a1a1a;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; overflow: hidden;
+        }
+
+        .banner {
+            width: 1584px; height: 396px;
+            background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+            display: flex; align-items: center;
+        }
+
+        /* --- ATMOSPHÈRE --- */
+        .noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            z-index: 2; pointer-events: none;
+        }
+
+        .glow {
+            position: absolute; border-radius: 50%; filter: blur(120px); z-index: 1; opacity: 0.3;
+        }
+        .glow-1 { width: 800px; height: 800px; background: var(--accent-primary); top: -400px; right: -200px; }
+        .glow-2 { width: 600px; height: 600px; background: var(--accent-secondary); bottom: -300px; left: 100px; opacity: 0.15; }
+
+        /* --- TYPO FOND --- */
+        .bg-text {
+            position: absolute;
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700; font-size: 260px; line-height: 0.8;
+            color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+            top: 50%; transform: translateY(-50%); left: -40px;
+            z-index: 1; white-space: nowrap; pointer-events: none;
+        }
+
+        /* --- CARTE EN VERRE (Positionnée à droite) --- */
+        .glass-wrapper {
+            position: absolute;
+            right: 120px;
+            z-index: 10;
+            transform: perspective(1200px) rotateY(-8deg);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(25px);
+            padding: 50px 60px;
+            border-radius: 32px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        /* Effet de reflet sur le dessus de la carte */
+        .glass-card::before {
+            content: ''; position: absolute; inset: 0; border-radius: 32px;
+            padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 50%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude; pointer-events: none;
+        }
+
+        .cursor {
+            position: absolute; top: -15px; left: -15px; width: 32px;
+            filter: drop-shadow(0 0 15px var(--accent-secondary));
+        }
+
+        h1 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 48px; font-weight: 700; color: #fff;
+            margin: 0 0 8px 0; letter-spacing: -1px;
+        }
+
+        .job-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 30px; font-weight: 500; margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff 40%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .stack-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;
+        }
+
+      .stack-item {
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 15px; /* Augmenté pour la lisibilité */
+            font-weight: 600; /* Plus épais pour ressortir du fond sombre */
+            color: #FFFFFF; /* Blanc pur au lieu de muted pour un impact max */
+            display: flex; 
+            align-items: center; 
+            gap: 12px;
+            text-transform: uppercase;
+        }
+
+        /* On booste l'éclat des points pour attirer l'œil */
+        .dot { 
+            width: 8px; 
+            height: 8px; 
+            background: var(--accent-primary); 
+            border-radius: 50%; 
+            box-shadow: 0 0 12px var(--accent-primary), 0 0 4px #fff; 
+        }
+        /* Code abstrait flottant */
+        .floating-code {
+            position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 14px;
+            color: rgba(255,255,255,0.07); z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="banner">
+        <div class="noise"></div>
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+
+        <div class="bg-text">DEVELOPER</div>
+        
+        <div class="floating-code" style="bottom: 40px; right: 400px; color: var(--accent-secondary); opacity: 0.1;">&lt;section id="innovation" /&gt;</div>
+
+        <div class="glass-wrapper">
+            <div class="glass-card">
+                <svg class="cursor" viewBox="0 0 24 24" fill="#8B5CF6"><path d="M13.64,21.97C13.14,22.21 12.54,22 12.31,21.5L10.13,16.76L7.62,18.78C7.45,18.92 7.24,19 7,19A1,1 0 0,1 6,18V3A1,1 0 0,1 7,2C7.24,2 7.47,2.09 7.64,2.23L7.65,2.22L19.14,11.86C19.57,12.22 19.62,12.85 19.27,13.28C19.09,13.5 18.83,13.62 18.55,13.63L14.85,13.83L17.15,18.81C17.38,19.31 17.17,19.91 16.67,20.14L13.64,21.97Z"/></svg>
+                
+                <h1>Olivier Pouchoy</h1>
+                <div class="job-title">UI/UX Designer &<br>Intégrateur Web</div>
+                
+                <div class="stack-grid">
+                    <div class="stack-item"><div class="dot"></div> Figma & Design System</div>
+                    <div class="stack-item"><div class="dot"></div> WordPress & Webflow</div>
+                    <div class="stack-item"><div class="dot"></div> HTML / CSS / JS</div>
+                    <div class="stack-item"><div class="dot" style="background:var(--accent-secondary); box-shadow: 0 0 8px var(--accent-secondary);"></div> GSAP & Animation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
