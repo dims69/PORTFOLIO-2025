@@ -565,7 +565,7 @@ a {
     opacity: 0.6;
 }
 
-/* --- RESPONSIVE DESKTOP --- */
+/* --- RESPONSIVE Mobile --- */
 @media (min-width: 768px) {
 
     /* Boutons côte à côte */
@@ -1227,6 +1227,7 @@ a.bento-card:hover .mini-tag {
     z-index: 5;
 }
 
+
 .project-tags-container {
     display: flex;
     flex-wrap: wrap;
@@ -1309,8 +1310,7 @@ a.bento-card:hover .mini-tag {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 12px;
-    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.6);
+   
     
    
     transform: translateZ(0); 
@@ -1330,7 +1330,7 @@ a.bento-card:hover .mini-tag {
 
 /* Context Section */
 .context-section {
-    padding: 10rem 5%;
+    padding: 3rem 5%;
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
@@ -1759,6 +1759,10 @@ a.next-project-section:hover::before {
     }
 
     /* Project Pages */
+    .project-hero-content{
+        padding-top: 2rem;
+    }
+    
     .project-hero h1 {
         font-size: clamp(2.5rem, 10vw, 4rem);
     }
@@ -1828,10 +1832,7 @@ a.next-project-section:hover::before {
 /* =========================================
    SCROLL LOCK & GALERIE
    ========================================= */
-html.no-scroll,
 body.no-scroll {
-    overflow: hidden !important;
-    height: 100vh !important;
     touch-action: none;
 }
 

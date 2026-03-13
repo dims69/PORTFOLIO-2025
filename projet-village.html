@@ -146,16 +146,24 @@
 
             <div class="scroll-images">
                 <div class="scroll-image-item">
-                    <img src="assets/projet-village/frame1.webp" alt="Page d'accueil Village Motel" loading="lazy">
+                    <a href="assets/projet-village/frame1.webp" data-fancybox="gallery" data-caption="Page d'accueil">
+                        <img src="assets/projet-village/frame1.webp" alt="Page d'accueil Village Motel" loading="lazy">
+                    </a>
                 </div>
                 <div class="scroll-image-item">
-                    <img src="assets/projet-village/frame2.webp" alt="Système de réservation" loading="lazy">
+                    <a href="assets/projet-village/frame2.webp" data-fancybox="gallery" data-caption="Système de réservation">
+                        <img src="assets/projet-village/frame2.webp" alt="Système de réservation" loading="lazy">
+                    </a>
                 </div>
                 <div class="scroll-image-item">
-                    <img src="assets/projet-village/frame3.webp" alt="Pages chambres" loading="lazy">
+                    <a href="assets/projet-village/frame3.webp" data-fancybox="gallery" data-caption="Pages chambres">
+                        <img src="assets/projet-village/frame3.webp" alt="Pages chambres" loading="lazy">
+                    </a>
                 </div>
                 <div class="scroll-image-item">
-                    <img src="assets/projet-village/frame4.webp" alt="Version mobile responsive" loading="lazy">
+                    <a href="assets/projet-village/frame4.webp" data-fancybox="gallery" data-caption="Version mobile responsive">
+                        <img src="assets/projet-village/frame4.webp" alt="Version mobile responsive" loading="lazy">
+                    </a>
                 </div>
             </div>
         </div>
@@ -223,6 +231,24 @@
 
     <script src="script.js"></script>
     <script src="script-projet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Images: { zoom: false },
+            on: {
+                init: () => {
+                    document.body.classList.add("no-scroll");
+                    if (window.lenis) window.lenis.stop();
+                },
+                destroy: () => {
+                    document.body.classList.remove("no-scroll");
+                    if (window.lenis) window.lenis.start();
+                }
+            }
+        });
+    </script>
+
 </body>
 
 </html>

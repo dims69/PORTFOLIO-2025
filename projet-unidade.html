@@ -192,7 +192,7 @@
         </div>
     </section>
 
-    <a href="projet-dewalt.html" class="next-project-section">
+    <a href="/projet-bestof.html" class="next-project-section">
         <div class="next-project-container">
             <span class="next-project-label">Projet Suivant</span>
             <div class="next-project-content">
@@ -217,12 +217,12 @@
             Images: { zoom: false },
             on: {
                 init: () => {
-                    document.documentElement.classList.add("no-scroll");
                     document.body.classList.add("no-scroll");
+                    if (window.lenis) window.lenis.stop();
                 },
                 destroy: () => {
-                    document.documentElement.classList.remove("no-scroll");
                     document.body.classList.remove("no-scroll");
+                    if (window.lenis) window.lenis.start();
                 }
             }
         });

@@ -230,12 +230,12 @@
             Images: { zoom: false },
             on: {
                 init: () => {
-                    document.documentElement.classList.add("no-scroll");
                     document.body.classList.add("no-scroll");
+                    if (window.lenis) window.lenis.stop();
                 },
                 destroy: () => {
-                    document.documentElement.classList.remove("no-scroll");
                     document.body.classList.remove("no-scroll");
+                    if (window.lenis) window.lenis.start();
                 }
             }
         });
