@@ -34,6 +34,7 @@ function loadComponents() {
     Promise.allSettled([headerLoad, footerLoad]).then(() => {
         runApp();
         ScrollTrigger.refresh();
+        window.dispatchEvent(new Event('appReady'));
     });
 }
 
@@ -73,7 +74,7 @@ function initFooterInteractions() {
                 const x = (e.clientX - (rect.left + rect.width / 2)) * 0.5;
                 const y = (e.clientY - (rect.top + rect.height / 2)) * 0.5;
                 xTo(x); yTo(y);
-            });
+            }, { passive: true });
 
             link.addEventListener('mouseleave', () => {
                 gsap.to(link, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
@@ -87,7 +88,7 @@ function initFooterInteractions() {
 // ========================================================
 
 function runApp() {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const isMobile = window.matchMedia("(max-width: 1024px)").matches;
     const isProjectPage = document.body.classList.contains('project-page');
 
     // --- LENIS SCROLL ---
@@ -100,14 +101,9 @@ function runApp() {
         });
         window.lenis = lenis;
 
+        lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
     }
 
     // --- INITIALISATION VISUELLE ---
@@ -165,9 +161,10 @@ function initStatsCounters() {
 }
 
 function initMarquee() {
-    gsap.to(".marquee-content", {
-        xPercent: -100, repeat: -1, duration: 35, ease: "linear"
-    }).totalProgress(0.5);
+    gsap.set(".marquee-wrapper", { xPercent: 0 });
+    gsap.to(".marquee-wrapper", {
+        xPercent: -50, repeat: -1, duration: 35, ease: "none"
+    });
 }
 
 function playHomeHeroAnimations() {
@@ -205,7 +202,7 @@ function initHomeBlobs() {
             const x = e.clientX - (window.innerWidth / 2);
             const y = e.clientY - (window.innerHeight / 2);
             xToP(x); yToP(y); xToB(x); yToB(y);
-        });
+        }, { passive: true });
     }
 }
 
@@ -299,21 +296,29 @@ function initScrollHideNav() {
 
 // --- NOUVELLE FONCTION AJOUTÉE ---
 function initScrollReveals() {
+    const isProjectPage = document.body.classList.contains('project-page');
+
     // 1. ÉLÉMENTS SIMPLES (Titre, Texte, Image seule)
     const simpleReveals = document.querySelectorAll(".reveal");
 
     simpleReveals.forEach((element) => {
-        gsap.fromTo(element, 
-            { y: 50, opacity: 0, filter: "blur(5px)" }, 
+        // Sur les pages projet, ignorer les éléments déjà animés par script-projet.js
+        if (isProjectPage && (
+            element.closest('.project-hero') ||
+            element.closest('.context-section') ||
+            element.closest('.scroll-images')
+        )) return;
+
+        gsap.fromTo(element,
+            { y: 50, autoAlpha: 0 },
             {
-                y: 0, 
-                opacity: 1, 
-                filter: "blur(0px)",
-                duration: 1, 
+                y: 0,
+                autoAlpha: 1,
+                duration: 1,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: element,
-                    start: "top 85%", 
+                    start: "top 85%",
                 }
             }
         );
@@ -323,18 +328,20 @@ function initScrollReveals() {
     const groupReveals = document.querySelectorAll(".reveal-group");
 
     groupReveals.forEach((group) => {
+        // Sur les pages projet, ignorer les groupes du hero (gérés par la timeline)
+        if (isProjectPage && group.closest('.project-hero')) return;
+
         const items = group.querySelectorAll(".reveal-item");
 
         if (items.length > 0) {
             gsap.fromTo(items,
-                { y: 30, opacity: 0, filter: "blur(5px)" },
+                { y: 30, autoAlpha: 0 },
                 {
                     y: 0,
-                    opacity: 1,
-                    filter: "blur(0px)",
+                    autoAlpha: 1,
                     duration: 0.8,
                     ease: "power2.out",
-                    stagger: 0.1, 
+                    stagger: 0.1,
                     scrollTrigger: {
                         trigger: group,
                         start: "top 80%"

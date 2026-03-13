@@ -1,33 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // Sécurité : on vérifie qu'on est sur la page projet
     if (!document.body.classList.contains('project-page')) return;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    window.addEventListener("load", () => {
-        
-        initAnimations();
+    // Synchronisation : attendre que les images soient chargées (load)
+    // ET que script.js ait fini (header/footer injectés + reveals initialisés)
+    let loadDone = false;
+    let appDone = false;
 
-        // --- GESTION DU RESPONSIVE GSAP (Stable) ---
-        let mm = gsap.matchMedia();
+    function setup() {
+        if (!loadDone || !appDone) return;
+        if (setup.done) return;
+        setup.done = true;
 
-        // Active le sticky SEULEMENT sur Desktop (> 1024px)
-        mm.add("(min-width: 1025px)", () => {
-            
-            ScrollTrigger.create({
-                trigger: ".sticky-container",
-                start: "top 15%",
-                end: "bottom bottom",
-                pin: ".sticky-content",
-                pinSpacing: false,
-                invalidateOnRefresh: true,
+        // Attendre que le navigateur ait calculé le layout
+        requestAnimationFrame(() => {
+            initAnimations();
+
+            // Forcer le chargement des images lazy dans la section sticky
+            // (elles doivent avoir leur hauteur réelle pour que le pin soit correct)
+            const scrollImgs = document.querySelectorAll('.scroll-images img[loading="lazy"]');
+            scrollImgs.forEach(img => img.removeAttribute('loading'));
+
+            // Créer le pin après le chargement de toutes les images
+            const imgPromises = Array.from(scrollImgs).map(img => {
+                if (img.complete) return Promise.resolve();
+                return new Promise(resolve => {
+                    img.addEventListener('load', resolve, { once: true });
+                    img.addEventListener('error', resolve, { once: true });
+                });
             });
 
+            Promise.all(imgPromises).then(() => {
+                // --- GESTION DU RESPONSIVE GSAP (Stable) ---
+                let mm = gsap.matchMedia();
+
+                // Active le sticky SEULEMENT sur Desktop (> 1024px)
+                mm.add("(min-width: 1025px)", () => {
+
+                    ScrollTrigger.create({
+                        trigger: ".sticky-container",
+                        start: "top 15%",
+                        end: "bottom bottom",
+                        pin: ".sticky-content",
+                        pinSpacing: false,
+                        invalidateOnRefresh: true,
+                    });
+
+                });
+
+                ScrollTrigger.refresh();
+            });
         });
-        
-        ScrollTrigger.refresh(); 
-    });
+    }
+
+    window.addEventListener("load", () => { loadDone = true; setup(); });
+    window.addEventListener("appReady", () => { appDone = true; setup(); });
 
     function initAnimations() {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
