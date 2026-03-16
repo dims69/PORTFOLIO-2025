@@ -340,11 +340,18 @@ function initScrollHideNav() {
                     }
                 }
             });
-            
+
             // Nettoyage automatique quand on repasse sur Desktop
-            return () => { 
-                gsap.set(nav, { yPercent: 0, autoAlpha: 1 }); 
+            return () => {
+                gsap.set(nav, { yPercent: 0, autoAlpha: 1 });
             };
+        }
+    });
+
+    // Sécurité : forcer la visibilité au resize (rattrape les états perdus)
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            gsap.set(nav, { yPercent: 0, autoAlpha: 1, clearProps: "visibility,opacity" });
         }
     });
 }
