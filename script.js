@@ -4,6 +4,9 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Empêcher ScrollTrigger de recalculer quand seule la hauteur change (barre d'URL mobile)
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 document.addEventListener("DOMContentLoaded", () => {
     loadComponents();
 });
@@ -354,8 +357,11 @@ function initScrollHideNav() {
         }
     });
 
-    // Sécurité : forcer la visibilité au resize (rattrape les états perdus)
+    // Sécurité : forcer la visibilité au resize (uniquement si la largeur change)
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
+        if (window.innerWidth === lastWidth) return; // Ignorer les changements de hauteur seule (barre d'URL mobile)
+        lastWidth = window.innerWidth;
         if (window.innerWidth > 768) {
             gsap.set(nav, { yPercent: 0, autoAlpha: 1, clearProps: "visibility,opacity" });
         }

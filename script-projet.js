@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!document.body.classList.contains('project-page')) return;
 
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     // Synchronisation : attendre que les images soient chargées (load)
     // ET que script.js ait fini (header/footer injectés + reveals initialisés)
