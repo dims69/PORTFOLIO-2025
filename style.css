@@ -267,6 +267,10 @@ a {
     margin-right: 2rem;
 }
 
+.logo-icon {
+    display: none;
+}
+
 .links {
     display: flex;
     align-items: center;
@@ -1978,26 +1982,22 @@ body.no-scroll .burger-btn {
         box-shadow: 0 5px 20px -5px rgba(0,0,0,0.3);
     }
 
-    /* --- LOGO CARRÉ (2 lignes) --- */
+    /* --- LOGO ICÔNE SVG --- */
     .desktop-nav .logo {
         width: auto;
-        text-align: center;
         padding-bottom: 0;
         border-bottom: none;
-        margin-right: 1rem;
+        margin-right: 0.8rem;
     }
 
-    .desktop-nav .logo a {
-        font-size: 1.05rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        line-height: 1.15;
-        letter-spacing: 0.02em;
+    .desktop-nav .logo .logo-text {
+        display: none;
     }
 
-    .desktop-nav .logo .logo-last {
+    .desktop-nav .logo .logo-icon {
         display: block;
+        width: auto;
+        height: 32px;
     }
 
     /* --- LIENS --- */
@@ -2020,15 +2020,11 @@ body.no-scroll .burger-btn {
 
 @media (max-width: 450px) {
     .desktop-nav {
-        padding: 0.7rem 1rem;
+        padding: 0.6rem 0.8rem;
     }
 
-    .desktop-nav .logo a {
-        font-size: 0.95rem;
-    }
-
-    .desktop-nav .logo {
-        margin-right: 0.6rem;
+    .desktop-nav .logo .logo-icon {
+        height: 28px;
     }
 
     .nav-item {
