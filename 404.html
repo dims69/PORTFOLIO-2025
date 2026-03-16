@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Olivier Pouchoy</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <style>
+        .page-404 {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .error-code {
+            font-family: var(--font-heading);
+            font-size: clamp(8rem, 20vw, 16rem);
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--accent-primary), #a78bfa, var(--accent-primary));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .error-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .error-desc {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            color: var(--text-muted);
+            max-width: 480px;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-primary);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .back-home-btn .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .back-home-btn:hover .arrow {
+            transform: translateX(-4px);
+        }
+
+        .error-glow-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .error-glow-1 {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            background: var(--accent-primary);
+            filter: blur(200px);
+            opacity: 0.15;
+            left: 30%;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
+        .error-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 350px;
+            background: #a78bfa;
+            filter: blur(200px);
+            opacity: 0.1;
+            left: 65%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <div class="organic-lines-container">
+        <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
+            <path class="organic-path" d="M-50,800 C300,900 500,500 1000,600 C1400,700 1300,100 1550,50" />
+            <path class="organic-path" d="M1500,400 C1100,100 800,900 400,600 C100,300 -50,500 -100,400" />
+        </svg>
+    </div>
+
+    <div id="header-placeholder"></div>
+
+    <section class="page-404">
+        <div class="error-glow-container">
+            <div class="error-glow-1"></div>
+            <div class="error-glow-2"></div>
+        </div>
+
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page introuvable</h1>
+        <p class="error-desc">
+            La page que vous recherchez n'existe pas ou a peut-être été déplacée.
+        </p>
+        <a href="index.html" class="back-home-btn">
+            <span class="arrow">&larr;</span> Retour à l'accueil
+        </a>
+    </section>
+
+    <script src="script.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".error-code", { y: 60, opacity: 0, duration: 1 })
+          .from(".error-title", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5")
+          .from(".error-desc", { y: 20, opacity: 0, duration: 0.8 }, "-=0.5")
+          .from(".back-home-btn", { y: 20, opacity: 0, duration: 0.8 }, "-=0.4");
+    </script>
+
+</body>
+
+</html>
