@@ -118,11 +118,30 @@ function runApp() {
     initScrollHideNav();
     initScrollReveals(); // <--- NOUVEAU : Active les animations d'apparition au scroll
 
+    // --- SCROLL SPY (toutes les pages) ---
+    initScrollSpy();
+
+    // --- SMOOTH SCROLL pour les liens avec ancre ---
+    document.querySelectorAll('a[href*="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            const hash = href.includes('#') ? '#' + href.split('#')[1] : null;
+            if (!hash) return;
+            const target = document.querySelector(hash);
+            if (!target) return;
+            e.preventDefault();
+            if (window.lenis) {
+                window.lenis.scrollTo(target, { offset: 0, duration: 1.2 });
+            } else {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
     // --- ANIMATIONS PAGE D'ACCUEIL ---
     if (!isProjectPage) {
         initHomeBlobs();
         playHomeHeroAnimations();
-        initScrollSpy();
     }
 }
 
@@ -207,13 +226,19 @@ function initHomeBlobs() {
 }
 
 function initScrollSpy() {
-    const sections = document.querySelectorAll('section[id]');
+    const sectionElements = document.querySelectorAll('section[id]');
+    const contactEl = document.getElementById('contact');
+    const sections = [...sectionElements];
+    if (contactEl && !contactEl.matches('section')) sections.push(contactEl);
     const navBackdrop = document.querySelector('.nav-backdrop');
     const navItems = document.querySelectorAll('.nav-item');
 
     if (!navBackdrop || sections.length === 0) return;
 
+   let currentActiveId = null;
+
    const updateNav = (id) => {
+    currentActiveId = id;
     const activeLink = document.querySelector(`.nav-item[href*="#${id}"]`);
     
     if (activeLink) {
@@ -243,11 +268,29 @@ function initScrollSpy() {
     sections.forEach(section => {
         ScrollTrigger.create({
             trigger: section,
-            start: "top center",
+            start: section.id === 'contact' ? "top 90%" : "top center",
             end: "bottom center",
             onEnter: () => updateNav(section.id),
             onEnterBack: () => updateNav(section.id)
         });
+    });
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const href = item.getAttribute('href') || '';
+            const match = href.match(/#([^/]+)$/);
+            if (match) updateNav(match[1]);
+        });
+    });
+
+    // Sur les pages projet, activer "Projets" par défaut
+    if (document.body.classList.contains('project-page')) {
+        updateNav('projets');
+    }
+
+    // Recalculer la position du backdrop au resize
+    window.addEventListener('resize', () => {
+        if (currentActiveId) updateNav(currentActiveId);
     });
 }
 
@@ -256,19 +299,31 @@ function initScrollHideNav() {
     const nav = document.querySelector('.desktop-nav');
     if (!nav) return;
 
+    // Flag pour ignorer le masquage après un clic nav
+    let navClickLock = false;
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navClickLock = true;
+            gsap.to(nav, { yPercent: 0, autoAlpha: 1, duration: 0.3, overwrite: true });
+            setTimeout(() => { navClickLock = false; }, 1200);
+        });
+    });
+
     // ScrollTrigger.matchMedia gère automatiquement l'activation/désactivation
     // selon la taille de l'écran (ici max 768px)
     ScrollTrigger.matchMedia({
         "(max-width: 768px)": function() {
-            
+
             // On crée le trigger
             ScrollTrigger.create({
                 trigger: 'body',
                 start: "top top",
                 end: "bottom bottom",
                 onUpdate: (self) => {
+                    if (navClickLock) return;
                     const scrollY = self.scroll();
-                    
+
                     // Sécurité : tout en haut, on affiche toujours
                     if (scrollY < 50) {
                         gsap.to(nav, { yPercent: 0, autoAlpha: 1, duration: 0.3, overwrite: true });

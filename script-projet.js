@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function initAnimations() {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        
+
         if(document.querySelector(".project-hero h1")) {
             tl.from(".project-category", { y: 20, opacity: 0, duration: 0.8 })
               .from(".project-hero h1", { y: 40, opacity: 0, duration: 1 }, "-=0.6")
