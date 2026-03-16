@@ -315,6 +315,8 @@ function initScrollHideNav() {
     ScrollTrigger.matchMedia({
         "(max-width: 768px)": function() {
 
+            let lastScrollY = 0;
+
             // On crée le trigger
             ScrollTrigger.create({
                 trigger: 'body',
@@ -323,6 +325,10 @@ function initScrollHideNav() {
                 onUpdate: (self) => {
                     if (navClickLock) return;
                     const scrollY = self.scroll();
+
+                    // Ignorer les micro-mouvements (barre d'URL mobile)
+                    if (Math.abs(scrollY - lastScrollY) < 8) return;
+                    lastScrollY = scrollY;
 
                     // Sécurité : tout en haut, on affiche toujours
                     if (scrollY < 50) {
