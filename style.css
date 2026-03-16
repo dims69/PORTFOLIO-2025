@@ -391,7 +391,7 @@ a {
 /* Les liens eux-mêmes */
 .mobile-link {
     font-family: var(--font-heading, sans-serif); /* Ta typo titre */
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.4rem, 6vw, 3.5rem);
     font-weight: 700;
     color: #fff;
     text-decoration: none;
@@ -1807,6 +1807,10 @@ a.next-project-section:hover::before {
     .floating-car,
     .floating-ball {
         transform: none !important;
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        left: auto !important;
         width: 95% !important;
         max-height: 90%;
         object-fit: contain;
@@ -2001,7 +2005,7 @@ body.no-scroll .burger-btn {
     .desktop-nav .logo .logo-icon {
         display: block;
         width: auto;
-        height: clamp(26px, 5vw, 36px);
+        height: clamp(30px, 6vw, 42px);
     }
 
     /* --- LIENS --- */
