@@ -40,16 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Active le sticky SEULEMENT sur Desktop (> 1024px)
                 mm.add("(min-width: 1025px)", () => {
+                    const stickyContent = document.querySelector(".sticky-content");
+                    if (!stickyContent) return;
+
+                    const contentHeight = stickyContent.offsetHeight;
+                    const viewportHeight = window.innerHeight;
+                    const overflow = contentHeight - (viewportHeight * 0.85);
 
                     ScrollTrigger.create({
                         trigger: ".sticky-container",
-                        start: "top 15%",
+                        // Si le contenu est plus grand que le viewport, on retarde le pin
+                        start: overflow > 0 ? `top+=${overflow}px top` : "top 15%",
                         end: "bottom bottom",
                         pin: ".sticky-content",
                         pinSpacing: false,
                         invalidateOnRefresh: true,
                     });
-
                 });
 
                 ScrollTrigger.refresh();

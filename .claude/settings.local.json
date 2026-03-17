@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for f:*)",
+      "Bash(do sed:*)",
+      "Bash(sed -i 's/<script src=\"\"https:\\\\/\\\\/unpkg.com/<script defer src=\"\"https:\\\\/\\\\/unpkg.com/g' \"$f\")",
+      "Bash(echo \"Updated $f\")",
+      "Bash(done)"
+    ]
+  }
+}

@@ -1439,8 +1439,6 @@ a.bento-card:hover .mini-tag {
     position: relative;
     z-index: 2;
     padding-bottom: 2rem;
-    max-height: 85vh;
-    overflow: visible;
 }
 
 
@@ -1500,6 +1498,12 @@ a.bento-card:hover .mini-tag {
 
 .sticky-action {
     margin-top: 3rem;
+}
+
+@media (max-width: 1024px) {
+    .sticky-action {
+        text-align: center;
+    }
 }
 
 .scroll-image-item {
