@@ -3224,10 +3224,16 @@ a.next-project-section:hover::before {
    ========================================= */
 body.no-scroll {
     overflow: hidden !important;
+    height: 100vh !important;
+}
+
+/* Verrouiller aussi html pendant le preloader */
+html:has(body.no-scroll) {
+    overflow: hidden !important;
 }
 
 /* Empêcher Lenis d'overrider le scroll quand il n'est pas actif */
-html:not(.lenis) {
+html:not(.lenis):not(:has(body.no-scroll)) {
     overflow-y: scroll !important;
 }
 

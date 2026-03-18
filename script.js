@@ -337,10 +337,12 @@ function runApp() {
             if (preloader) preloader.remove();
             playHomeHeroAnimations();
         } else if (preloader) {
-            // Desktop, première visite : lancer le preloader puis le hero
+            // Desktop, première visite : bloquer le scroll pendant le preloader
             document.body.classList.add('no-scroll');
+            if (window.lenis) window.lenis.stop();
             playPreloader(() => {
                 document.body.classList.remove('no-scroll');
+                if (window.lenis) window.lenis.start();
                 playHomeHeroAnimations(true);
             });
         } else {
