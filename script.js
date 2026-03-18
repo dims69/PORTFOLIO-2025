@@ -8,6 +8,26 @@
     if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
 
+// Redirection automatique vers /en/ si navigateur non-francophone
+// (sauf si le visiteur a déjà choisi manuellement sa langue)
+(function() {
+    try {
+        const langChoice = localStorage.getItem('langChoice');
+        if (langChoice) return; // Choix manuel déjà fait, ne pas rediriger
+
+        const isOnFrench = !window.location.pathname.includes('/en/');
+        if (!isOnFrench) return; // Déjà sur la version EN
+
+        const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        if (browserLang.startsWith('fr')) return; // Navigateur francophone, rester sur FR
+
+        // Rediriger vers la page EN équivalente
+        const path = window.location.pathname;
+        const page = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+        window.location.replace('en/' + page);
+    } catch (e) { /* localStorage bloqué */ }
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Empêcher ScrollTrigger de recalculer quand seule la hauteur change (barre d'URL mobile)
@@ -679,9 +699,21 @@ function initLangPill() {
     document.querySelectorAll('.lang-pill').forEach(pill => {
         pill.addEventListener('click', function(e) {
             e.preventDefault();
-            const href = this.getAttribute('href');
             const current = this.dataset.active;
             const next = current === 'fr' ? 'en' : 'fr';
+
+            // Calculer l'URL équivalente dans l'autre langue
+            const path = window.location.pathname;
+            const page = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+            let target;
+
+            if (current === 'fr') {
+                // FR → EN : ajouter /en/ devant le fichier
+                target = 'en/' + page;
+            } else {
+                // EN → FR : remonter d'un niveau
+                target = '../' + page;
+            }
 
             // Basculer l'état visuel
             this.dataset.active = next;
@@ -689,9 +721,12 @@ function initLangPill() {
                 label.classList.toggle('active');
             });
 
+            // Mémoriser le choix manuel pour ne plus rediriger automatiquement
+            try { localStorage.setItem('langChoice', next); } catch (e) {}
+
             // Naviguer après l'animation
             setTimeout(() => {
-                window.location.href = href;
+                window.location.href = target;
             }, 350);
         });
     });
