@@ -892,9 +892,12 @@ h1.reveal-text {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    color: #fff;
+    text-decoration: none;
+    z-index: 3;
     flex-direction: column;
     align-items: center;
-    opacity: .7;
+    opacity: 1;
     transition: opacity .3s;
     cursor: pointer;
 }
@@ -908,7 +911,7 @@ h1.reveal-text {
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 1);
+    color: #fff;
     margin-top: 10px;
     font-family: var(--font-heading, sans-serif);
 }
@@ -916,7 +919,7 @@ h1.reveal-text {
 .mouse {
     width: 30px;
     height: 50px;
-    border: 2px solid rgba(255, 255, 255, .5);
+    border: 2px solid #fff;
     border-radius: 20px;
     position: relative;
     margin-bottom: 5px;
