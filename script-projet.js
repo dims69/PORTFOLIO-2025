@@ -16,9 +16,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (setup.done) return;
         setup.done = true;
 
+        // Sécurité : nettoyer tout blocage de scroll résiduel
+        document.body.classList.remove('no-scroll');
+        document.documentElement.classList.remove('lenis-stopped');
+        document.body.style.overflow = '';
+        document.body.style.overflowX = '';
+        document.body.style.overflowY = '';
+        document.documentElement.style.overflow = '';
+        document.documentElement.style.overflowX = '';
+        document.documentElement.style.overflowY = '';
+
         // Attendre que le navigateur ait calculé le layout
         requestAnimationFrame(() => {
             initAnimations();
+
+            const isMobileDevice = window.innerWidth <= 1024;
+
+            // Sur mobile, pas besoin de sticky ni de refresh ScrollTrigger
+            if (isMobileDevice) return;
 
             // Forcer le chargement des images lazy dans la section sticky
             // (elles doivent avoir leur hauteur réelle pour que le pin soit correct)
@@ -65,6 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("load", () => { loadDone = true; setup(); });
     window.addEventListener("appReady", () => { appDone = true; setup(); });
+
+    // Filet de sécurité : forcer le déblocage du scroll après tout le JS
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            document.body.classList.remove('no-scroll');
+            document.body.style.overflow = '';
+            document.body.style.overflowX = '';
+            document.body.style.overflowY = '';
+            document.documentElement.style.overflow = '';
+            document.documentElement.style.overflowX = '';
+            document.documentElement.style.overflowY = '';
+            document.documentElement.classList.remove('lenis-stopped');
+        }, 500);
+    });
 
     function initAnimations() {
         const isMobile = window.innerWidth <= 768;

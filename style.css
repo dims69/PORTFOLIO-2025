@@ -541,13 +541,14 @@
 }
 
 html {
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-primary) var(--bg-color, #050508);
-   
+    -webkit-overflow-scrolling: touch;
 }
 
 ::-webkit-scrollbar {
@@ -573,9 +574,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     overflow: visible;
-    overflow-x: hidden;
     min-height: 100vh;
-    /* Crucial */
     width: 100%;
     position: relative;
     margin: 0;
@@ -1239,6 +1238,12 @@ h1.reveal-text {
     line-height: 1.6;
 }
 
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
 /* Background Blobs & Noise */
 .noise-overlay {
     position: fixed;
@@ -1450,8 +1455,7 @@ h1.reveal-text {
     padding:  8rem 5% 8rem 5%;
 }
 
-.section-title,
-.contact-title {
+.section-title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 4rem;
     line-height: 1.1;
@@ -2046,7 +2050,6 @@ a.bento-card:hover .mini-tag {
    ========================================= */
 .project-page {
     background-color: var(--bg-color);
-    overscroll-behavior-y: none;
 }
 
 .project-page .organic-lines-container {
@@ -2850,7 +2853,7 @@ a.next-project-section:hover::before {
     .sticky-container {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 
     .sticky-content,
@@ -2865,7 +2868,7 @@ a.next-project-section:hover::before {
 
     .scroll-image-item:nth-child(1) {
         order: 2;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .text-block-2 {
@@ -2874,7 +2877,7 @@ a.next-project-section:hover::before {
 
     .scroll-image-item:nth-child(2) {
         order: 4;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .text-block-3 {
@@ -2978,15 +2981,82 @@ a.next-project-section:hover::before {
         left: 1rem;
     }
 
-    .context-section {
-        display: none !important;
+    /* Project Pages — espacement harmonisé mobile */
+    .project-hero {
+        padding-top: 120px;
+        padding-bottom: 1.5rem;
     }
 
-    /* Project Pages */
-    .project-hero-content{
-        padding-top: 2rem;
+    .project-hero-content {
+        padding-top: 1rem;
     }
-    
+
+    .project-hero-image {
+        margin-top: 1.5rem;
+    }
+
+    .context-section {
+        padding: 2rem 5% 1rem;
+    }
+
+    .context-section h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    .sticky-scroll-section {
+        padding: 2rem 5%;
+    }
+
+    .performance-section {
+        padding: 3rem 5% !important;
+    }
+
+    .performance-section h3 {
+        margin-bottom: 1.5rem;
+    }
+
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    a.next-project-section {
+        padding: 4rem 5%;
+    }
+
+    .all-projects-link {
+        padding: 1.5rem 0 2rem;
+    }
+
+    /* Footer — espacement mobile */
+    .footer-container {
+        padding: 3rem 1.5rem 2rem;
+        min-height: auto;
+    }
+
+    .contact-label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        margin-bottom: 2rem !important;
+    }
+
+    .contact-form {
+        margin-bottom: 3rem;
+    }
+
+    .magnetic-button {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+    }
+
+    .main-footer {
+        padding-top: 1.5rem;
+        gap: 1rem;
+    }
+
     .project-hero h1 {
         font-size: clamp(2.5rem, 10vw, 4rem);
     }
@@ -3023,18 +3093,27 @@ a.next-project-section:hover::before {
     /* Sticky Mobile Tweaks */
     .sticky-content h2 {
         font-size: 2rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .sticky-content h3 {
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .sticky-content h3:last-of-type {
         display: none;
     }
 
+    .sticky-content p {
+        margin-bottom: 0.5rem;
+    }
+
     .sticky-content ul {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
     }
 
     .sticky-content li {
@@ -3088,8 +3167,12 @@ a.next-project-section:hover::before {
    SCROLL LOCK & GALERIE
    ========================================= */
 body.no-scroll {
-    overflow: hidden;
-    touch-action: none;
+    overflow: hidden !important;
+}
+
+/* Empêcher Lenis d'overrider le scroll quand il n'est pas actif */
+html:not(.lenis) {
+    overflow-y: scroll !important;
 }
 
 body.no-scroll .desktop-nav,

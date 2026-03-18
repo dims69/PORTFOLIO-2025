@@ -216,6 +216,16 @@ function runApp() {
     const isMobile = window.matchMedia("(max-width: 1024px)").matches;
     const isProjectPage = document.body.classList.contains('project-page');
 
+    // Sécurité : nettoyer tout blocage de scroll résiduel
+    document.body.classList.remove('no-scroll');
+    document.documentElement.classList.remove('lenis-stopped');
+    document.body.style.overflow = '';
+    document.body.style.overflowX = '';
+    document.body.style.overflowY = '';
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.overflowX = '';
+    document.documentElement.style.overflowY = '';
+
     // --- LENIS SCROLL ---
     let lenis;
     if (!isMobile && typeof Lenis !== 'undefined') {
@@ -229,7 +239,31 @@ function runApp() {
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
+    } else {
+        // Sur mobile : s'assurer que Lenis n'a pas ajouté de classes résiduelles
+        document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
+        window.lenis = null;
     }
+
+    // --- SÉCURITÉ RESIZE : détruire Lenis si passage en mobile ---
+    let lastWidthCheck = window.innerWidth;
+    window.addEventListener('resize', () => {
+        if (window.innerWidth === lastWidthCheck) return;
+        lastWidthCheck = window.innerWidth;
+
+        const nowMobile = window.innerWidth <= 1024;
+        if (nowMobile && window.lenis) {
+            window.lenis.destroy();
+            window.lenis = null;
+            document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped');
+            document.documentElement.style.overflow = '';
+            document.documentElement.style.overflowX = '';
+            document.documentElement.style.overflowY = '';
+            document.body.style.overflow = '';
+            document.body.style.overflowX = '';
+            document.body.style.overflowY = '';
+        }
+    });
 
     // --- INITIALISATION VISUELLE ---
     // Fixe la nav (Vertical & Opacité gérés par JS, Horizontal par CSS margin:auto)
@@ -271,16 +305,18 @@ function runApp() {
         let preloaderSeen = false;
         try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) { /* Storage bloqué (nav privée / tracking prevention) */ }
 
-        if (preloader && !preloaderSeen) {
-            // Première visite : lancer le preloader puis le hero (sans anim nav/h1)
+        if (isMobile || preloaderSeen) {
+            // Mobile ou visite suivante : supprimer le preloader et afficher directement
+            if (preloader) preloader.remove();
+            playHomeHeroAnimations();
+        } else if (preloader) {
+            // Desktop, première visite : lancer le preloader puis le hero
             document.body.classList.add('no-scroll');
             playPreloader(() => {
                 document.body.classList.remove('no-scroll');
                 playHomeHeroAnimations(true);
             });
         } else {
-            // Visite suivante : supprimer le preloader et lancer le hero directement
-            if (preloader) preloader.remove();
             playHomeHeroAnimations();
         }
     }
@@ -384,32 +420,35 @@ function initMarquee() {
 
 function playHomeHeroAnimations(skipNavAndTitle) {
     if (!document.querySelector('.hero')) return;
-    const tl = gsap.timeline();
+    const isMobileHero = window.innerWidth <= 768;
 
-    if (skipNavAndTitle) {
-        // Après preloader : tout déjà visible, pas de double animation
+    // Sur mobile ou après preloader : tout visible immédiatement, pas d'animation
+    if (isMobileHero || skipNavAndTitle) {
         gsap.set(".desktop-nav", { yPercent: 0, autoAlpha: 1 });
         document.querySelectorAll("h1.reveal-text").forEach(el => gsap.set(el, { y: 0, autoAlpha: 1 }));
         const sub = document.querySelector(".hero-subtitle");
         if (sub) gsap.set(sub, { y: 0, autoAlpha: 1 });
         const scrollInd = document.querySelector(".scroll-indicator");
         if (scrollInd) gsap.set(scrollInd, { y: 0, autoAlpha: 0.7 });
-    } else {
-        // Sans preloader : animation complète
-        tl.fromTo(".desktop-nav",
-            { yPercent: -200, autoAlpha: 0 },
-            { yPercent: 0, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
-        );
-
-        const h1 = document.querySelector("h1.reveal-text");
-        if (h1) tl.fromTo(h1, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.05, ease: "power4.out" }, "-=0.7");
-
-        const sub = document.querySelector(".hero-subtitle");
-        if (sub) tl.fromTo(sub, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "-=0.5");
-
-        const scrollInd = document.querySelector(".scroll-indicator");
-        if (scrollInd) gsap.fromTo(scrollInd, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 0.7, duration: 0.5, ease: "power2.out", delay: 0.3 });
+        return;
     }
+
+    // Desktop sans preloader : animation complète
+    const tl = gsap.timeline();
+
+    tl.fromTo(".desktop-nav",
+        { yPercent: -200, autoAlpha: 0 },
+        { yPercent: 0, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
+    );
+
+    const h1 = document.querySelector("h1.reveal-text");
+    if (h1) tl.fromTo(h1, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.05, ease: "power4.out" }, "-=0.7");
+
+    const sub = document.querySelector(".hero-subtitle");
+    if (sub) tl.fromTo(sub, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "-=0.5");
+
+    const scrollInd = document.querySelector(".scroll-indicator");
+    if (scrollInd) gsap.fromTo(scrollInd, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 0.7, duration: 0.5, ease: "power2.out", delay: 0.3 });
 }
 
 function initHomeBlobs() {
