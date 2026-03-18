@@ -1625,8 +1625,37 @@ a.bento-card:hover .mini-tag {
 .scroll-image-item img {
     width: 100%;
     height: auto;
+    max-height: 700px;
+    object-fit: cover;
     display: block;
     border-radius: 30px;
+}
+
+.scroll-image-row {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: stretch;
+}
+
+.scroll-image-row .scroll-image-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.scroll-image-row .scroll-image-item a {
+    display: block;
+    height: 100%;
+}
+
+.scroll-image-row .scroll-image-item img {
+    height: 100%;
+    max-height: none;
+}
+
+.scroll-image-item--contain img {
+    object-fit: contain;
+    background: #111;
 }
 
 /* Performance & Impact */
@@ -1831,6 +1860,20 @@ a.bento-card:hover .mini-tag {
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
     overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #111;
+}
+
+.video-wrapper img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    transition: opacity .3s ease;
 }
 
 .video-wrapper iframe {
@@ -1839,11 +1882,39 @@ a.bento-card:hover .mini-tag {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
 }
 
-.video-wrapper.playing iframe {
-    pointer-events: auto;
+.video-wrapper.playing {
+    cursor: default;
+}
+
+/* Bouton play YouTube */
+.video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 2;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.video-play-btn svg {
+    width: 68px;
+    height: 48px;
+    opacity: .85;
+    transition: opacity .2s ease;
+}
+
+.video-wrapper:hover .video-play-btn svg {
+    opacity: 1;
+}
+
+.video-wrapper:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.08);
 }
 
 /* Format vertical (Shorts / 9:16) */
@@ -2124,6 +2195,20 @@ a.next-project-section:hover::before {
         order: 6;
     }
 
+    .scroll-image-row {
+        flex-direction: row;
+        order: 6;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+
+    .scroll-image-row .scroll-image-item--contain img {
+        height: auto;
+        max-height: 500px;
+        object-fit: contain;
+        background: transparent;
+    }
+
     .about-section,
     .contact-section,
     .projects-section,
@@ -2267,6 +2352,39 @@ a.next-project-section:hover::before {
 
     .sticky-content li::before {
         content: none;
+    }
+
+    .scroll-image-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .scroll-image-row .scroll-image-item {
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .scroll-image-row .scroll-image-item a {
+        height: auto;
+    }
+
+    .scroll-image-row .scroll-image-item img {
+        width: 100%;
+        height: auto;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    .scroll-image-row .scroll-image-item--contain {
+        aspect-ratio: auto;
+    }
+
+    .scroll-image-row .scroll-image-item--contain img {
+        object-fit: contain;
+        background: transparent;
+        max-height: none;
+        height: auto;
     }
 }
 
