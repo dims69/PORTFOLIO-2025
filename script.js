@@ -119,7 +119,8 @@ function runApp() {
     initStatsCounters();
     initMarquee();
     initScrollHideNav();
-    initScrollReveals(); // <--- NOUVEAU : Active les animations d'apparition au scroll
+    initScrollReveals();
+    initLangPill();
 
     // --- SCROLL SPY (toutes les pages) ---
     initScrollSpy();
@@ -408,26 +409,20 @@ function initScrollHideNav() {
                     if (Math.abs(scrollY - lastScrollY) < 8) return;
                     lastScrollY = scrollY;
 
-                    // Sécurité : tout en haut, on affiche toujours
+                    // Tout en haut : header complet avec le nom
                     if (scrollY < 50) {
-                        gsap.to(nav, { yPercent: 0, autoAlpha: 1, duration: 0.3, overwrite: true });
+                        nav.classList.remove('nav-scrolled');
                         return;
                     }
 
-                    // Direction : 1 = descend, -1 = monte
-                    if (self.direction === 1) {
-                        // ON DESCEND : On cache (vers le haut -150% et opacité réduite)
-                        gsap.to(nav, { yPercent: -150, autoAlpha: 0, duration: 0.3, ease: "power2.out", overwrite: true });
-                    } else {
-                        // ON MONTE : On affiche
-                        gsap.to(nav, { yPercent: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out", overwrite: true });
-                    }
+                    // Au scroll : passer en mode compact (cacher le nom, garder les liens)
+                    nav.classList.add('nav-scrolled');
                 }
             });
 
             // Nettoyage automatique quand on repasse sur Desktop
             return () => {
-                gsap.set(nav, { yPercent: 0, autoAlpha: 1 });
+                nav.classList.remove('nav-scrolled');
             };
         }
     });
@@ -498,5 +493,30 @@ function initScrollReveals() {
                 }
             );
         }
+    });
+}
+
+// ========================================================
+// LANG PILL — Animation du toggle avant navigation
+// ========================================================
+function initLangPill() {
+    document.querySelectorAll('.lang-pill').forEach(pill => {
+        pill.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const current = this.dataset.active;
+            const next = current === 'fr' ? 'en' : 'fr';
+
+            // Basculer l'état visuel
+            this.dataset.active = next;
+            this.querySelectorAll('.lang-pill-label').forEach(label => {
+                label.classList.toggle('active');
+            });
+
+            // Naviguer après l'animation
+            setTimeout(() => {
+                window.location.href = href;
+            }, 350);
+        });
     });
 }

@@ -366,36 +366,65 @@ a {
     color: #fff;
 }
 
-.lang-toggle {
+/* --- Language Pill Toggle --- */
+.lang-pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
-    font-size: 0.8rem;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 100px;
+    padding: 3px;
+    margin-left: 0.6rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s ease;
+}
+
+.lang-pill:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.lang-pill-label {
+    position: relative;
+    z-index: 2;
+    min-width: 28px;
+    text-align: center;
+    padding: 4px 6px;
+    font-size: 0.72rem;
     font-family: var(--font-heading);
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.05em;
-    margin-left: 0.5rem;
-}
-
-.lang-active {
-    color: #fff;
-}
-
-.lang-sep {
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 300;
-}
-
-.lang-link {
     color: rgba(255, 255, 255, 0.4);
-    transition: color 0.3s ease;
+    transition: color 0.35s ease;
+    line-height: 1;
 }
 
-.lang-link:hover {
-    color: #fff;
+.lang-pill-label.active {
+    color: var(--bg-primary, #0f0a1a);
 }
 
-/* Mobile lang toggle : caché sur desktop */
+.lang-pill-thumb {
+    position: absolute;
+    z-index: 1;
+    top: 3px;
+    left: 3px;
+    width: calc(50% - 3px);
+    height: calc(100% - 6px);
+    background: #fff;
+    border-radius: 100px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lang-pill[data-active="fr"] .lang-pill-thumb {
+    transform: translateX(100%);
+}
+
+.lang-pill[data-active="en"] .lang-pill-thumb {
+    transform: translateX(0);
+}
+
+/* Mobile pill : caché sur desktop */
 .lang-switch-mobile {
     display: none;
 }
@@ -2488,14 +2517,15 @@ body.no-scroll .burger-btn {
         width: 92%;
         max-width: 92%;
         justify-content: center;
-        padding: 0.6rem 1rem 0.5rem;
-        gap: 0.3rem;
+        padding: 0.75rem 1.2rem 0.6rem;
+        gap: 0.35rem;
         z-index: 1000;
         border-radius: 20px;
         background: rgba(11, 12, 21, .6);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, .08);
+        transition: padding 0.35s ease, gap 0.35s ease;
     }
 
     /* --- Ligne 1 : Nom + Lang Switch --- */
@@ -2508,6 +2538,9 @@ body.no-scroll .burger-btn {
         border-bottom: none;
         margin-right: 0;
         position: relative;
+        max-height: 1.8rem;
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.35s ease, margin 0.35s ease;
     }
 
     .desktop-nav .logo .logo-icon {
@@ -2516,13 +2549,13 @@ body.no-scroll .burger-btn {
 
     .desktop-nav .logo .logo-text {
         display: flex;
-        gap: 0.35rem;
+        gap: 0.4rem;
     }
 
     .desktop-nav .logo .logo-first,
     .desktop-nav .logo .logo-last {
         font-family: var(--font-heading);
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        font-size: clamp(1rem, 4.5vw, 1.25rem);
     }
 
     /* --- Ligne 2 : Liens de navigation --- */
@@ -2538,27 +2571,55 @@ body.no-scroll .burger-btn {
     }
 
     .nav-item {
-        font-size: clamp(0.75rem, 2.8vw, 0.9rem);
-        padding: 0.4rem clamp(0.5rem, 2.5vw, 0.8rem);
+        font-size: clamp(0.85rem, 3.2vw, 1rem);
+        padding: 0.45rem clamp(0.6rem, 3vw, 1rem);
         color: rgba(255, 255, 255, 0.75);
     }
 
-    /* Mobile : afficher le lang-toggle sur la ligne du nom, cacher celui dans les liens */
+    /* Mobile : afficher le pill sur la ligne du nom, cacher celui dans les liens */
     .lang-switch-mobile {
         display: inline-flex;
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 0.7rem;
         margin-left: 0;
+    }
+
+    .lang-switch-mobile .lang-pill-label {
+        min-width: 24px;
+        padding: 3px 5px;
+        font-size: 0.65rem;
     }
 
     .lang-switch-desktop {
         display: none;
     }
 
+    /* --- État compact au scroll : on cache le nom --- */
+    .desktop-nav.nav-scrolled .logo {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .desktop-nav.nav-scrolled {
+        padding: 0.55rem 1.2rem;
+        gap: 0;
+        border-radius: 100px;
+    }
+
+    .desktop-nav.nav-scrolled .lang-switch-mobile {
+        display: none;
+    }
+
+    .desktop-nav.nav-scrolled .lang-switch-desktop {
+        display: inline-flex;
+    }
+
     .hero {
-        padding-top: 120px;
+        padding-top: 130px;
     }
 }
