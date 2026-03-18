@@ -316,6 +316,10 @@ function initScrollSpy() {
 
    let currentActiveId = null;
 
+   // Exposer updateNav pour le recalcul depuis d'autres fonctions
+   window._updateNav = (id) => updateNav(id);
+   window._getCurrentActiveId = () => currentActiveId;
+
    const updateNav = (id) => {
     currentActiveId = id;
     const activeLink = document.querySelector(`.nav-item[href*="#${id}"]`);
@@ -373,8 +377,15 @@ function initScrollSpy() {
     });
 }
 
+function recalcBackdrop() {
+    // Attendre la fin de la transition CSS avant de recalculer
+    setTimeout(() => {
+        const id = window._getCurrentActiveId && window._getCurrentActiveId();
+        if (id && window._updateNav) window._updateNav(id);
+    }, 370);
+}
+
 function initScrollHideNav() {
-    // On vérifie que la nav existe
     const nav = document.querySelector('.desktop-nav');
     if (!nav) return;
 
@@ -411,12 +422,18 @@ function initScrollHideNav() {
 
                     // Tout en haut : header complet avec le nom
                     if (scrollY < 50) {
-                        nav.classList.remove('nav-scrolled');
+                        if (nav.classList.contains('nav-scrolled')) {
+                            nav.classList.remove('nav-scrolled');
+                            recalcBackdrop();
+                        }
                         return;
                     }
 
                     // Au scroll : passer en mode compact (cacher le nom, garder les liens)
-                    nav.classList.add('nav-scrolled');
+                    if (!nav.classList.contains('nav-scrolled')) {
+                        nav.classList.add('nav-scrolled');
+                        recalcBackdrop();
+                    }
                 }
             });
 
