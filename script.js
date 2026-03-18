@@ -70,6 +70,7 @@ function loadComponents() {
         initScrollToTop();
         initBentoFilters();
         runApp();
+        initTouchPrefetch();
         ScrollTrigger.refresh();
         window.dispatchEvent(new Event('appReady'));
     });
@@ -732,4 +733,29 @@ function initLangPill() {
             }, 350);
         });
     });
+}
+
+// ========================================================
+// 5. PREFETCH AU TOUCH (Safari iOS)
+// ========================================================
+// Safari ne fait pas de prefetch natif — on pré-charge la page
+// dès que le doigt touche le lien (avant le click)
+
+function initTouchPrefetch() {
+    const prefetched = new Set();
+
+    document.addEventListener('touchstart', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        // Ignorer les ancres, liens externes et déjà prefetchés
+        if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || prefetched.has(href)) return;
+
+        prefetched.add(href);
+        const prefetchLink = document.createElement('link');
+        prefetchLink.rel = 'prefetch';
+        prefetchLink.href = href;
+        document.head.appendChild(prefetchLink);
+    }, { passive: true });
 }
