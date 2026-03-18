@@ -140,6 +140,14 @@
     color: var(--text-muted);
 }
 
+[data-theme="light"] .marquee-content-secondary span {
+    color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .marquee-content-secondary span:hover {
+    color: rgba(0, 0, 0, 0.3);
+}
+
 [data-theme="light"] .skills-section {
     border-color: var(--glass-border);
 }
@@ -190,7 +198,8 @@
     border-color: var(--bg-color);
 }
 
-[data-theme="light"] .floating-actions button {
+[data-theme="light"] .floating-actions button,
+[data-theme="light"] .theme-toggle-nav {
     background: #fff;
     border-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -418,6 +427,42 @@
 .scroll-top-btn.visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+/* Theme toggle in nav (desktop only) */
+.theme-toggle-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    padding: 0;
+    margin-left: 0.25rem;
+}
+
+.theme-toggle-nav:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+/* Hide floating theme toggle on desktop, show nav one */
+@media (min-width: 769px) {
+    .floating-actions .theme-toggle {
+        display: none;
+    }
+}
+
+/* Hide nav theme toggle on mobile, show floating one */
+@media (max-width: 768px) {
+    .theme-toggle-nav {
+        display: none;
+    }
 }
 
 .theme-icon-moon {
@@ -798,18 +843,6 @@ a {
     color: #fff;
 }
 
-#btn-contact {
-    background: var(--accent-primary);
-    color: #fff;
-    border-radius: 100px;
-    padding: 0.45em 1rem;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-#btn-contact:hover {
-    background: var(--accent-secondary, #7c3aed);
-    transform: translateY(-1px);
-}
 
 /* --- Language Pill Toggle --- */
 .lang-pill {
@@ -1934,6 +1967,9 @@ a.bento-card:hover .mini-tag {
 }
 
 @media (max-width: 768px) {
+    .organic-lines-container {
+        display: none;
+    }
     .cv-wrapper {
         margin-top: 3rem;
         text-align: center;
@@ -1942,13 +1978,15 @@ a.bento-card:hover .mini-tag {
 
 /* Marquee Skills */
 .skills-section {
-    padding: 4rem 0;
+    padding: 3rem 0;
     border-top: 1px solid var(--glass-border);
     border-bottom: 1px solid var(--glass-border);
     overflow: hidden;
     position: relative;
     width: 100%;
-    display: flex; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .marquee-wrapper {
@@ -1967,15 +2005,40 @@ a.bento-card:hover .mini-tag {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 4vw, 4rem);
     color: rgba(255, 255, 255, .15);
-    margin: 0 2rem; 
+    margin: 0 1rem;
     font-weight: 600;
     transition: color .3s;
     flex-shrink: 0;
-    cursor: default; 
+    cursor: default;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.marquee-content span::after {
+    content: "•";
+    font-size: 0.5em;
+    opacity: 0.5;
 }
 
 .marquee-content span:hover {
     color: var(--accent-primary);
+}
+
+.marquee-content-secondary span {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: rgba(255, 255, 255, .1);
+    font-weight: 400;
+    margin: 0 0.75rem;
+    gap: 1.5rem;
+}
+
+.marquee-content-secondary span::after {
+    font-size: 0.4em;
+}
+
+.marquee-content-secondary span:hover {
+    color: rgba(255, 255, 255, .3);
 }
 
 /* =========================================

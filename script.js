@@ -371,9 +371,14 @@ function initStatsCounters() {
 }
 
 function initMarquee() {
-    gsap.set(".marquee-wrapper", { xPercent: 0 });
-    gsap.to(".marquee-wrapper", {
-        xPercent: -50, repeat: -1, duration: 35, ease: "none"
+    gsap.set(".marquee-primary", { xPercent: 0 });
+    gsap.to(".marquee-primary", {
+        xPercent: -50, repeat: -1, duration: 60, ease: "none"
+    });
+
+    gsap.set(".marquee-secondary", { xPercent: -50 });
+    gsap.to(".marquee-secondary", {
+        xPercent: 0, repeat: -1, duration: 70, ease: "none"
     });
 }
 
@@ -449,8 +454,7 @@ function initScrollSpy() {
     // Reset : tous les liens en couleur muted
     navItems.forEach(el => el.style.color = "");
 
-    // Le lien actif passe en blanc (sauf Contact qui a son propre style CSS)
-    if (activeLink && activeLink.id !== 'btn-contact') {
+    if (activeLink) {
         activeLink.style.color = document.documentElement.getAttribute('data-theme') === 'light' ? 'var(--text-main)' : 'white';
     }
 };
@@ -556,6 +560,16 @@ function initScrollHideNav() {
 
 // --- NOUVELLE FONCTION AJOUTÉE ---
 function initScrollReveals() {
+    const isMobile = window.innerWidth <= 768;
+
+    // Sur mobile, rendre tout visible immédiatement sans animation
+    if (isMobile) {
+        document.querySelectorAll(".reveal, .reveal-item").forEach(el => {
+            gsap.set(el, { autoAlpha: 1, y: 0 });
+        });
+        return;
+    }
+
     const isProjectPage = document.body.classList.contains('project-page');
 
     // 1. ÉLÉMENTS SIMPLES (Titre, Texte, Image seule)

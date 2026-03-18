@@ -67,14 +67,24 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("appReady", () => { appDone = true; setup(); });
 
     function initAnimations() {
+        const isMobile = window.innerWidth <= 768;
+
+        // Sur mobile, tout est visible immédiatement
+        if (isMobile) {
+            gsap.set([".project-hero h1", ".project-tags-container", ".project-hero-description", ".project-meta", ".project-hero-image", ".context-section h2", ".context-section p", ".scroll-image-item"], { opacity: 1, y: 0 });
+            return;
+        }
+
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
         if(document.querySelector(".project-hero h1")) {
-            tl.from(".project-category", { y: 20, opacity: 0, duration: 0.8 })
-              .from(".project-hero h1", { y: 40, opacity: 0, duration: 1 }, "-=0.6")
-              .from(".project-hero-description", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
-              .from(".project-meta", { y: 20, opacity: 0, duration: 0.8 }, "-=0.6")
-              .from(".project-hero-image", { y: 60, opacity: 0, duration: 1.2 }, "-=0.8");
+            gsap.set([".project-hero h1", ".project-tags-container", ".project-hero-description", ".project-meta", ".project-hero-image"], { opacity: 0, y: 30 });
+
+            tl.to(".project-hero h1", { y: 0, opacity: 1, duration: 0.8 })
+              .to(".project-tags-container", { y: 0, opacity: 1, duration: 0.6 }, "-=0.5")
+              .to(".project-hero-description", { y: 0, opacity: 1, duration: 0.6 }, "-=0.4")
+              .to(".project-meta", { y: 0, opacity: 1, duration: 0.6 }, "-=0.4")
+              .to(".project-hero-image", { y: 0, opacity: 1, duration: 0.8 }, "-=0.4");
         }
 
         gsap.utils.toArray(".context-section h2, .context-section p").forEach(el => {
