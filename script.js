@@ -18,12 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadComponents() {
-    // 1. Charger le Header (Juste l'affichage, plus de logique burger)
+    // 1. Charger le Header — rendre la nav visible immédiatement après injection
     const headerLoad = fetch('header.html')
         .then(res => { if (!res.ok) throw new Error("Header introuvable"); return res.text(); })
         .then(html => {
             const placeholder = document.getElementById('header-placeholder');
-            if (placeholder) placeholder.innerHTML = html;
+            if (placeholder) {
+                placeholder.innerHTML = html;
+                // Nav visible dès l'injection, sans attendre runApp()
+                const nav = document.querySelector('.desktop-nav');
+                if (nav) { nav.style.opacity = '1'; nav.style.visibility = 'visible'; }
+            }
         })
         .catch(err => console.error(err));
 
@@ -271,9 +276,11 @@ function runApp() {
     gsap.set(".scroll-indicator", { y: 0, autoAlpha: 0.7 });
 
     // --- ANIMATIONS GLOBALES ---
-    initScrollLines();
+    if (!isMobile) {
+        initScrollLines(); // SVG path animation — skip on mobile (element hidden anyway)
+        initMarquee();     // GSAP marquee — skip on mobile (CSS animation used instead)
+    }
     initStatsCounters();
-    initMarquee();
     initScrollHideNav();
     initScrollReveals();
     initLangPill();
@@ -300,7 +307,7 @@ function runApp() {
 
     // --- ANIMATIONS PAGE D'ACCUEIL ---
     if (!isProjectPage) {
-        initHomeBlobs();
+        if (!isMobile) initHomeBlobs(); // mousemove tracking inutile sur mobile
         const preloader = document.getElementById('preloader');
         let preloaderSeen = false;
         try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) { /* Storage bloqué (nav privée / tracking prevention) */ }

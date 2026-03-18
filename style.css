@@ -494,6 +494,12 @@
     pointer-events: all;
 }
 
+@media (max-width: 1024px) {
+    .preloader {
+        display: none !important;
+    }
+}
+
 .preloader-inner {
     position: relative;
     z-index: 3;
@@ -1974,10 +1980,60 @@ a.bento-card:hover .mini-tag {
     .organic-lines-container {
         display: none;
     }
+
+    /* Performance mobile : désactiver le noise overlay animé */
+    .noise-overlay {
+        display: none;
+    }
+
+    /* Performance mobile : réduire les blur GPU-intensifs */
+    .glow-blob {
+        filter: blur(80px);
+        opacity: .15;
+    }
+
+    .project-hero .glow-blob {
+        filter: blur(100px);
+        opacity: .1;
+    }
+
+    /* Performance mobile : supprimer les will-change inutiles */
+    .bento-card,
+    .cv-btn,
+    .links a,
+    .magnetic-button,
+    .floating-obj,
+    .floating-car,
+    .floating-ball,
+    .desktop-nav,
+    .glow-blob,
+    .scroll-indicator,
+    .marquee-content,
+    .reveal-item {
+        will-change: auto;
+    }
+
     .cv-wrapper {
         margin-top: 3rem;
         text-align: center;
     }
+
+    /* Performance mobile : marquee en CSS pur (pas de GSAP ticker) */
+    .marquee-primary {
+        animation: marquee-left 30s linear infinite;
+    }
+    .marquee-secondary {
+        animation: marquee-right 35s linear infinite;
+    }
+}
+
+@keyframes marquee-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
 }
 
 /* Marquee Skills */
@@ -3175,11 +3231,13 @@ html:not(.lenis) {
     overflow-y: scroll !important;
 }
 
-body.no-scroll .desktop-nav,
-body.no-scroll .burger-btn {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+@media (min-width: 1025px) {
+    body.no-scroll .desktop-nav,
+    body.no-scroll .burger-btn {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
 }
 
 /* =========================================
@@ -3239,9 +3297,9 @@ body.no-scroll .burger-btn {
         gap: 0.35rem;
         z-index: 1000;
         border-radius: 20px;
-        background: rgba(11, 12, 21, .6);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: rgba(11, 12, 21, .85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, .08);
         transition: padding 0.35s ease, gap 0.35s ease;
     }

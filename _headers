@@ -1,0 +1,23 @@
+# Cache HTML : toujours revalider auprès du CDN
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/en/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cache assets statiques : 1 an (Netlify invalide à chaque deploy)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/favicon/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# CSS & JS : 1 an
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# PDF (CV) : 1 semaine
+/assets/*.pdf
+  Cache-Control: public, max-age=604800
