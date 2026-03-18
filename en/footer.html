@@ -4,17 +4,29 @@
 
     <h2 class="contact-title">Let's Work<br>Together</h2>
 
-    <div class="contact-actions">
-        <a href="mailto:olivier.p.fr@outlook.fr" class="magnetic-button">
-            Get in touch <span class="arrow">&#8599;</span>
-        </a>
+    <form name="contact-en" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="bot-field">
+        <input type="hidden" name="form-name" value="contact-en">
 
-        <button class="copy-email-btn" onclick="copyEmail(this)">
-            <span id="email-text">olivier.p.fr@outlook.fr</span>
-            <svg class="icon-copy" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            <span class="copy-feedback">Copied!</span>
+        <div class="form-row">
+            <div class="form-group">
+                <input type="text" name="firstname" placeholder="First name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Last name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <textarea name="message" placeholder="Your message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit" class="magnetic-button">
+            Send <span class="arrow">&#8599;</span>
         </button>
-    </div>
+    </form>
 
     <footer class="main-footer">
         <div class="footer-links">

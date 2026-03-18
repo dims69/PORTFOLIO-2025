@@ -46,25 +46,6 @@ function loadComponents() {
 // ========================================================
 
 function initFooterInteractions() {
-    // Copie Email
-    const copyBtn = document.querySelector('.copy-email-btn');
-    if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            const email = 'olivier.p.fr@outlook.fr';
-            const feedback = copyBtn.querySelector('.copy-feedback');
-            
-            navigator.clipboard.writeText(email).then(() => {
-                copyBtn.classList.add('copied');
-                if (feedback) feedback.style.opacity = '1';
-                
-                setTimeout(() => {
-                    copyBtn.classList.remove('copied');
-                    if (feedback) feedback.style.opacity = '0';
-                }, 2000);
-            });
-        });
-    }
-
     // Liens Magnétiques
     const socialLinks = document.querySelectorAll('.footer-links a');
     if (window.matchMedia("(pointer: fine)").matches && socialLinks.length > 0) {

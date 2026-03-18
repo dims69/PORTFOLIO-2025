@@ -531,7 +531,7 @@ a {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto; /* Centre le bloc horizontalement */
-    padding: 2rem 1.5rem 2rem; /* Espace Haut | Cotés | Bas */
+    padding: 6rem 1.5rem 4rem;
     min-height: 80vh; /* Prend de la hauteur pour l'esthétique */
     display: flex;
     flex-direction: column;
@@ -556,20 +556,60 @@ a {
     color: #fff;
 }
 
-/* Groupe des boutons */
-.contact-actions {
+/* --- FORMULAIRE DE CONTACT --- */
+.contact-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
+    max-width: 500px;
     margin-bottom: 5rem;
 }
 
-/* --- BOUTONS (Ton design conservé) --- */
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* --- BOUTON SUBMIT --- */
 .magnetic-button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     padding: 1rem 3rem;
     background: var(--accent-primary);
@@ -579,81 +619,17 @@ a {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
     box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
+    align-self: center;
 }
 
 .magnetic-button:hover {
     background: var(--accent-secondary);
     transform: translateY(-4px);
     box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
-}
-
-.copy-email-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--text-muted);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-family: 'Inter', sans-serif;
-    transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
-}
-
-.copy-email-btn:hover {
-    border-color: #fff;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
-}
-
-.copy-email-btn.copied {
-    border-color: var(--accent-primary);
-    color: #fff;
-}
-
-/* --- FEEDBACK "COPIÉ" --- */
-.copy-feedback {
-    position: absolute;
-    top: 50%;
-    left: 100%; 
-    margin-left: 15px;
-    transform: translateY(-50%) translateX(-10px);
-    background-color: var(--accent-primary);
-    color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.copy-feedback::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -5px;
-    transform: translateY(-50%);
-    border-width: 5px 5px 5px 0;
-    border-style: solid;
-    border-color: transparent var(--accent-primary) transparent transparent;
-}
-
-.copy-email-btn.copied .copy-feedback {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-50%) translateX(0); 
 }
 
 /* --- BAS DE PAGE (Footer Links) --- */
@@ -694,10 +670,9 @@ a {
 /* --- RESPONSIVE Mobile --- */
 @media (min-width: 768px) {
 
-    /* Boutons côte à côte */
-    .contact-actions {
-        flex-direction: row;
-        justify-content: center;
+    /* Formulaire de contact */
+    .contact-form {
+        max-width: 500px;
     }
 
     /* Footer sur une seule ligne (gauche/droite ou centré selon goût) */
