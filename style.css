@@ -1,12 +1,435 @@
 :root {
     --bg-color: #0B0C15;
+    --bg-secondary: #050508;
     --text-main: #F3F4F6;
     --text-muted: #9CA3AF;
     --accent-primary: #4F46E5;
     --accent-secondary: #8B5CF6;
     --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-hover: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.02);
+    --card-bg-hover: rgba(255, 255, 255, 0.03);
+    --nav-bg: rgba(11, 12, 21, 0.6);
+    --organic-stroke: rgba(255, 255, 255, 0.08);
     --font-heading: 'Clash Display', sans-serif;
     --font-body: 'Inter', sans-serif;
+}
+
+/* =========================================
+   LIGHT THEME
+   ========================================= */
+[data-theme="light"] {
+    --bg-color: #F5F5F7;
+    --bg-secondary: #EEEEF0;
+    --text-main: #1a1a2e;
+    --text-muted: #555566;
+    --accent-primary: #4F46E5;
+    --accent-secondary: #7C3AED;
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-bg: rgba(0, 0, 0, 0.03);
+    --glass-bg-hover: rgba(0, 0, 0, 0.06);
+    --card-bg: rgba(0, 0, 0, 0.02);
+    --card-bg-hover: rgba(0, 0, 0, 0.04);
+    --nav-bg: rgba(245, 245, 247, 0.7);
+    --organic-stroke: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .preloader {
+    background: #F5F5F7;
+}
+
+[data-theme="light"] h1.reveal-text {
+    background-image: radial-gradient(circle 300px at var(--cursor-x, 50%) var(--cursor-y, 50%), #1a1a2e 0, #888 100%);
+}
+
+[data-theme="light"] .desktop-nav {
+    background: var(--nav-bg);
+}
+
+[data-theme="light"] .organic-path {
+    stroke: var(--organic-stroke);
+}
+
+[data-theme="light"] .scroll-indicator {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .scroll-label {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .mouse {
+    border-color: var(--text-main);
+}
+
+[data-theme="light"] .gradient-text {
+    filter: drop-shadow(0 0 15px rgba(79, 70, 229, 0.15));
+}
+
+[data-theme="light"] .bento-card {
+    border-color: var(--glass-border);
+    background: var(--card-bg);
+}
+
+[data-theme="light"] .bento-card:hover {
+    background: var(--card-bg-hover);
+}
+
+[data-theme="light"] .bento-card .card-content h3,
+[data-theme="light"] .contact-title,
+[data-theme="light"] .section-title,
+[data-theme="light"] .stat-number {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .skill-tag {
+    border-color: var(--glass-border);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .skill-tag:hover {
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .lang-pill {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .lang-pill-label {
+    color: rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="light"] .lang-pill-label.active {
+    color: #fff;
+}
+
+[data-theme="light"] .lang-pill-thumb {
+    background: var(--accent-primary);
+}
+
+[data-theme="light"] .nav-item {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .logo-first,
+[data-theme="light"] .logo-last {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-main);
+}
+
+[data-theme="light"] .form-group input::placeholder,
+[data-theme="light"] .form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group textarea:focus {
+    border-color: var(--accent-primary);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .marquee-content span {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .skills-section {
+    border-color: var(--glass-border);
+}
+
+[data-theme="light"] .footer-links a {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .footer-links a:hover {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .main-footer {
+    border-color: var(--glass-border);
+}
+
+[data-theme="light"] .stat-card {
+    border-color: var(--glass-border);
+    background: var(--card-bg);
+}
+
+[data-theme="light"] .benefit-card {
+    border-color: var(--glass-border);
+    background: var(--card-bg);
+}
+
+[data-theme="light"] .about-image-wrapper {
+    background: linear-gradient(45deg, rgba(79, 70, 229, 0.15), transparent 60%);
+}
+
+[data-theme="light"] .hero::after {
+    background: linear-gradient(to bottom, transparent 0, var(--bg-color) 100%);
+}
+
+[data-theme="light"] .glow-blob {
+    opacity: 0.08;
+}
+
+[data-theme="light"] .noise-overlay {
+    opacity: 0.01;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    border-color: var(--bg-color);
+}
+
+[data-theme="light"] .floating-actions button {
+    background: #fff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    color: var(--text-main);
+}
+
+/* --- Textes blancs → sombres en light --- */
+[data-theme="light"] .lead-text {
+    color: var(--text-main) !important;
+}
+
+[data-theme="light"] .sticky-content h2 {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .context-section h2 {
+    background: linear-gradient(to right, var(--text-main), var(--text-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+[data-theme="light"] .performance-section h3 {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .benefit-title {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .benefit-desc {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .meta-value {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .project-hero h1 {
+    color: var(--text-main);
+    background: linear-gradient(180deg, var(--text-main) 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+[data-theme="light"] .project-hero-description {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .project-tag {
+    border-color: var(--glass-border);
+    color: var(--text-muted);
+    background: var(--card-bg);
+}
+
+/* --- Next Project Section --- */
+[data-theme="light"] a.next-project-section {
+    background: linear-gradient(to bottom, var(--card-bg), rgba(79, 70, 229, 0.05));
+}
+
+[data-theme="light"] a.next-project-section:hover {
+    background: linear-gradient(to bottom, var(--card-bg-hover), rgba(139, 92, 246, 0.1));
+}
+
+[data-theme="light"] .next-project-title {
+    color: var(--text-main) !important;
+}
+
+[data-theme="light"] .next-project-label {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .all-projects-link a {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .all-projects-link a:hover {
+    color: var(--text-main);
+}
+
+/* --- Nav active items --- */
+[data-theme="light"] .nav-item:hover,
+[data-theme="light"] .nav-item.active {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .mobile-link {
+    color: var(--text-main);
+}
+
+/* --- Bento cards en light mode --- */
+[data-theme="light"] a.bento-card {
+    background: #f0f0f2;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] a.bento-card:hover {
+    background: #eaeaed;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .card-content {
+    background: none;
+    padding-bottom: 1.5rem;
+}
+
+[data-theme="light"] .card-content h3 {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .card-content p {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .mini-tag {
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] a.bento-card:hover .mini-tag {
+    background: var(--accent-primary);
+    color: #fff;
+    border-color: var(--accent-primary);
+}
+
+/* Studios light : fond neutre uniforme + léger dégradé violet */
+[data-theme="light"] .labo-studio,
+[data-theme="light"] .dewalt-tech-bg,
+[data-theme="light"] .golf-studio,
+[data-theme="light"] .village-studio,
+[data-theme="light"] .unidade-studio,
+[data-theme="light"] .covering-studio,
+[data-theme="light"] .motion-studio,
+[data-theme="light"] .apidia-studio {
+    background-color: #ededf0;
+    background-image: radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.04) 0%, transparent 70%);
+}
+
+/* Shadows plus douces en light mode */
+[data-theme="light"] .labo-studio .floating-obj,
+[data-theme="light"] .dewalt-tech-bg .floating-obj,
+[data-theme="light"] .floating-ball,
+[data-theme="light"] .unidade-studio .floating-obj,
+[data-theme="light"] .floating-car,
+[data-theme="light"] .village-studio .floating-obj,
+[data-theme="light"] .apidia-studio .floating-obj,
+[data-theme="light"] .motion-studio .floating-obj {
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+/* --- Video page --- */
+[data-theme="light"] .video-block-text h2,
+[data-theme="light"] .video-block-header h2 {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .video-block-text p,
+[data-theme="light"] .video-block-header p {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .video-block-label {
+    color: var(--accent-primary);
+}
+
+/* --- Project meta grid --- */
+[data-theme="light"] .project-meta {
+    border-color: var(--glass-border);
+}
+
+[data-theme="light"] .meta-item:not(:last-child)::after {
+    background: var(--glass-border);
+}
+
+/* --- Titres projet custom → même gradient que les autres en light --- */
+[data-theme="light"] .dewalt-hero h1.gradient-text,
+[data-theme="light"] .labo-hero h1 {
+    background-image: linear-gradient(180deg, var(--text-main) 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+/* Floating Actions (theme toggle + scroll to top) */
+.floating-actions {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10000;
+}
+
+.floating-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-color);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-actions button:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+    transform: translateY(-2px);
+}
+
+/* Scroll to top : caché par défaut, visible au scroll */
+.scroll-top-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.theme-icon-moon {
+    display: none;
+}
+
+[data-theme="light"] .theme-icon-sun {
+    display: none;
+}
+
+[data-theme="light"] .theme-icon-moon {
+    display: block;
 }
 
 /* =========================================
@@ -323,7 +746,7 @@ a {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    background: rgba(11, 12, 21, .6);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, .08);
@@ -815,7 +1238,7 @@ h1.reveal-text {
 
 .organic-path {
     fill: none;
-    stroke: rgba(255, 255, 255, .08);
+    stroke: var(--organic-stroke);
     stroke-width: 1.5px;
     vector-effect: non-scaling-stroke;
     stroke-dasharray: 1000 1000;
@@ -881,26 +1304,36 @@ h1.reveal-text {
 }
 
 .project-hero .blob-purple {
-    width: 900px;
-    height: 600px;
-    left: 40%;
-    top: 40%;
+    width: 1100px;
+    height: 500px;
+    left: 20%;
+    top: 30%;
+    border-radius: 60% 40% 50% 70%;
 }
 
 .project-hero .blob-blue {
-    width: 1000px;
-    height: 700px;
-    left: 60%;
-    top: 35%;
+    width: 800px;
+    height: 400px;
+    left: 55%;
+    top: 50%;
+    border-radius: 40% 60% 70% 30%;
 }
 
 .project-hero .glow-blob {
     filter: blur(200px);
-    opacity: .25;
+    opacity: .2;
 }
 
-.video-hero .glow-blob {
-    opacity: .12;
+.project-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(to bottom, transparent, var(--bg-color));
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Scroll Indicator */
@@ -992,6 +1425,119 @@ h1.reveal-text {
     color: #fff;
 }
 
+/* Filtres Bento */
+.bento-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+.filter-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    border-color: var(--accent-primary);
+}
+
+[data-theme="light"] .filter-btn {
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .filter-btn:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+}
+
+[data-theme="light"] .filter-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    border-color: var(--accent-primary);
+}
+
+/* Animation filtre */
+.bento-card.filter-hidden {
+    display: none !important;
+}
+
+.bento-card.filter-fade-in {
+    animation: filterFadeIn 0.4s ease forwards;
+}
+
+@keyframes filterFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.bento-filtered {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 380px;
+}
+
+.bento-filtered .bento-card.span-2 {
+    grid-column: span 1;
+}
+
+.bento-filtered .floating-obj,
+.bento-filtered .floating-car {
+    width: 110% !important;
+    height: auto !important;
+}
+
+.bento-filtered .floating-ball {
+    width: 170% !important;
+    height: auto !important;
+    transform: translateY(-5%) !important;
+}
+
+.bento-filtered .dewalt-tech-bg .floating-obj {
+    width: auto !important;
+    height: 95% !important;
+}
+
+.bento-filtered .apidia-studio .floating-obj {
+    bottom: 0 !important;
+    position: relative !important;
+}
+
+.bento-filtered .village-studio {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.bento-filtered .village-studio .floating-obj {
+    width: 110% !important;
+}
+
+.bento-filtered .unidade-studio .floating-obj {
+    height: auto !important;
+    width: 115% !important;
+}
+
+.bento-filtered .motion-studio .floating-obj {
+    width: 68% !important;
+    max-width: 390px !important;
+    transform: translateY(-1%) !important;
+}
+
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1050,8 +1596,6 @@ a.bento-card:hover {
 
 /* Backgrounds spécifiques */
 .labo-studio {
-    width: 120%;
-    height: 120%;
     background-color: #050608;
     background-image: radial-gradient(circle at 50% 50%, rgba(15, 35, 44, 0.8) 0%, transparent 90%), radial-gradient(circle at 80% 20%, rgba(229, 213, 184, 0.05) 0%, transparent 40%);
 }
@@ -1101,7 +1645,8 @@ a.bento-card:hover {
 
 /* Spécificités Objets */
 .labo-studio .floating-obj {
-    width: 90%;
+    width: 85%;
+    transform: translateY(3%);
     filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.8));
 }
 
@@ -1132,35 +1677,35 @@ a.bento-card:hover {
     filter: drop-shadow(0 25px 40px rgba(0, 0, 0, .8));
 }
 
-/* Effets Hover Objets */
+/* Effets Hover Objets — couleurs calées sur les héros projets */
 .bento-card:hover .labo-studio .floating-obj {
     transform: translateY(-8px) scale(1.02);
-    filter: drop-shadow(0 0 35px rgba(229, 213, 184, 0.15));
+    filter: drop-shadow(0 0 35px rgba(0, 80, 113, 0.5));
 }
 
 .bento-card:hover .dewalt-tech-bg .floating-obj {
     transform: translateY(-10px) scale(1.05) rotate(-2deg);
-    filter: drop-shadow(0 0 30px rgba(202, 156, 14, .5));
+    filter: drop-shadow(0 0 30px rgba(254, 184, 28, 0.5));
 }
 
 .bento-card:hover .floating-ball {
     transform: translateY(-10px) scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(16, 185, 129, .6));
+    filter: drop-shadow(0 0 25px rgba(13, 69, 54, 0.5));
 }
 
 .bento-card:hover .unidade-studio .floating-obj {
     transform: translateY(-8px) scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(65, 105, 225, .6));
+    filter: drop-shadow(0 0 30px rgba(0, 68, 204, 0.6));
 }
 
 .bento-card:hover .floating-car {
     transform: scale(1.05) translateY(0);
-    filter: drop-shadow(0 0 25px rgba(220, 20, 60, .4));
+    filter: drop-shadow(0 0 25px rgba(227, 6, 19, 0.4));
 }
 
 .bento-card:hover .village-studio .floating-obj {
     transform: translateY(-8px) scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, .35));
+    filter: drop-shadow(0 0 30px rgba(212, 165, 116, 0.5));
 }
 
 .apidia-studio .floating-obj {
@@ -1177,7 +1722,8 @@ a.bento-card:hover {
 
 /* Motion Design Card */
 .motion-studio {
-    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, .12) 0%, rgba(10, 10, 15, .6) 55%, transparent 85%);
+    background-color: #0a0a0f;
+    background-image: radial-gradient(circle at 50% 50%, rgba(254, 184, 28, .08) 0%, rgba(10, 10, 15, .6) 55%, transparent 85%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1194,7 +1740,7 @@ a.bento-card:hover {
 
 .bento-card:hover .motion-studio .floating-obj {
     transform: translateY(18px) scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, .4));
+    filter: drop-shadow(0 0 30px rgba(254, 184, 28, 0.3)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.15));
 }
 
 .motion-play-icon {
@@ -1685,6 +2231,16 @@ a.bento-card:hover .mini-tag {
     .sticky-action {
         text-align: center;
     }
+
+    .labo-studio,
+    .village-studio {
+        width: 100%;
+        height: 100%;
+    }
+
+    .labo-studio .floating-obj {
+        width: 80%;
+    }
 }
 
 .scroll-image-item {
@@ -1697,8 +2253,7 @@ a.bento-card:hover .mini-tag {
 .scroll-image-item img {
     width: 100%;
     height: auto;
-    max-height: 700px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     border-radius: 30px;
 }
@@ -2340,6 +2895,10 @@ a.next-project-section:hover::before {
     .card-content {
         padding: 1.5rem !important;
         background: linear-gradient(to top, rgba(5, 6, 8, 0.95) 10%, transparent 80%) !important;
+    }
+
+    [data-theme="light"] .card-content {
+        background: none !important;
     }
 
     .card-content h3 {

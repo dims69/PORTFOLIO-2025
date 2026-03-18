@@ -2,6 +2,12 @@
 // 0. CONFIGURATION & CHARGEMENT
 // ========================================================
 
+// Appliquer le thème sauvegardé immédiatement (avant le rendu)
+(function() {
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Empêcher ScrollTrigger de recalculer quand seule la hauteur change (barre d'URL mobile)
@@ -35,9 +41,103 @@ function loadComponents() {
 
     // 3. Lancer le site une fois tout chargé
     Promise.allSettled([headerLoad, footerLoad]).then(() => {
+        initThemeToggle();
+        initScrollToTop();
+        initBentoFilters();
         runApp();
         ScrollTrigger.refresh();
         window.dispatchEvent(new Event('appReady'));
+    });
+}
+
+// ========================================================
+// 0.5. THEME TOGGLE
+// ========================================================
+
+function initThemeToggle() {
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            if (next === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+            localStorage.setItem('theme', next === 'dark' ? '' : 'light');
+            // Recalculer la couleur du nav item actif
+            if (window._getCurrentActiveId && window._updateNav) {
+                window._updateNav(window._getCurrentActiveId());
+            }
+        });
+    });
+}
+
+// ========================================================
+// 0.6. SCROLL TO TOP
+// ========================================================
+
+function initScrollToTop() {
+    const btn = document.querySelector('.scroll-top-btn');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        if (window.lenis) {
+            window.lenis.scrollTo(0);
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
+}
+
+// ========================================================
+// 0.7. BENTO FILTERS
+// ========================================================
+
+function initBentoFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.bento-card[data-category]');
+    if (!buttons.length || !cards.length) return;
+
+    const grid = document.querySelector('.bento-grid');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+
+            // Update active button
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Toggle filtered mode on grid
+            grid.classList.toggle('bento-filtered', filter !== 'all');
+
+            // Filter cards
+            cards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                if (match) {
+                    card.classList.remove('filter-hidden');
+                    card.classList.add('filter-fade-in');
+                    card.addEventListener('animationend', () => {
+                        card.classList.remove('filter-fade-in');
+                    }, { once: true });
+                } else {
+                    card.classList.add('filter-hidden');
+                    card.classList.remove('filter-fade-in');
+                }
+            });
+
+            // Refresh ScrollTrigger after layout change
+            ScrollTrigger.refresh();
+        });
     });
 }
 
@@ -46,6 +146,10 @@ function loadComponents() {
 // ========================================================
 
 function initFooterInteractions() {
+    // Année dynamique
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
     // Formulaire de contact Netlify
     const form = document.querySelector('.contact-form');
     if (form) {
@@ -347,7 +451,7 @@ function initScrollSpy() {
 
     // Le lien actif passe en blanc (sauf Contact qui a son propre style CSS)
     if (activeLink && activeLink.id !== 'btn-contact') {
-        activeLink.style.color = "white";
+        activeLink.style.color = document.documentElement.getAttribute('data-theme') === 'light' ? 'var(--text-main)' : 'white';
     }
 };
 
