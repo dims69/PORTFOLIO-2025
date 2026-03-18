@@ -11,7 +11,7 @@
     --card-bg: rgba(255, 255, 255, 0.02);
     --card-bg-hover: rgba(255, 255, 255, 0.03);
     --nav-bg: rgba(11, 12, 21, 0.6);
-    --organic-stroke: rgba(255, 255, 255, 0.08);
+    --organic-stroke: rgba(255, 255, 255, 0.14);
     --font-heading: 'Clash Display', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -32,7 +32,7 @@
     --card-bg: rgba(0, 0, 0, 0.02);
     --card-bg-hover: rgba(0, 0, 0, 0.04);
     --nav-bg: rgba(245, 245, 247, 0.7);
-    --organic-stroke: rgba(0, 0, 0, 0.06);
+    --organic-stroke: rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="light"] .preloader {
@@ -1984,6 +1984,10 @@ a.bento-card:hover .mini-tag {
 .project-page {
     background-color: var(--bg-color);
     overscroll-behavior-y: none;
+}
+
+.project-page .organic-lines-container {
+    display: none;
 }
 
 .project-hero {
