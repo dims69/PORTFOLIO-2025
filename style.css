@@ -10,6 +10,60 @@
 }
 
 /* =========================================
+   PRELOADER
+   ========================================= */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: #050508;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+.preloader-inner {
+    position: relative;
+    z-index: 3;
+}
+
+.preloader-word {
+    display: flex;
+    align-items: baseline;
+}
+
+.preloader-space {
+    width: 0.3em;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+}
+
+.preloader-letter {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 600;
+    display: inline-block;
+    letter-spacing: 0.02em;
+    background: linear-gradient(
+        to top,
+        #fff 0%,
+        #c4b5fd 25%,
+        var(--accent-secondary) 50%,
+        var(--accent-primary) 75%,
+        rgba(79, 70, 229, .15) 100%
+    );
+    background-size: 100% 300%;
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* =========================================
    RESET & BASE
    ========================================= */
 * {
@@ -205,6 +259,7 @@ a {
     background: rgba(255, 255, 255, .07);
     border: 1px solid rgba(255, 255, 255, .2);
     color: rgba(255, 255, 255, .9);
+    white-space: nowrap;
 }
 
 .project-tag {
@@ -775,6 +830,10 @@ h1.reveal-text {
     opacity: .25;
 }
 
+.video-hero .glow-blob {
+    opacity: .12;
+}
+
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
@@ -1042,6 +1101,56 @@ a.bento-card:hover {
 .bento-card:hover .apidia-studio .floating-obj {
     transform: translateY(-8px) scale(1.02);
     filter: drop-shadow(0 0 30px rgba(0, 131, 139, .5));
+}
+
+/* Motion Design Card */
+.motion-studio {
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, .12) 0%, rgba(10, 10, 15, .6) 55%, transparent 85%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.motion-studio .floating-obj {
+    width: 70%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(25px);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+}
+
+.bento-card:hover .motion-studio .floating-obj {
+    transform: translateY(18px) scale(1.02);
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, .4));
+}
+
+.motion-play-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+    border: 2px solid rgba(255, 255, 255, .15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease;
+}
+
+.motion-play-icon svg {
+    margin-left: 4px;
+    opacity: .7;
+    transition: opacity 0.3s ease;
+}
+
+.bento-card:hover .motion-play-icon {
+    transform: scale(1.15);
+    background: rgba(139, 92, 246, .25);
+    border-color: var(--accent-secondary);
+}
+
+.bento-card:hover .motion-play-icon svg {
+    opacity: 1;
 }
 
 /* Contenu Carte (Texte) */
@@ -1607,6 +1716,233 @@ a.bento-card:hover .mini-tag {
     color: transparent;
 }
 
+/* =========================================
+   VIDEO & MOTION PAGE
+   ========================================= */
+
+/* Blocs vidéo */
+.video-block {
+    padding: 6rem 5%;
+    border-top: 1px solid rgba(255, 255, 255, .06);
+}
+
+.video-block:first-of-type {
+    border-top: none;
+}
+
+.video-block-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Layout split : texte + vidéo côte à côte */
+.video-block-split {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.video-block-reverse {
+    grid-template-columns: 1.5fr 1fr;
+}
+
+.video-block-reverse .video-block-text {
+    order: 2;
+}
+
+.video-block-reverse .video-block-media {
+    order: 1;
+}
+
+/* Texte */
+.video-block-text {
+    text-align: left;
+}
+
+.video-block-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, .4);
+    display: block;
+    margin-bottom: 0.8rem;
+}
+
+.video-block-text h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.video-block-text p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Header centré (pour grilles) */
+.video-block-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.video-block-header h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.8rem;
+}
+
+.video-block-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Media */
+.video-block-media-vertical {
+    max-width: 280px;
+}
+
+/* Carte vidéo */
+.video-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .03);
+    border: 1px solid var(--glass-border);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.video-card:hover {
+    border-color: rgba(139, 92, 246, .3);
+    transform: translateY(-4px);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.video-wrapper.playing iframe {
+    pointer-events: auto;
+}
+
+/* Format vertical (Shorts / 9:16) */
+.video-wrapper-vertical {
+    padding-bottom: 177.78%;
+}
+
+/* Grilles de vidéos */
+.video-block-grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.video-block-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.video-block-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+.video-block-grid-centered {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Sous-blocs (campagnes groupées) */
+.video-sub-block {
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.video-sub-block:last-child {
+    margin-bottom: 0;
+}
+
+.video-sub-block .video-block-label {
+    margin-bottom: 0.6rem;
+}
+
+.video-sub-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+}
+
+/* Brand header */
+.video-block-brand {
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+@media (max-width: 1024px) {
+    .video-block-split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .video-block-reverse .video-block-text {
+        order: 1;
+    }
+
+    .video-block-reverse .video-block-media {
+        order: 2;
+    }
+
+    .video-block-text {
+        text-align: center;
+    }
+
+    .video-block-media-vertical {
+        max-width: 250px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .video-block {
+        padding: 4rem 5%;
+    }
+
+    .video-block-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 400px;
+    }
+
+    .video-block-grid-2 {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
 /* Next Project */
 a.next-project-section {
     display: block;
@@ -1679,6 +2015,23 @@ a.next-project-section::before {
 a.next-project-section:hover::before {
     opacity: 0.2;
     transform: translate(-50%, -50%) scale(1.2);
+}
+
+.all-projects-link {
+    text-align: center;
+    padding: 2rem 0 3rem;
+}
+
+.all-projects-link a {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.all-projects-link a:hover {
+    color: #fff;
 }
 
 /* =========================================
@@ -1921,6 +2274,7 @@ a.next-project-section:hover::before {
    SCROLL LOCK & GALERIE
    ========================================= */
 body.no-scroll {
+    overflow: hidden;
     touch-action: none;
 }
 

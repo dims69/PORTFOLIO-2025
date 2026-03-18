@@ -144,8 +144,73 @@ function runApp() {
     // --- ANIMATIONS PAGE D'ACCUEIL ---
     if (!isProjectPage) {
         initHomeBlobs();
-        playHomeHeroAnimations();
+        const preloader = document.getElementById('preloader');
+        let preloaderSeen = false;
+        try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) { /* Storage bloqué (nav privée / tracking prevention) */ }
+
+        if (preloader && !preloaderSeen) {
+            // Première visite : lancer le preloader puis le hero (sans anim nav/h1)
+            document.body.classList.add('no-scroll');
+            playPreloader(() => {
+                document.body.classList.remove('no-scroll');
+                playHomeHeroAnimations(true);
+            });
+        } else {
+            // Visite suivante : supprimer le preloader et lancer le hero directement
+            if (preloader) preloader.remove();
+            playHomeHeroAnimations();
+        }
     }
+}
+
+// ========================================================
+// 2.5 PRELOADER
+// ========================================================
+
+function playPreloader(onComplete) {
+    const preloader = document.getElementById('preloader');
+    const letters = document.querySelectorAll('.preloader-letter');
+    const inner = document.querySelector('.preloader-inner');
+
+    if (!preloader) { onComplete(); return; }
+
+    const tl = gsap.timeline({
+        onComplete: () => {
+            try { sessionStorage.setItem('preloaderSeen', 'true'); } catch (e) { /* Storage bloqué */ }
+            preloader.remove();
+            if (onComplete) onComplete();
+        }
+    });
+
+    // Phase 1 : Le fluide remplit chaque lettre du bas vers le haut
+    // background-position: 0 0 = invisible (haut du gradient = quasi transparent)
+    // background-position: 0 -200% = rempli (bas du gradient = blanc)
+    tl.to(letters, {
+        backgroundPosition: "0 -200%",
+        duration: 1,
+        ease: "power2.out",
+        stagger: {
+            each: 0.07,
+            from: "start"
+        }
+    }, 0.2);
+
+    // Phase 2 : Pause pour apprécier le résultat
+    tl.to({}, { duration: 0.6 });
+
+    // Phase 3 : Exit — le texte scale up et fade, puis le fond disparaît
+    tl.to(inner, {
+        scale: 1.2,
+        autoAlpha: 0,
+        duration: 0.5,
+        ease: "power3.in"
+    });
+
+    tl.to(preloader, {
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: "power2.inOut"
+    });
 }
 
 // ========================================================
@@ -189,24 +254,34 @@ function initMarquee() {
     });
 }
 
-function playHomeHeroAnimations() {
+function playHomeHeroAnimations(skipNavAndTitle) {
     if (!document.querySelector('.hero')) return;
     const tl = gsap.timeline();
 
-    // Animation d'entrée de la nav (uniquement axe Y)
-    tl.fromTo(".desktop-nav", 
-        { yPercent: -200, autoAlpha: 0 }, 
-        { yPercent: 0, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
-    );
+    if (skipNavAndTitle) {
+        // Après preloader : tout déjà visible, pas de double animation
+        gsap.set(".desktop-nav", { yPercent: 0, autoAlpha: 1 });
+        document.querySelectorAll("h1.reveal-text").forEach(el => gsap.set(el, { y: 0, autoAlpha: 1 }));
+        const sub = document.querySelector(".hero-subtitle");
+        if (sub) gsap.set(sub, { y: 0, autoAlpha: 1 });
+        const scrollInd = document.querySelector(".scroll-indicator");
+        if (scrollInd) gsap.set(scrollInd, { y: 0, autoAlpha: 0.7 });
+    } else {
+        // Sans preloader : animation complète
+        tl.fromTo(".desktop-nav",
+            { yPercent: -200, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.8, ease: "power4.out" }
+        );
 
-    const h1 = document.querySelector("h1.reveal-text");
-    if (h1) tl.fromTo(h1, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.05, ease: "power4.out" }, "-=0.7");
+        const h1 = document.querySelector("h1.reveal-text");
+        if (h1) tl.fromTo(h1, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.05, ease: "power4.out" }, "-=0.7");
 
-    const sub = document.querySelector(".hero-subtitle");
-    if (sub) tl.fromTo(sub, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "-=0.5");
+        const sub = document.querySelector(".hero-subtitle");
+        if (sub) tl.fromTo(sub, { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "-=0.5");
 
-    const scrollInd = document.querySelector(".scroll-indicator");
-    if (scrollInd) gsap.fromTo(scrollInd, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 0.7, duration: 0.5, ease: "power2.out", delay: 0.3 });
+        const scrollInd = document.querySelector(".scroll-indicator");
+        if (scrollInd) gsap.fromTo(scrollInd, { y: -10, autoAlpha: 0 }, { y: 0, autoAlpha: 0.7, duration: 0.5, ease: "power2.out", delay: 0.3 });
+    }
 }
 
 function initHomeBlobs() {
