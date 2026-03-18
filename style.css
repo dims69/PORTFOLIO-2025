@@ -494,11 +494,6 @@
     pointer-events: all;
 }
 
-@media (max-width: 1024px) {
-    .preloader {
-        display: none !important;
-    }
-}
 
 .preloader-inner {
     position: relative;

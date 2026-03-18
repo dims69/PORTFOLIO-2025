@@ -332,12 +332,12 @@ function runApp() {
         let preloaderSeen = false;
         try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) { /* Storage bloqué (nav privée / tracking prevention) */ }
 
-        if (isMobile || preloaderSeen) {
-            // Mobile ou visite suivante : supprimer le preloader et afficher directement
+        if (preloaderSeen) {
+            // Visite suivante : supprimer le preloader et afficher directement
             if (preloader) preloader.remove();
             playHomeHeroAnimations();
         } else if (preloader) {
-            // Desktop, première visite : bloquer le scroll pendant le preloader
+            // Première visite : bloquer le scroll pendant le preloader
             document.body.classList.add('no-scroll');
             if (window.lenis) window.lenis.stop();
             playPreloader(() => {
