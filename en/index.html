@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olivier Pouchoy - UI/UX Designer & Web Developer in Lyon</title>
+    <meta name="description" content="UI/UX designer and web developer based in Lyon, France. I design it, I build it. Portfolio, client projects and contact.">
+    <meta property="og:title" content="Olivier Pouchoy - UI/UX Designer & Web Developer">
+    <meta property="og:description" content="UI/UX designer and web developer based in Lyon. I design it, I build it. Check out my projects.">
+    <meta property="og:image" content="../assets/profil.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
+    <link rel="shortcut icon" href="../favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-word">
+                <span class="preloader-letter">O</span>
+                <span class="preloader-letter">l</span>
+                <span class="preloader-letter">i</span>
+                <span class="preloader-letter">v</span>
+                <span class="preloader-letter">i</span>
+                <span class="preloader-letter">e</span>
+                <span class="preloader-letter">r</span>
+                <span class="preloader-space"></span>
+                <span class="preloader-letter">P</span>
+                <span class="preloader-letter">o</span>
+                <span class="preloader-letter">u</span>
+                <span class="preloader-letter">c</span>
+                <span class="preloader-letter">h</span>
+                <span class="preloader-letter">o</span>
+                <span class="preloader-letter">y</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="noise-overlay"></div>
+
+    <div class="organic-lines-container">
+        <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
+            <path class="organic-path" d="M-50,800 C300,900 500,500 1000,600 C1400,700 1300,100 1550,50" />
+            <path class="organic-path" d="M1500,400 C1100,100 800,900 400,600 C100,300 -50,500 -100,400" />
+        </svg>
+    </div>
+
+    <div class="mobile-menu-overlay">
+        <nav class="mobile-nav-links">
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+        </nav>
+    </div>
+
+    <div id="header-placeholder"></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="reveal-text">UI/UX <span class="gradient-text">Designer</span></h1>
+            <h1 class="reveal-text">Web <span class="gradient-text">Developer</span></h1>
+
+            <p class="hero-subtitle">
+                Your visual identity, turned into a website. From design to code, I handle both.
+            </p>
+        </div>
+        <a href="#projects" class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span class="scroll-label">SCROLL</span>
+        </a>
+        <div class="glow-container">
+            <div class="glow-blob blob-purple"></div>
+            <div class="glow-blob blob-blue"></div>
+        </div>
+    </header>
+
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title reveal">Selected <span class="highlight">Work</span></h2>
+
+            <div class="bento-grid reveal-group">
+
+                <a href="projet-laboratoire32.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">Figma</span>
+                        <span class="mini-tag">HTML/CSS/JS</span>
+                    </div>
+                    <div class="card-visual-container labo-studio">
+                        <img src="../assets/thumb-labo32.webp" alt="Laboratoire 32" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Laboratoire 32</h3>
+                        <p>Dark mode website & 3D file upload tool</p>
+                    </div>
+                </a>
+
+                <a href="projet-catalogue-dewalt.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Print</span>
+                        <span class="mini-tag">Layout</span>
+                        <span class="mini-tag">InDesign</span>
+                    </div>
+                    <div class="card-visual-container dewalt-tech-bg">
+                        <img src="../assets/thumb-bestof.webp" alt="DeWalt Catalogue" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Best Of DeWalt</h3>
+                        <p>64-page catalogue, 3 editions per year</p>
+                    </div>
+                </a>
+
+                <a href="projet-emeraude-experience.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Branding</span>
+                        <span class="mini-tag">Visual Identity</span>
+                    </div>
+                    <div class="card-visual-container golf-studio">
+                        <img src="../assets/thumb-emeraude-experience.webp" alt="Emeraude Ball" class="floating-ball" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Emeraude Experience</h3>
+                        <p>Logo, brand guidelines and print materials</p>
+                    </div>
+                </a>
+
+                <a href="projet-village-motel.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">UX/UI Design</span>
+                        <span class="mini-tag">SEO</span>
+                    </div>
+                    <div class="card-visual-container village-studio">
+                        <img src="../assets/thumb-village-motel.webp" alt="Village Motel Mockup" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Village Motel</h3>
+                        <p>Full redesign with built-in booking system</p>
+                    </div>
+                </a>
+
+                <a href="projet-unidade.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">UI/UX Design</span>
+                        <span class="mini-tag">Elementor</span>
+                    </div>
+                    <div class="card-visual-container unidade-studio">
+                        <img src="../assets/thumb-unidade.webp" alt="Unidade Mockup" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>UNIDADE Jiu-Jitsu</h3>
+                        <p>Website and identity for a martial arts club</p>
+                    </div>
+                </a>
+
+                <a href="projet-covering.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">Covering</span>
+                        <span class="mini-tag">Illustrator</span>
+                    </div>
+                    <div class="card-visual-container covering-studio">
+                        <img src="../assets/thumb-covering.webp" alt="Car Wrap" class="floating-car" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Ford Focus Wrap</h3>
+                        <p>Full vehicle wrap for a company car</p>
+                    </div>
+                </a>
+
+                <a href="projet-video-motion.html" class="bento-card reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">After Effects</span>
+                        <span class="mini-tag">Premiere Pro</span>
+                    </div>
+                    <div class="card-visual-container motion-studio">
+                        <img src="../assets/thumb-video-motion.webp" alt="Video & Motion" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Video & Motion</h3>
+                        <p>Product spots, teasers and social media clips</p>
+                    </div>
+                </a>
+
+                <a href="projet-apidia.html" class="bento-card span-2 reveal-item">
+                    <div class="card-tags">
+                        <span class="mini-tag">WordPress</span>
+                        <span class="mini-tag">Elementor</span>
+                        <span class="mini-tag">UI/UX Design</span>
+                    </div>
+                    <div class="card-visual-container apidia-studio">
+                        <img src="../assets/thumb-apidia.webp" alt="Apidia Mockup" class="floating-obj" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Apidia</h3>
+                        <p>Industrial website redesign & logo refresh</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-glow-1"></div>
+        <div class="container about-grid">
+            <div class="about-text">
+                <h2 class="section-title reveal">A hybrid profile<br><span class="highlight">Creative &
+                        Technical</span></h2>
+
+                <p class="lead-text reveal">
+                    I design it, I build it. The two go hand in hand.
+                </p>
+
+                <p class="reveal">
+                    4 years designing mockups and putting them online myself.
+                    This website is proof. Web, print, motion: I do it all, but always with the same goal.
+                    Deliver clean work, on time.
+                </p>
+
+                <div class="stats-grid reveal-group">
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number counter" data-target="4">0</span>
+                        <span class="stat-label">Years of experience</span>
+                    </div>
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number counter" data-target="40">0</span>
+                        <span class="stat-label">Projects delivered</span>
+                    </div>
+                    <div class="stat-card reveal-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Delivered on time</span>
+                    </div>
+                </div>
+
+                <div class="cv-wrapper reveal">
+                    <a href="../assets/CV-OLIVIER-POUCHOY-2026-EN-FR.pdf" target="_blank" class="cv-btn">
+                        Download my resume
+                        <span class="icon-download">&darr;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="about-image-wrapper reveal">
+                <div class="about-image" style="background-image: url('../assets/profil.webp');"></div>
+                <div class="about-glow-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <span>Figma</span> &bull;
+                <span>WordPress</span> &bull;
+                <span>UI/UX</span> &bull;
+                <span>HTML/CSS</span> &bull;
+                <span>Motion</span> &bull;
+                <span>Webflow</span> &bull;
+                <span>Branding</span> &bull;
+                <span>SEO</span> &bull;
+                <span>Adobe Suite</span> &bull;
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span>Figma</span> &bull;
+                <span>WordPress</span> &bull;
+                <span>UI/UX</span> &bull;
+                <span>HTML/CSS</span> &bull;
+                <span>Motion</span> &bull;
+                <span>Webflow</span> &bull;
+                <span>Branding</span> &bull;
+                <span>SEO</span> &bull;
+                <span>Adobe Suite</span> &bull;
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
