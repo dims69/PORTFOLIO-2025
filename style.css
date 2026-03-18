@@ -119,6 +119,24 @@ html.lenis body {
     height: auto;
 }
 
+/* Empêche le curseur texte et la sélection sur les éléments non-textuels */
+img,
+svg,
+.bento-card,
+.about-image-wrapper,
+.about-image,
+.scroll-indicator,
+.glow-container,
+.noise-overlay,
+.organic-lines-container,
+.project-hero-image,
+.scroll-images,
+.stat-card,
+.benefit-card {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 /* Typographie & Animations Performance */
 .bento-card,
 .cv-btn,
