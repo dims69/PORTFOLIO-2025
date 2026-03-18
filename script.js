@@ -323,28 +323,13 @@ function initScrollSpy() {
    const updateNav = (id) => {
     currentActiveId = id;
     const activeLink = document.querySelector(`.nav-item[href*="#${id}"]`);
-    
-    if (activeLink) {
-        // Reset des styles
-        navItems.forEach(el => el.style.color = "");
-        
-        // Style du lien actif
+
+    // Reset : tous les liens en couleur muted
+    navItems.forEach(el => el.style.color = "");
+
+    // Le lien actif passe en blanc (sauf Contact qui a son propre style CSS)
+    if (activeLink && activeLink.id !== 'btn-contact') {
         activeLink.style.color = "white";
-
-        // Calcul du Backdrop (Identique pour tous les liens)
-        const width = activeLink.offsetWidth;
-        const left = activeLink.offsetLeft;
-        
-        navBackdrop.style.width = `${width}px`;
-        navBackdrop.style.left = `${left}px`;
-        navBackdrop.style.opacity = "1"; // On force la visibilité
-
-        // Distinction de couleur uniquement
-        if (activeLink.id === 'btn-contact') {
-            navBackdrop.style.background = "var(--accent-primary)";
-        } else {
-            navBackdrop.style.background = "rgba(255, 255, 255, 0.1)";
-        }
     }
 };
 
@@ -375,14 +360,6 @@ function initScrollSpy() {
     window.addEventListener('resize', () => {
         if (currentActiveId) updateNav(currentActiveId);
     });
-}
-
-function recalcBackdrop() {
-    // Attendre la fin de la transition CSS avant de recalculer
-    setTimeout(() => {
-        const id = window._getCurrentActiveId && window._getCurrentActiveId();
-        if (id && window._updateNav) window._updateNav(id);
-    }, 370);
 }
 
 function initScrollHideNav() {
@@ -424,7 +401,7 @@ function initScrollHideNav() {
                     if (scrollY < 50) {
                         if (nav.classList.contains('nav-scrolled')) {
                             nav.classList.remove('nav-scrolled');
-                            recalcBackdrop();
+
                         }
                         return;
                     }
