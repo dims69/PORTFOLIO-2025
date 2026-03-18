@@ -2571,8 +2571,8 @@ body.no-scroll .burger-btn {
     }
 
     .nav-item {
-        font-size: clamp(0.85rem, 3.2vw, 1rem);
-        padding: 0.45rem clamp(0.6rem, 3vw, 1rem);
+        font-size: clamp(0.9rem, 3.5vw, 1.05rem);
+        padding: 0.6rem clamp(0.7rem, 3vw, 1rem);
         color: rgba(255, 255, 255, 0.75);
     }
 
