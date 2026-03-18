@@ -46,6 +46,43 @@ function loadComponents() {
 // ========================================================
 
 function initFooterInteractions() {
+    // Formulaire de contact Netlify
+    const form = document.querySelector('.contact-form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="arrow">⏳</span>';
+
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(res => {
+                if (res.ok) {
+                    btn.innerHTML = '✓ Envoyé';
+                    btn.classList.add('form-success');
+                    form.reset();
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('form-success');
+                        btn.disabled = false;
+                    }, 3000);
+                } else {
+                    throw new Error('Erreur');
+                }
+            })
+            .catch(() => {
+                btn.innerHTML = 'Erreur, réessayez';
+                btn.disabled = false;
+                setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+            });
+        });
+    }
+
     // Liens Magnétiques
     const socialLinks = document.querySelectorAll('.footer-links a');
     if (window.matchMedia("(pointer: fine)").matches && socialLinks.length > 0) {

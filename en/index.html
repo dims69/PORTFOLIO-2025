@@ -290,6 +290,15 @@
         </div>
     </section>
 
+    <!-- Hidden form so Netlify detects the JS-loaded form -->
+    <form name="contact-en" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input name="bot-field">
+        <input name="firstname">
+        <input name="name">
+        <input name="email">
+        <textarea name="message"></textarea>
+    </form>
+
     <div id="footer-placeholder"></div>
 
     <script src="../script.js"></script>

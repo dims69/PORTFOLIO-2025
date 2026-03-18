@@ -632,6 +632,17 @@ a {
     box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.6);
 }
 
+.magnetic-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.magnetic-button.form-success {
+    background: #059669;
+    box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+}
+
 /* --- BAS DE PAGE (Footer Links) --- */
 .main-footer {
     width: 100%;

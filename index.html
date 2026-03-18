@@ -291,6 +291,15 @@
         </div>
     </section>
 
+    <!-- Formulaire caché pour que Netlify détecte le form (le vrai est dans footer.html chargé en JS) -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input name="bot-field">
+        <input name="firstname">
+        <input name="name">
+        <input name="email">
+        <textarea name="message"></textarea>
+    </form>
+
     <div id="footer-placeholder"></div>
 
     <script src="script.js"></script>
