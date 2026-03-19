@@ -536,24 +536,14 @@
     color: transparent;
 }
 
-/* Mobile : pas de background-clip text (trop lourd), simple opacity */
+/* Mobile : mêmes styles que desktop, GPU-optimisé pour 120Hz */
 @media (max-width: 1024px) {
+    .preloader,
+    .preloader-inner,
     .preloader-letter {
-        background: none;
-        -webkit-background-clip: unset;
-        background-clip: unset;
-        -webkit-text-fill-color: #fff;
-        color: #fff;
-        opacity: 0;
-        will-change: opacity;
-    }
-
-    .preloader-inner {
-        will-change: opacity;
-    }
-
-    .preloader {
-        will-change: opacity;
+        will-change: transform, opacity;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
 }
 
@@ -940,7 +930,6 @@ a {
     position: relative; /* Important pour le positionnement interne */
     z-index: 10010; /* Toujours au-dessus de l'overlay */
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     cursor: pointer;
@@ -1020,7 +1009,9 @@ a {
     color: #fff;
     text-decoration: none;
     opacity: 0;
+    visibility: hidden;
     transform: translateY(20px);
+    will-change: transform, opacity;
 }
 
 [data-theme="light"] .mobile-link {
@@ -1039,6 +1030,7 @@ a {
     align-items: center;
     gap: 1.2rem;
     opacity: 0;
+    visibility: hidden;
 }
 
 .mobile-menu-icon-btn {
@@ -2077,9 +2069,15 @@ a.bento-card:hover .mini-tag {
     .stat-card,
     .skill-tag,
     .project-tag,
+    .mini-tag,
     .next-project-section {
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
+    }
+
+    /* Performance iOS : stopper l'animation infinie textShine pendant le scroll */
+    .gradient-text {
+        animation: none;
     }
 
     .cv-wrapper {

@@ -376,61 +376,41 @@ function playPreloader(onComplete) {
 
     if (!preloader) { onComplete(); return; }
 
-    const isMobilePreloader = window.innerWidth <= 1024;
-
     const done = () => {
         try { sessionStorage.setItem('preloaderSeen', 'true'); } catch (e) { /* Storage bloqué */ }
         preloader.remove();
         if (onComplete) onComplete();
     };
 
-    if (isMobilePreloader) {
-        // Mobile : attendre 2 frames pour que le navigateur ait fini le layout initial
-        requestAnimationFrame(() => { requestAnimationFrame(() => {
-            const tl = gsap.timeline({ onComplete: done });
+    // Même animation partout (desktop + mobile)
+    // On attend 2 frames pour que le layout initial soit terminé (crucial sur iOS 120Hz)
+    requestAnimationFrame(() => { requestAnimationFrame(() => {
+        const tl = gsap.timeline({ onComplete: done });
 
-            // Fade in des lettres une par une (opacity uniquement = GPU)
-            tl.fromTo(letters, { opacity: 0 }, {
-                opacity: 1,
-                duration: 0.5,
-                ease: "none",
-                stagger: { each: 0.04, from: "start" }
-            }, 0.1);
+        tl.to(letters, {
+            backgroundPosition: "0 -200%",
+            duration: 1,
+            ease: "power2.out",
+            stagger: { each: 0.07, from: "start" },
+            force3D: true
+        }, 0.2);
 
-            // Pause
-            tl.to({}, { duration: 0.3 });
+        tl.to({}, { duration: 0.6 });
 
-            // Fade out du contenu puis du preloader
-            tl.to(inner, { opacity: 0, duration: 0.25, ease: "power2.in" });
-            tl.to(preloader, { opacity: 0, duration: 0.25, ease: "power2.in" });
-        }); });
-        return;
-    }
+        tl.to(inner, {
+            scale: 1.2,
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power3.in",
+            force3D: true
+        });
 
-    // Desktop : animation complète avec remplissage gradient
-    const tl = gsap.timeline({ onComplete: done });
-
-    tl.to(letters, {
-        backgroundPosition: "0 -200%",
-        duration: 1,
-        ease: "power2.out",
-        stagger: { each: 0.07, from: "start" }
-    }, 0.2);
-
-    tl.to({}, { duration: 0.6 });
-
-    tl.to(inner, {
-        scale: 1.2,
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: "power3.in"
-    });
-
-    tl.to(preloader, {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: "power2.inOut"
-    });
+        tl.to(preloader, {
+            autoAlpha: 0,
+            duration: 0.4,
+            ease: "power2.inOut"
+        });
+    }); });
 }
 
 // ========================================================
@@ -703,12 +683,12 @@ function initBurgerMenu() {
         if (window.lenis) window.lenis.stop();
 
         const tl = gsap.timeline();
-        tl.to(overlay, { opacity: 1, visibility: 'visible', duration: 0.3, ease: "power2.out" });
-        tl.fromTo(mobileLinks, { opacity: 0, y: 20 }, {
-            opacity: 1, y: 0, duration: 0.4, ease: "power3.out",
-            stagger: 0.07
+        tl.to(overlay, { autoAlpha: 1, duration: 0.3, ease: "power2.out" });
+        tl.fromTo(mobileLinks, { autoAlpha: 0, y: 20 }, {
+            autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out",
+            stagger: 0.07, force3D: true
         }, "-=0.1");
-        tl.to(footer, { opacity: 1, duration: 0.3 }, "-=0.2");
+        tl.to(footer, { autoAlpha: 1, duration: 0.3, force3D: true }, "-=0.2");
     }
 
     function closeMenu() {
@@ -717,11 +697,10 @@ function initBurgerMenu() {
         overlay.classList.remove('active');
 
         gsap.to(overlay, {
-            opacity: 0, duration: 0.25, ease: "power2.in",
+            autoAlpha: 0, duration: 0.25, ease: "power2.in",
             onComplete: () => {
-                gsap.set(overlay, { visibility: 'hidden' });
-                gsap.set(mobileLinks, { opacity: 0, y: 20 });
-                gsap.set(footer, { opacity: 0 });
+                gsap.set(mobileLinks, { autoAlpha: 0, y: 20 });
+                gsap.set(footer, { autoAlpha: 0 });
             }
         });
 
