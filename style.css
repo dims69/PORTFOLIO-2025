@@ -2220,10 +2220,8 @@ a.bento-card:hover .mini-tag {
     width: 100%;
     height: auto;
     display: block;
-   
-    
-   
-    transform: translateZ(0); 
+    cursor: zoom-in;
+    transform: translateZ(0);
     will-change: transform;
 }
 @keyframes fadeInUp {

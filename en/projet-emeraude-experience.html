@@ -235,22 +235,6 @@
     <script src="../script-projet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-    <script>
-        Fancybox.bind("[data-fancybox]", {
-            Images: { zoom: false },
-            on: {
-                init: () => {
-                    document.body.classList.add("no-scroll");
-                    if (window.lenis) window.lenis.stop();
-                },
-                destroy: () => {
-                    document.body.classList.remove("no-scroll");
-                    if (window.lenis) window.lenis.start();
-                }
-            }
-        });
-    </script>
-
 </body>
 
 </html>

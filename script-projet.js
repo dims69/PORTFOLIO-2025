@@ -50,28 +50,31 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             Promise.all(imgPromises).then(() => {
-                // --- GESTION DU RESPONSIVE GSAP (Stable) ---
-                let mm = gsap.matchMedia();
+                // --- STICKY NATIF CSS (remplace le pin GSAP) ---
+                const stickyContent = document.querySelector(".sticky-content");
+                if (!stickyContent) return;
 
-                // Active le sticky SEULEMENT sur Desktop (> 1024px)
-                mm.add("(min-width: 1025px)", () => {
-                    const stickyContent = document.querySelector(".sticky-content");
-                    if (!stickyContent) return;
-
+                function calcStickyTop() {
                     const contentHeight = stickyContent.offsetHeight;
                     const viewportHeight = window.innerHeight;
-                    const overflow = contentHeight - (viewportHeight * 0.85);
+                    const headerOffset = 100; // espace sous le header fixe
 
-                    ScrollTrigger.create({
-                        trigger: ".sticky-container",
-                        // Si le contenu est plus grand que le viewport, on retarde le pin
-                        start: overflow > 0 ? `top+=${overflow}px top` : "top 15%",
-                        end: "bottom bottom",
-                        pin: ".sticky-content",
-                        pinSpacing: false,
-                        invalidateOnRefresh: true,
-                    });
-                });
+                    if (contentHeight > viewportHeight - headerOffset) {
+                        // Contenu plus long que le viewport : coller le bas du contenu
+                        // au bas du viewport (top négatif)
+                        stickyContent.style.top = `${viewportHeight - contentHeight - 40}px`;
+                    } else {
+                        // Contenu court : coller en haut sous le header
+                        stickyContent.style.top = `${headerOffset}px`;
+                    }
+                }
+
+                stickyContent.style.position = 'sticky';
+                stickyContent.style.alignSelf = 'flex-start';
+                calcStickyTop();
+
+                // Recalculer au resize
+                window.addEventListener('resize', calcStickyTop);
 
                 ScrollTrigger.refresh();
             });
@@ -93,6 +96,54 @@ document.addEventListener("DOMContentLoaded", () => {
             document.documentElement.style.overflowY = '';
             document.documentElement.classList.remove('lenis-stopped');
         }, 500);
+    });
+
+    // Rendre la hero image cliquable (Fancybox) + fix scroll position
+    function initFancybox() {
+        if (typeof Fancybox === 'undefined') return;
+
+        // Ajouter la hero image à la galerie
+        const heroImg = document.querySelector('.project-hero-image img');
+        if (heroImg && !heroImg.closest('[data-fancybox]')) {
+            const wrapper = document.createElement('a');
+            wrapper.href = heroImg.src;
+            wrapper.setAttribute('data-fancybox', 'gallery');
+            wrapper.setAttribute('data-caption', heroImg.alt || '');
+            wrapper.style.display = 'block';
+            wrapper.style.cursor = 'zoom-in';
+            heroImg.parentNode.insertBefore(wrapper, heroImg);
+            wrapper.appendChild(heroImg);
+        }
+
+        // Variable pour sauvegarder la position de scroll
+        let savedScrollY = 0;
+
+        Fancybox.bind("[data-fancybox]", {
+            Images: { zoom: false },
+            on: {
+                init: () => {
+                    // Sauvegarder la position de scroll AVANT de bloquer
+                    savedScrollY = window.scrollY || window.pageYOffset;
+                    document.body.style.position = 'fixed';
+                    document.body.style.top = `-${savedScrollY}px`;
+                    document.body.style.width = '100%';
+                    if (window.lenis) window.lenis.stop();
+                },
+                destroy: () => {
+                    // Restaurer la position de scroll
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.width = '';
+                    window.scrollTo(0, savedScrollY);
+                    if (window.lenis) window.lenis.start();
+                }
+            }
+        });
+    }
+
+    // Attendre que Fancybox soit chargé (script externe après script-projet.js)
+    window.addEventListener("load", () => {
+        initFancybox();
     });
 
     function initAnimations() {
