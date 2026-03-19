@@ -3112,7 +3112,7 @@ a.next-project-section:hover::before {
     }
 
     .project-hero-image {
-        padding: 0 1rem;
+        padding: 0;
     }
 
     .project-tag {
