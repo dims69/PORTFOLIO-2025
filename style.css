@@ -3331,7 +3331,8 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(255, 255, 255, .08);
-        transition: padding 0.25s ease, gap 0.25s ease, border-radius 0.25s ease;
+        transition: none;
+        contain: layout style;
     }
 
     [data-theme="light"] .desktop-nav {
@@ -3349,9 +3350,10 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         border-bottom: none;
         margin-right: 0;
         position: relative;
-        max-height: 2.5rem;
-        overflow: visible;
-        transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
+        overflow: hidden;
+        transform-origin: top center;
+        will-change: transform, opacity;
+        transition: none;
     }
 
     .desktop-nav .logo .logo-icon {

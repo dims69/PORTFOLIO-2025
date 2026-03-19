@@ -598,6 +598,8 @@ function initScrollHideNav() {
         "(max-width: 768px)": function() {
 
             let lastScrollY = 0;
+            const logo = nav.querySelector('.logo');
+            let isScrolled = false;
 
             // On crée le trigger
             ScrollTrigger.create({
@@ -613,24 +615,35 @@ function initScrollHideNav() {
                     lastScrollY = scrollY;
 
                     // Tout en haut : header complet avec le nom
-                    if (scrollY < 50) {
-                        if (nav.classList.contains('nav-scrolled')) {
-                            nav.classList.remove('nav-scrolled');
-
-                        }
+                    if (scrollY < 50 && isScrolled) {
+                        isScrolled = false;
+                        // Animation GPU : déplier le logo (transform + opacity uniquement)
+                        gsap.to(logo, {
+                            scaleY: 1, opacity: 1, height: 'auto',
+                            duration: 0.2, ease: "power2.out",
+                            onComplete: () => nav.classList.remove('nav-scrolled')
+                        });
                         return;
                     }
 
                     // Au scroll : passer en mode compact (cacher le nom, garder les liens)
-                    if (!nav.classList.contains('nav-scrolled')) {
-                        nav.classList.add('nav-scrolled');
+                    if (scrollY >= 50 && !isScrolled) {
+                        isScrolled = true;
+                        // Animation GPU : replier le logo
+                        gsap.to(logo, {
+                            scaleY: 0, opacity: 0, height: 0,
+                            duration: 0.2, ease: "power2.in",
+                            onComplete: () => nav.classList.add('nav-scrolled')
+                        });
                     }
                 }
             });
 
             // Nettoyage automatique quand on repasse sur Desktop
             return () => {
+                isScrolled = false;
                 nav.classList.remove('nav-scrolled');
+                if (logo) gsap.set(logo, { clearProps: "all" });
             };
         }
     });
