@@ -458,9 +458,13 @@
     }
 }
 
-/* Hide nav theme toggle on mobile, show floating one */
+/* Mobile : theme toggle uniquement dans le burger menu */
 @media (max-width: 768px) {
     .theme-toggle-nav {
+        display: none;
+    }
+
+    .floating-actions .theme-toggle {
         display: none;
     }
 }

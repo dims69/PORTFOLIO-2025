@@ -288,6 +288,16 @@ function runApp() {
             document.body.style.overflow = '';
             document.body.style.overflowX = '';
             document.body.style.overflowY = '';
+        } else if (!nowMobile && !window.lenis && typeof Lenis !== 'undefined') {
+            // Retour desktop : recréer Lenis
+            const newLenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true
+            });
+            window.lenis = newLenis;
+            newLenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => newLenis.raf(time * 1000));
         }
     });
 
