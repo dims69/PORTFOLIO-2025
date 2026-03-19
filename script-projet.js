@@ -98,62 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     });
 
-    // 1. Wrapper la hero image immédiatement (pas besoin de Fancybox pour ça)
-    const heroImg = document.querySelector('.project-hero-image img');
-    if (heroImg && !heroImg.closest('[data-fancybox]')) {
-        const wrapper = document.createElement('a');
-        wrapper.href = heroImg.src;
-        wrapper.setAttribute('data-fancybox', 'gallery');
-        wrapper.setAttribute('data-caption', heroImg.alt || '');
-        wrapper.style.display = 'block';
-        wrapper.style.cursor = 'zoom-in';
-        heroImg.parentNode.insertBefore(wrapper, heroImg);
-        wrapper.appendChild(heroImg);
-    }
-
-    // 2. Bind Fancybox quand disponible
-    let fancyboxBound = false;
-
-    function bindFancybox() {
-        if (fancyboxBound || typeof Fancybox === 'undefined') return;
-        fancyboxBound = true;
-
-        let savedScrollY = 0;
-
-        Fancybox.bind("[data-fancybox]", {
-            Images: { zoom: false },
-            on: {
-                init: () => {
-                    savedScrollY = window.scrollY || window.pageYOffset;
-                    document.body.style.position = 'fixed';
-                    document.body.style.top = `-${savedScrollY}px`;
-                    document.body.style.width = '100%';
-                    if (window.lenis) window.lenis.stop();
-                },
-                destroy: () => {
-                    document.body.style.position = '';
-                    document.body.style.top = '';
-                    document.body.style.width = '';
-                    window.scrollTo(0, savedScrollY);
-                    if (window.lenis) window.lenis.start();
-                }
-            }
-        });
-    }
-
-    // Essayer immédiatement (si Fancybox déjà chargé)
-    bindFancybox();
-
-    // Sinon, essayer au load
-    if (document.readyState === 'complete') {
-        bindFancybox();
-    } else {
-        window.addEventListener("load", bindFancybox);
-    }
-
-    // Filet de sécurité : retry après un court délai
-    setTimeout(bindFancybox, 1000);
-
     function initAnimations() {
         const isMobile = window.innerWidth <= 768;
 
