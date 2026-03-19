@@ -28,6 +28,16 @@
     } catch (e) { /* localStorage bloqué */ }
 })();
 
+// Marquer la session dès qu'une page sans preloader est visitée
+// → au retour sur l'accueil le preloader ne se rejouera pas
+(function() {
+    try {
+        if (!document.getElementById('preloader')) {
+            sessionStorage.setItem('preloaderSeen', 'true');
+        }
+    } catch (e) {}
+})();
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Empêcher ScrollTrigger de recalculer quand seule la hauteur change (barre d'URL mobile)
@@ -38,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function loadComponents() {
+    // 0. Preloader — démarrer immédiatement (en parallèle des fetches, pas après)
+    const preloaderReady = startPreloaderIfNeeded();
+
     // 1. Charger le Header — rendre la nav visible immédiatement après injection
     const headerLoad = fetch('header.html')
         .then(res => { if (!res.ok) throw new Error("Header introuvable"); return res.text(); })
@@ -64,8 +77,8 @@ function loadComponents() {
         })
         .catch(err => console.error(err));
 
-    // 3. Lancer le site une fois tout chargé
-    Promise.allSettled([headerLoad, footerLoad]).then(() => {
+    // 3. Lancer le site une fois tout chargé (composants + preloader)
+    Promise.allSettled([headerLoad, footerLoad, preloaderReady]).then(() => {
         initThemeToggle();
         initScrollToTop();
         initBentoFilters();
@@ -73,6 +86,32 @@ function loadComponents() {
         initTouchPrefetch();
         ScrollTrigger.refresh();
         window.dispatchEvent(new Event('appReady'));
+    });
+}
+
+// Flag global — le preloader a-t-il joué lors de ce chargement ?
+let _preloaderWasPlayed = false;
+
+function startPreloaderIfNeeded() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return Promise.resolve();
+
+    let preloaderSeen = false;
+    try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) {}
+
+    if (preloaderSeen) {
+        preloader.remove();
+        return Promise.resolve();
+    }
+
+    // Première visite : bloquer le scroll et jouer l'animation
+    _preloaderWasPlayed = true;
+    document.body.classList.add('no-scroll');
+    return new Promise(resolve => {
+        playPreloader(() => {
+            document.body.classList.remove('no-scroll');
+            resolve();
+        });
     });
 }
 
@@ -340,28 +379,8 @@ function runApp() {
     // --- ANIMATIONS PAGE D'ACCUEIL ---
     if (!isProjectPage) {
         if (!isMobile) initHomeBlobs(); // mousemove tracking inutile sur mobile
-        const preloader = document.getElementById('preloader');
-        let preloaderSeen = false;
-        try { preloaderSeen = sessionStorage.getItem('preloaderSeen'); } catch (e) { /* Storage bloqué (nav privée / tracking prevention) */ }
-
-        if (preloaderSeen) {
-            // Visite suivante : supprimer le preloader et afficher directement
-            if (preloader) preloader.remove();
-            playHomeHeroAnimations();
-        } else if (preloader) {
-            // Première visite : bloquer le scroll pendant le preloader
-            document.body.classList.add('no-scroll');
-            if (window.lenis) window.lenis.stop();
-            playPreloader(() => {
-                document.body.classList.remove('no-scroll');
-                if (window.lenis) window.lenis.start();
-                playHomeHeroAnimations(true);
-                // Recalculer les ScrollTriggers maintenant que le scroll est débloqué
-                ScrollTrigger.refresh();
-            });
-        } else {
-            playHomeHeroAnimations();
-        }
+        // Le preloader est géré dans startPreloaderIfNeeded() (lancé en parallèle des fetches)
+        playHomeHeroAnimations(_preloaderWasPlayed);
     }
 }
 
@@ -395,7 +414,7 @@ function playPreloader(onComplete) {
             force3D: true
         }, 0.2);
 
-        tl.to({}, { duration: 0.6 });
+        tl.to({}, { duration: 0.2 });
 
         tl.to(inner, {
             scale: 1.2,
