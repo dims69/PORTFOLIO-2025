@@ -971,50 +971,90 @@ a {
 .burger-btn.active span:nth-child(2) {
     transform: translateY(0) rotate(-45deg);
 }
+/* =========================================
+   OVERLAY MENU MOBILE (plein écran)
+   ========================================= */
 .mobile-menu-overlay {
-    /* 1. Prend tout l'écran */
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-
-    /* 2. Couleur de fond (INDISPENSABLE) */
-    background-color: #0b0c15; /* Remplace par ta couleur sombre exacte si différente */
-    
-    /* 3. Z-Index : Très haut, mais SOUS le bouton burger */
-    z-index: 10009; 
-    
-    /* 4. Centrage des liens */
+    height: 100dvh;
+    background: #0b0c15;
+    z-index: 10000;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    /* 5. État initial pour GSAP (Caché) */
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
-/* Le conteneur des liens */
+[data-theme="light"] .mobile-menu-overlay {
+    background: #F5F5F7;
+}
+
+.mobile-menu-overlay.active {
+    pointer-events: all;
+}
+
 .mobile-nav-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Les liens eux-mêmes */
 .mobile-link {
-    font-family: var(--font-heading, sans-serif); /* Ta typo titre */
-    font-size: clamp(2.4rem, 6vw, 3.5rem);
-    font-weight: 700;
+    font-family: var(--font-heading, sans-serif);
+    font-size: clamp(2.2rem, 7vw, 3.2rem);
+    font-weight: 600;
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.mobile-link:hover {
+[data-theme="light"] .mobile-link {
+    color: var(--text-main);
+}
+
+.mobile-link:hover,
+.mobile-link:active {
     color: var(--accent-primary, #4f46e5);
+}
+
+.mobile-menu-footer {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    opacity: 0;
+}
+
+.mobile-menu-icon-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+
+[data-theme="light"] .mobile-menu-icon-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: var(--text-main);
 }
 
 /* =========================================
@@ -3310,9 +3350,9 @@ html:not(.lenis):not(:has(body.no-scroll)) {
    ========================================= */
 
 @media (max-width: 768px) {
+
+    /* --- Barre compacte : Nom + Lang + Burger --- */
     .desktop-nav {
-        flex-direction: column;
-        align-items: center;
         position: fixed;
         top: 10px;
         bottom: auto;
@@ -3322,11 +3362,13 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         margin-right: auto;
         width: 92%;
         max-width: 92%;
-        justify-content: center;
-        padding: 0.75rem 1.2rem 0.6rem;
-        gap: 0.35rem;
-        z-index: 1000;
-        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.55rem 0.8rem 0.55rem 1.2rem;
+        gap: 0;
+        z-index: 10005;
+        border-radius: 100px;
         background: rgba(11, 12, 21, .95) !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
@@ -3338,16 +3380,11 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         border-color: rgba(0, 0, 0, .08);
     }
 
-    /* --- Ligne 1 : Nom + Lang Switch --- */
+    /* Logo : nom visible, pas d'icône */
     .desktop-nav .logo {
-        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding-bottom: 0;
-        border-bottom: none;
         margin-right: 0;
-        position: relative;
     }
 
     .desktop-nav .logo .logo-icon {
@@ -3362,44 +3399,45 @@ html:not(.lenis):not(:has(body.no-scroll)) {
     .desktop-nav .logo .logo-first,
     .desktop-nav .logo .logo-last {
         font-family: var(--font-heading);
-        font-size: clamp(1rem, 4.5vw, 1.25rem);
+        font-size: clamp(0.95rem, 4vw, 1.15rem);
     }
 
-    /* --- Ligne 2 : Liens de navigation --- */
-    .links {
-        width: 100%;
-        justify-content: space-evenly;
-        padding: 0;
-        gap: 0.4rem;
+    /* Cacher les liens de nav (ils sont dans l'overlay) */
+    .desktop-nav .links {
+        display: none;
+    }
+
+    /* Afficher le burger */
+    .burger-btn {
+        display: flex;
+        width: 42px;
+        height: 42px;
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
+    }
+
+    [data-theme="light"] .burger-btn span {
+        background-color: var(--text-main);
+    }
+
+    /* Lang pill dans le logo (visible dans la barre) */
+    .lang-switch-mobile {
+        display: inline-flex;
+        margin-left: 0.6rem;
+    }
+
+    .lang-switch-mobile .lang-pill-label {
+        min-width: 24px;
+        padding: 4px 6px;
+        font-size: 0.7rem;
     }
 
     .nav-backdrop {
         display: none;
     }
 
-    .nav-item {
-        font-size: clamp(0.9rem, 3.5vw, 1.05rem);
-        padding: 0.6rem clamp(0.5rem, 2vw, 0.8rem);
-        color: rgba(255, 255, 255, 0.75);
-    }
-
-    /* Mobile : cacher le pill du logo, afficher celui des liens */
-    .lang-switch-mobile {
-        display: none;
-    }
-
-    .lang-switch-desktop {
-        display: inline-flex;
-        margin-left: 0;
-    }
-
-    .lang-switch-desktop .lang-pill-label {
-        min-width: 26px;
-        padding: 5px 7px;
-        font-size: 0.72rem;
-    }
-
     .hero {
-        padding-top: 130px;
+        padding-top: 100px;
     }
 }
