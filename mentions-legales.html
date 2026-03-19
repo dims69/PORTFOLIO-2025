@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions Légales & Politique de Confidentialité | Olivier Pouchoy</title>
+    <meta name="description" content="Mentions légales et politique de confidentialité du site olivierpouchoy.fr.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+    <style>
+        .legal-section {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 160px 5% 6rem;
+        }
+
+        .legal-section h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-section .legal-updated {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 3rem;
+        }
+
+        .legal-section h2 {
+            font-size: 1.3rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .legal-section p,
+        .legal-section li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.4rem;
+        }
+
+        .legal-section a {
+            color: #a78bfa;
+            text-decoration: underline;
+        }
+
+        .legal-back {
+            display: inline-block;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .legal-back:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="noise-overlay"></div>
+
+    <div class="organic-lines-container">
+        <svg class="organic-lines" viewBox="0 0 1440 1000" preserveAspectRatio="none">
+            <path class="organic-path" d="M-100,100 C400,300 600,-100 900,300 C1200,700 1500,500 1600,800" />
+            <path class="organic-path" d="M-50,800 C300,900 500,500 1000,600 C1400,700 1300,100 1550,50" />
+            <path class="organic-path" d="M1500,400 C1100,100 800,900 400,600 C100,300 -50,500 -100,400" />
+        </svg>
+    </div>
+
+    <div id="header-placeholder"></div>
+
+    <section class="legal-section">
+        <h1>Mentions Légales</h1>
+        <p class="legal-updated">Dernière mise à jour : mars 2026</p>
+
+        <h2>Éditeur du site</h2>
+        <p>
+            Olivier Pouchoy<br>
+            Designer UI/UX & Intégrateur Web<br>
+            Lyon, France<br>
+            Contact : via le <a href="index.html#contact">formulaire de contact</a>
+        </p>
+        <p>Directeur de la publication : Olivier Pouchoy</p>
+
+        <h2>Hébergement</h2>
+        <p>
+            Ce site est hébergé par Netlify, Inc.<br>
+            44 Montgomery Street, Suite 300<br>
+            San Francisco, California 94104, USA<br>
+            <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">www.netlify.com</a>
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+            L'ensemble du contenu de ce site (textes, images, visuels, maquettes, code)
+            est la propriété exclusive d'Olivier Pouchoy, sauf mention contraire.
+            Toute reproduction, même partielle, est interdite sans autorisation écrite préalable.
+        </p>
+
+        <h1 style="margin-top: 5rem;">Politique de Confidentialité</h1>
+
+        <h2>Données collectées</h2>
+        <p>
+            Ce site collecte des données personnelles uniquement via le formulaire de contact :
+        </p>
+        <ul>
+            <li>Prénom</li>
+            <li>Nom</li>
+            <li>Adresse email</li>
+            <li>Message</li>
+        </ul>
+        <p>
+            Ces données sont transmises via Netlify Forms et servent exclusivement
+            à répondre aux demandes de contact. Elles ne sont ni vendues, ni transmises à des tiers.
+        </p>
+
+        <h2>Durée de conservation</h2>
+        <p>
+            Les données issues du formulaire sont conservées le temps nécessaire au traitement
+            de la demande, puis supprimées dans un délai maximum de 12 mois.
+        </p>
+
+        <h2>Cookies et stockage local</h2>
+        <p>
+            Ce site n'utilise aucun cookie publicitaire ni outil de tracking.
+            Seuls des stockages techniques sont utilisés :
+        </p>
+        <ul>
+            <li><strong>localStorage</strong> : mémorisation du thème (clair/sombre) et du choix de langue</li>
+            <li><strong>sessionStorage</strong> : gestion de l'animation de chargement</li>
+        </ul>
+        <p>
+            Ces données restent sur votre appareil et ne sont jamais transmises à un serveur.
+        </p>
+
+        <h2>Services tiers</h2>
+        <p>
+            Ce site charge des polices depuis Google Fonts et Fontshare.
+            Ces services peuvent recevoir votre adresse IP lors du chargement des fichiers.
+            Consultez leurs politiques de confidentialité respectives pour plus d'informations.
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+            Conformément au RGPD, vous disposez d'un droit d'accès, de rectification,
+            de suppression et de portabilité de vos données personnelles.
+            Pour exercer ces droits, contactez-moi via le
+            <a href="index.html#contact">formulaire de contact</a>.
+        </p>
+
+        <a href="index.html" class="legal-back">&larr; Retour à l'accueil</a>
+    </section>
+
+    <script defer src="script.js?v=2"></script>
+</body>
+
+</html>

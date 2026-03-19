@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Accueil -->
+  <url>
+    <loc>https://olivierpouchoy.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/"/>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Laboratoire 32 -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-laboratoire32.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-laboratoire32.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-laboratoire32.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-laboratoire32.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-laboratoire32.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-laboratoire32.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Best Of DeWalt -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-catalogue-dewalt.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-catalogue-dewalt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-catalogue-dewalt.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-catalogue-dewalt.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-catalogue-dewalt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-catalogue-dewalt.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Emeraude Experience -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-emeraude-experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-emeraude-experience.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-emeraude-experience.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-emeraude-experience.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-emeraude-experience.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-emeraude-experience.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Village Motel -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-village-motel.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-village-motel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-village-motel.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-village-motel.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-village-motel.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-village-motel.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- UNIDADE Jiu-Jitsu -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-unidade.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-unidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-unidade.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-unidade.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-unidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-unidade.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Covering Ford Focus -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-covering.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-covering.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-covering.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-covering.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-covering.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-covering.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Video & Motion -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-video-motion.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-video-motion.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-video-motion.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-video-motion.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-video-motion.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-video-motion.html"/>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Apidia -->
+  <url>
+    <loc>https://olivierpouchoy.com/projet-apidia.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-apidia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-apidia.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://olivierpouchoy.com/en/projet-apidia.html</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://olivierpouchoy.com/projet-apidia.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://olivierpouchoy.com/en/projet-apidia.html"/>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

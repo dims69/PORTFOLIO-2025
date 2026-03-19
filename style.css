@@ -1129,6 +1129,21 @@ a {
 .form-group textarea:focus {
     border-color: var(--accent-primary);
     background: rgba(255, 255, 255, 0.08);
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Screen-reader only — masqué visuellement, visible par les lecteurs d'écran */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 .form-group textarea {

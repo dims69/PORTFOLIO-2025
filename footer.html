@@ -10,17 +10,21 @@
 
         <div class="form-row">
             <div class="form-group">
-                <input type="text" name="firstname" placeholder="Prénom" required>
+                <label for="firstname" class="sr-only">Prénom</label>
+                <input type="text" id="firstname" name="firstname" placeholder="Prénom" required>
             </div>
             <div class="form-group">
-                <input type="text" name="name" placeholder="Nom" required>
+                <label for="name" class="sr-only">Nom</label>
+                <input type="text" id="name" name="name" placeholder="Nom" required>
             </div>
         </div>
         <div class="form-group">
-            <input type="email" name="email" placeholder="Email" required>
+            <label for="email" class="sr-only">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="form-group">
-            <textarea name="message" placeholder="Votre message" rows="4" required></textarea>
+            <label for="message" class="sr-only">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message" rows="4" required></textarea>
         </div>
 
         <button type="submit" class="magnetic-button">
@@ -31,6 +35,7 @@
     <footer class="main-footer">
         <div class="footer-links">
             <a href="https://www.linkedin.com/in/olivier-pouchoy/" target="_blank">LinkedIn</a>
+            <a href="mentions-legales.html">Mentions légales</a>
         </div>
         <p class="copyright">© <span id="current-year"></span> Olivier Pouchoy. Tous droits réservés.</p>
     </footer>
