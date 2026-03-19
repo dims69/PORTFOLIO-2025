@@ -98,31 +98,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     });
 
-    // Rendre la hero image cliquable (Fancybox) + fix scroll position
-    function initFancybox() {
-        if (typeof Fancybox === 'undefined') return;
+    // 1. Wrapper la hero image immédiatement (pas besoin de Fancybox pour ça)
+    const heroImg = document.querySelector('.project-hero-image img');
+    if (heroImg && !heroImg.closest('[data-fancybox]')) {
+        const wrapper = document.createElement('a');
+        wrapper.href = heroImg.src;
+        wrapper.setAttribute('data-fancybox', 'gallery');
+        wrapper.setAttribute('data-caption', heroImg.alt || '');
+        wrapper.style.display = 'block';
+        wrapper.style.cursor = 'zoom-in';
+        heroImg.parentNode.insertBefore(wrapper, heroImg);
+        wrapper.appendChild(heroImg);
+    }
 
-        // Ajouter la hero image à la galerie
-        const heroImg = document.querySelector('.project-hero-image img');
-        if (heroImg && !heroImg.closest('[data-fancybox]')) {
-            const wrapper = document.createElement('a');
-            wrapper.href = heroImg.src;
-            wrapper.setAttribute('data-fancybox', 'gallery');
-            wrapper.setAttribute('data-caption', heroImg.alt || '');
-            wrapper.style.display = 'block';
-            wrapper.style.cursor = 'zoom-in';
-            heroImg.parentNode.insertBefore(wrapper, heroImg);
-            wrapper.appendChild(heroImg);
-        }
+    // 2. Bind Fancybox quand disponible
+    let fancyboxBound = false;
 
-        // Variable pour sauvegarder la position de scroll
+    function bindFancybox() {
+        if (fancyboxBound || typeof Fancybox === 'undefined') return;
+        fancyboxBound = true;
+
         let savedScrollY = 0;
 
         Fancybox.bind("[data-fancybox]", {
             Images: { zoom: false },
             on: {
                 init: () => {
-                    // Sauvegarder la position de scroll AVANT de bloquer
                     savedScrollY = window.scrollY || window.pageYOffset;
                     document.body.style.position = 'fixed';
                     document.body.style.top = `-${savedScrollY}px`;
@@ -130,7 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (window.lenis) window.lenis.stop();
                 },
                 destroy: () => {
-                    // Restaurer la position de scroll
                     document.body.style.position = '';
                     document.body.style.top = '';
                     document.body.style.width = '';
@@ -141,10 +141,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Attendre que Fancybox soit chargé (script externe après script-projet.js)
-    window.addEventListener("load", () => {
-        initFancybox();
-    });
+    // Essayer immédiatement (si Fancybox déjà chargé)
+    bindFancybox();
+
+    // Sinon, essayer au load
+    if (document.readyState === 'complete') {
+        bindFancybox();
+    } else {
+        window.addEventListener("load", bindFancybox);
+    }
+
+    // Filet de sécurité : retry après un court délai
+    setTimeout(bindFancybox, 1000);
 
     function initAnimations() {
         const isMobile = window.innerWidth <= 768;
