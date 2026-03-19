@@ -345,6 +345,8 @@ function runApp() {
                 document.body.classList.remove('no-scroll');
                 if (window.lenis) window.lenis.start();
                 playHomeHeroAnimations(true);
+                // Recalculer les ScrollTriggers maintenant que le scroll est débloqué
+                ScrollTrigger.refresh();
             });
         } else {
             playHomeHeroAnimations();
@@ -365,60 +367,59 @@ function playPreloader(onComplete) {
 
     const isMobilePreloader = window.innerWidth <= 1024;
 
-    const tl = gsap.timeline({
-        onComplete: () => {
-            try { sessionStorage.setItem('preloaderSeen', 'true'); } catch (e) { /* Storage bloqué */ }
-            preloader.remove();
-            if (onComplete) onComplete();
-        }
-    });
+    const done = () => {
+        try { sessionStorage.setItem('preloaderSeen', 'true'); } catch (e) { /* Storage bloqué */ }
+        preloader.remove();
+        if (onComplete) onComplete();
+    };
 
     if (isMobilePreloader) {
-        // Mobile : animation légère (opacity seulement, pas de background-position)
-        tl.fromTo(letters, { opacity: 0 }, {
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: { each: 0.05, from: "start" }
-        }, 0.15);
+        // Mobile : attendre 2 frames pour que le navigateur ait fini le layout initial
+        requestAnimationFrame(() => { requestAnimationFrame(() => {
+            const tl = gsap.timeline({ onComplete: done });
 
-        tl.to({}, { duration: 0.4 });
+            // Fade in des lettres une par une (opacity uniquement = GPU)
+            tl.fromTo(letters, { opacity: 0 }, {
+                opacity: 1,
+                duration: 0.5,
+                ease: "none",
+                stagger: { each: 0.04, from: "start" }
+            }, 0.1);
 
-        tl.to(inner, {
-            autoAlpha: 0,
-            duration: 0.3,
-            ease: "power2.in"
-        });
+            // Pause
+            tl.to({}, { duration: 0.3 });
 
-        tl.to(preloader, {
-            autoAlpha: 0,
-            duration: 0.3,
-            ease: "power2.inOut"
-        });
-    } else {
-        // Desktop : animation complète avec remplissage gradient
-        tl.to(letters, {
-            backgroundPosition: "0 -200%",
-            duration: 1,
-            ease: "power2.out",
-            stagger: { each: 0.07, from: "start" }
-        }, 0.2);
-
-        tl.to({}, { duration: 0.6 });
-
-        tl.to(inner, {
-            scale: 1.2,
-            autoAlpha: 0,
-            duration: 0.5,
-            ease: "power3.in"
-        });
-
-        tl.to(preloader, {
-            autoAlpha: 0,
-            duration: 0.4,
-            ease: "power2.inOut"
-        });
+            // Fade out du contenu puis du preloader
+            tl.to(inner, { opacity: 0, duration: 0.25, ease: "power2.in" });
+            tl.to(preloader, { opacity: 0, duration: 0.25, ease: "power2.in" });
+        }); });
+        return;
     }
+
+    // Desktop : animation complète avec remplissage gradient
+    const tl = gsap.timeline({ onComplete: done });
+
+    tl.to(letters, {
+        backgroundPosition: "0 -200%",
+        duration: 1,
+        ease: "power2.out",
+        stagger: { each: 0.07, from: "start" }
+    }, 0.2);
+
+    tl.to({}, { duration: 0.6 });
+
+    tl.to(inner, {
+        scale: 1.2,
+        autoAlpha: 0,
+        duration: 0.5,
+        ease: "power3.in"
+    });
+
+    tl.to(preloader, {
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: "power2.inOut"
+    });
 }
 
 // ========================================================

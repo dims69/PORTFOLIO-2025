@@ -541,6 +541,15 @@
         -webkit-text-fill-color: #fff;
         color: #fff;
         opacity: 0;
+        will-change: opacity;
+    }
+
+    .preloader-inner {
+        will-change: opacity;
+    }
+
+    .preloader {
+        will-change: opacity;
     }
 }
 
@@ -3318,11 +3327,16 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         gap: 0.35rem;
         z-index: 1000;
         border-radius: 20px;
-        background: rgba(11, 12, 21, .95);
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        background: rgba(11, 12, 21, .95) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(255, 255, 255, .08);
-        transition: none;
+        transition: padding 0.25s ease, gap 0.25s ease, border-radius 0.25s ease;
+    }
+
+    [data-theme="light"] .desktop-nav {
+        background: rgba(245, 245, 247, .95) !important;
+        border-color: rgba(0, 0, 0, .08);
     }
 
     /* --- Ligne 1 : Nom + Lang Switch --- */
@@ -3337,7 +3351,7 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         position: relative;
         max-height: 2.5rem;
         overflow: visible;
-        transition: none;
+        transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
     }
 
     .desktop-nav .logo .logo-icon {
