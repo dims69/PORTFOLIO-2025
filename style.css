@@ -484,6 +484,11 @@
 /* =========================================
    PRELOADER
    ========================================= */
+/* Masquer le preloader instantanément si déjà vu (classe posée dans le <head> avant le rendu) */
+.preloader-done .preloader {
+    display: none !important;
+}
+
 .preloader {
     position: fixed;
     top: 0;
