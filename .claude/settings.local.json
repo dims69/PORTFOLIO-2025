@@ -6,7 +6,8 @@
       "Bash(sed -i 's/<script src=\"\"https:\\\\/\\\\/unpkg.com/<script defer src=\"\"https:\\\\/\\\\/unpkg.com/g' \"$f\")",
       "Bash(echo \"Updated $f\")",
       "Bash(done)",
-      "Bash(python -c \":*)"
+      "Bash(python -c \":*)",
+      "Bash(while read:*)"
     ]
   }
 }
