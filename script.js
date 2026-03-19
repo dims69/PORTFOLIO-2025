@@ -363,6 +363,8 @@ function playPreloader(onComplete) {
 
     if (!preloader) { onComplete(); return; }
 
+    const isMobilePreloader = window.innerWidth <= 1024;
+
     const tl = gsap.timeline({
         onComplete: () => {
             try { sessionStorage.setItem('preloaderSeen', 'true'); } catch (e) { /* Storage bloqué */ }
@@ -371,35 +373,52 @@ function playPreloader(onComplete) {
         }
     });
 
-    // Phase 1 : Le fluide remplit chaque lettre du bas vers le haut
-    // background-position: 0 0 = invisible (haut du gradient = quasi transparent)
-    // background-position: 0 -200% = rempli (bas du gradient = blanc)
-    tl.to(letters, {
-        backgroundPosition: "0 -200%",
-        duration: 1,
-        ease: "power2.out",
-        stagger: {
-            each: 0.07,
-            from: "start"
-        }
-    }, 0.2);
+    if (isMobilePreloader) {
+        // Mobile : animation légère (opacity seulement, pas de background-position)
+        tl.fromTo(letters, { opacity: 0 }, {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: { each: 0.05, from: "start" }
+        }, 0.15);
 
-    // Phase 2 : Pause pour apprécier le résultat
-    tl.to({}, { duration: 0.6 });
+        tl.to({}, { duration: 0.4 });
 
-    // Phase 3 : Exit — le texte scale up et fade, puis le fond disparaît
-    tl.to(inner, {
-        scale: 1.2,
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: "power3.in"
-    });
+        tl.to(inner, {
+            autoAlpha: 0,
+            duration: 0.3,
+            ease: "power2.in"
+        });
 
-    tl.to(preloader, {
-        autoAlpha: 0,
-        duration: 0.4,
-        ease: "power2.inOut"
-    });
+        tl.to(preloader, {
+            autoAlpha: 0,
+            duration: 0.3,
+            ease: "power2.inOut"
+        });
+    } else {
+        // Desktop : animation complète avec remplissage gradient
+        tl.to(letters, {
+            backgroundPosition: "0 -200%",
+            duration: 1,
+            ease: "power2.out",
+            stagger: { each: 0.07, from: "start" }
+        }, 0.2);
+
+        tl.to({}, { duration: 0.6 });
+
+        tl.to(inner, {
+            scale: 1.2,
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power3.in"
+        });
+
+        tl.to(preloader, {
+            autoAlpha: 0,
+            duration: 0.4,
+            ease: "power2.inOut"
+        });
+    }
 }
 
 // ========================================================

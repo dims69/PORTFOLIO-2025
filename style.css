@@ -532,6 +532,18 @@
     color: transparent;
 }
 
+/* Mobile : pas de background-clip text (trop lourd), simple opacity */
+@media (max-width: 1024px) {
+    .preloader-letter {
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        -webkit-text-fill-color: #fff;
+        color: #fff;
+        opacity: 0;
+    }
+}
+
 /* =========================================
    RESET & BASE
    ========================================= */
@@ -3297,11 +3309,9 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         gap: 0.35rem;
         z-index: 1000;
         border-radius: 20px;
-        background: rgba(11, 12, 21, .85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        background: rgba(11, 12, 21, .95);
         border: 1px solid rgba(255, 255, 255, .08);
-        transition: padding 0.35s ease, gap 0.35s ease;
+        transition: padding 0.25s ease, gap 0.25s ease;
     }
 
     /* --- Ligne 1 : Nom + Lang Switch --- */
@@ -3316,7 +3326,7 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         position: relative;
         max-height: 2.5rem;
         overflow: visible;
-        transition: max-height 0.35s ease, opacity 0.35s ease, margin 0.35s ease;
+        transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
     }
 
     .desktop-nav .logo .logo-icon {
@@ -3370,11 +3380,13 @@ html:not(.lenis):not(:has(body.no-scroll)) {
 
     /* --- État compact au scroll : on cache le nom --- */
     .desktop-nav.nav-scrolled .logo {
-        max-height: 0;
+        transform: scaleY(0);
         opacity: 0;
+        height: 0;
         margin: 0;
         padding: 0;
         overflow: hidden;
+        pointer-events: none;
     }
 
     .desktop-nav.nav-scrolled {
