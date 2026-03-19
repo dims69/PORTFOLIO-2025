@@ -623,7 +623,6 @@ function initScrollHideNav() {
                     // Au scroll : passer en mode compact (cacher le nom, garder les liens)
                     if (!nav.classList.contains('nav-scrolled')) {
                         nav.classList.add('nav-scrolled');
-                        recalcBackdrop();
                     }
                 }
             });

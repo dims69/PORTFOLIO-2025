@@ -2020,6 +2020,15 @@ a.bento-card:hover .mini-tag {
         will-change: auto;
     }
 
+    /* Performance iOS : supprimer tous les backdrop-filter (très coûteux sur WebKit mobile) */
+    .stat-card,
+    .skill-tag,
+    .project-tag,
+    .next-project-section {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
     .cv-wrapper {
         margin-top: 3rem;
         text-align: center;
@@ -3310,8 +3319,10 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         z-index: 1000;
         border-radius: 20px;
         background: rgba(11, 12, 21, .95);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
         border: 1px solid rgba(255, 255, 255, .08);
-        transition: padding 0.25s ease, gap 0.25s ease;
+        transition: none;
     }
 
     /* --- Ligne 1 : Nom + Lang Switch --- */
@@ -3326,7 +3337,7 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         position: relative;
         max-height: 2.5rem;
         overflow: visible;
-        transition: transform 0.25s ease, opacity 0.25s ease, height 0.25s ease;
+        transition: none;
     }
 
     .desktop-nav .logo .logo-icon {
