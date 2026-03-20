@@ -2041,56 +2041,8 @@ a.bento-card:hover .mini-tag {
         display: none;
     }
 
-    /* Performance mobile : désactiver le noise overlay animé */
     .noise-overlay {
         display: none;
-    }
-
-    /* Désactiver le preloader sur mobile pour test */
-    .preloader-active .preloader {
-        display: none !important;
-    }
-
-    /* Performance mobile : réduire les blur GPU-intensifs */
-    .glow-blob {
-        filter: blur(80px);
-        opacity: .15;
-    }
-
-    .project-hero .glow-blob {
-        filter: blur(100px);
-        opacity: .1;
-    }
-
-    /* Performance mobile : supprimer les will-change inutiles */
-    .bento-card,
-    .cv-btn,
-    .links a,
-    .magnetic-button,
-    .floating-obj,
-    .floating-car,
-    .floating-ball,
-    .desktop-nav,
-    .glow-blob,
-    .scroll-indicator,
-    .marquee-content,
-    .reveal-item {
-        will-change: auto;
-    }
-
-    /* Performance iOS : supprimer tous les backdrop-filter (très coûteux sur WebKit mobile) */
-    .stat-card,
-    .skill-tag,
-    .project-tag,
-    .mini-tag,
-    .next-project-section {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
-
-    /* Performance iOS : stopper l'animation infinie textShine pendant le scroll */
-    .gradient-text {
-        animation: none;
     }
 
     .cv-wrapper {
