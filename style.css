@@ -2045,14 +2045,17 @@ a.bento-card:hover .mini-tag {
         display: none;
     }
 
-    /* TEST 4 : will-change auto — sous-groupe A */
+    /* TEST 5 : will-change auto — groupe A + floating seulement */
     .desktop-nav,
     .glow-blob,
     .scroll-indicator,
     .bento-card,
     .cv-btn,
     .links a,
-    .magnetic-button {
+    .magnetic-button,
+    .floating-obj,
+    .floating-car,
+    .floating-ball {
         will-change: auto;
     }
 
