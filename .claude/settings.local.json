@@ -8,7 +8,8 @@
       "Bash(done)",
       "Bash(python -c \":*)",
       "Bash(while read:*)",
-      "Bash(find . -name \"*.html\" -exec sed -i 's/style\\\\.css?v=4/style.css?v=5/g' {} +)"
+      "Bash(find . -name \"*.html\" -exec sed -i 's/style\\\\.css?v=4/style.css?v=5/g' {} +)",
+      "Bash(find . -name \"*.html\" -exec sed -i 's/style\\\\.css?v=5/style.css?v=6/g' {} +)"
     ]
   }
 }

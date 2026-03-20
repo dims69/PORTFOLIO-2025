@@ -522,12 +522,14 @@
     font-weight: 600;
     display: inline-block;
     letter-spacing: 0.02em;
-    background: linear-gradient(to top,
-            #fff 0%,
-            #c4b5fd 25%,
-            var(--accent-secondary) 50%,
-            var(--accent-primary) 75%,
-            rgba(79, 70, 229, .15) 100%);
+    background: linear-gradient(
+        to top,
+        #fff 0%,
+        #c4b5fd 25%,
+        var(--accent-secondary) 50%,
+        var(--accent-primary) 75%,
+        rgba(79, 70, 229, .15) 100%
+    );
     background-size: 100% 300%;
     background-position: 0 0;
     -webkit-background-clip: text;
@@ -558,27 +560,21 @@ html {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
-    /* Largeur confortable */
+    width: 12px; /* Largeur confortable */
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-color, #050508);
-    /* Fond noir (comme ton site) */
+    background: var(--bg-color, #050508); /* Fond noir (comme ton site) */
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--accent-primary);
-    /* Ton Violet */
-    border-radius: 6px;
-    /* Arrondi */
-    border: 3px solid var(--bg-color, #050508);
-    /* Crée un espace vide autour du violet */
+    background-color: var(--accent-primary); /* Ton Violet */
+    border-radius: 6px; /* Arrondi */
+    border: 3px solid var(--bg-color, #050508); /* Crée un espace vide autour du violet */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #8B5CF6;
-    /* Violet plus clair au survol */
+    background-color: #8B5CF6; /* Violet plus clair au survol */
 }
 
 body {
@@ -790,13 +786,11 @@ a {
    NAVIGATION (Desktop & Mobile)
    ========================================= */
 .desktop-nav {
-    display: flex;
+   display: flex;
     align-items: center;
-    justify-content: center;
-    /* Centre le contenu */
+    justify-content: center; /* Centre le contenu */
     width: fit-content;
-    max-width: 95%;
-    /* Sécurité pour mobile */
+    max-width: 95%; /* Sécurité pour mobile */
     position: fixed;
     top: 20px;
     z-index: 10005;
@@ -809,8 +803,7 @@ a {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 100px;
-    padding: 0.8rem 1.5rem;
-    /* Padding Desktop */
+    padding: 0.8rem 1.5rem; /* Padding Desktop */
     opacity: 1;
     visibility: visible;
 }
@@ -853,8 +846,7 @@ a {
     z-index: 2;
 }
 
-.nav-item:hover,
-.nav-item.active {
+.nav-item:hover, .nav-item.active {
     color: #fff;
 }
 
@@ -924,14 +916,11 @@ a {
 
 /* Burger Menu */
 .burger-btn {
-    display: none;
-    /* Caché sur Desktop par défaut */
+   display: none; /* Caché sur Desktop par défaut */
     width: 50px;
     height: 50px;
-    position: relative;
-    /* Important pour le positionnement interne */
-    z-index: 10010;
-    /* Toujours au-dessus de l'overlay */
+    position: relative; /* Important pour le positionnement interne */
+    z-index: 10010; /* Toujours au-dessus de l'overlay */
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
@@ -939,42 +928,34 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 6px;
-    /* Espace entre les barres */
+    gap: 6px; /* Espace entre les barres */
     transition: border-color 0.3s ease;
 }
 
 .burger-btn span {
-    display: block;
+   display: block;
     width: 24px;
     height: 2px;
     background-color: #fff;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    /* Petit effet rebond */
-    position: absolute;
-    /* On passe en absolu pour la croix parfaite */
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Petit effet rebond */
+    position: absolute; /* On passe en absolu pour la croix parfaite */
 }
 
 /* État initial des barres (parallèles) */
 .burger-btn span:nth-child(1) {
-    transform: translateY(-4px);
-    /* Barre du haut */
+    transform: translateY(-4px); /* Barre du haut */
 }
-
 .burger-btn span:nth-child(2) {
-    transform: translateY(4px);
-    /* Barre du bas */
+    transform: translateY(4px); /* Barre du bas */
 }
 
 /* --- ANIMATION CROIX (État .active) --- */
 .burger-btn.active span:nth-child(1) {
     transform: translateY(0) rotate(45deg);
 }
-
 .burger-btn.active span:nth-child(2) {
     transform: translateY(0) rotate(-45deg);
 }
-
 /* =========================================
    OVERLAY MENU MOBILE (plein écran)
    ========================================= */
@@ -1072,15 +1053,12 @@ a {
 .footer-container {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    /* Centre le bloc horizontalement */
+    margin: 0 auto; /* Centre le bloc horizontalement */
     padding: 6rem 1.5rem 4rem;
-    min-height: 80vh;
-    /* Prend de la hauteur pour l'esthétique */
+    min-height: 80vh; /* Prend de la hauteur pour l'esthétique */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* Centre tout verticalement */
+    align-items: center; /* Centre tout verticalement */
     justify-content: center;
     text-align: center;
 }
@@ -1206,15 +1184,12 @@ a {
 /* --- BAS DE PAGE (Footer Links) --- */
 .main-footer {
     width: 100%;
-    border-top: 1px solid var(--glass-border);
-    /* Ta variable */
+    border-top: 1px solid var(--glass-border); /* Ta variable */
     padding-top: 2rem;
-
+    
     display: flex;
-    flex-direction: column;
-    /* Mobile : Empilé */
-    align-items: center;
-    /* Mobile : Centré */
+    flex-direction: column; /* Mobile : Empilé */
+    align-items: center;    /* Mobile : Centré */
     gap: 1.5rem;
 }
 
@@ -1252,7 +1227,7 @@ a {
     /* Footer sur une seule ligne (gauche/droite ou centré selon goût) */
     /* Ici je le garde centré car c'est plus joli pour un portfolio perso */
     .main-footer {
-        flex-direction: column;
+        flex-direction: column; 
     }
 }
 
@@ -1539,8 +1514,9 @@ h1.reveal-text {
 }
 
 .projects-section,
-.about-section {
-    padding: 8rem 5% 8rem 5%;
+.about-section
+ {
+    padding:  8rem 5% 8rem 5%;
 }
 
 .section-title {
@@ -1608,15 +1584,8 @@ h1.reveal-text {
 }
 
 @keyframes filterFadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .bento-filtered {
@@ -1967,8 +1936,7 @@ a.bento-card:hover .mini-tag {
 /* --- CORRECTIF 1 : Espace Titre réduit --- */
 /* On cible le titre h2 dans la section about pour remonter le texte */
 .about-text .section-title {
-    margin-bottom: 1.5rem !important;
-    /* Était souvent à 4rem par défaut */
+    margin-bottom: 1.5rem !important; /* Était souvent à 4rem par défaut */
 }
 
 .about-text p {
@@ -1983,8 +1951,7 @@ a.bento-card:hover .mini-tag {
     font-size: 1.4rem;
     color: #fff !important;
     font-weight: 500;
-    margin-bottom: 1.5rem !important;
-    /* Ajusté pour l'équilibre */
+    margin-bottom: 1.5rem !important; /* Ajusté pour l'équilibre */
 }
 
 .stats-grid {
@@ -2002,18 +1969,14 @@ a.bento-card:hover .mini-tag {
     border-radius: 20px;
     backdrop-filter: blur(10px);
     transition: transform .3s, border-color .3s;
-
+    
     /* Le secret du centrage vertical et horizontal : */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* Centre verticalement */
-    align-items: center;
-    /* Centre horizontalement */
-    text-align: center;
-    /* Sécurité pour le texte multi-lignes */
-    height: 100%;
-    /* Force la hauteur uniforme */
+    justify-content: center; /* Centre verticalement */
+    align-items: center;     /* Centre horizontalement */
+    text-align: center;      /* Sécurité pour le texte multi-lignes */
+    height: 100%;            /* Force la hauteur uniforme */
 }
 
 .stat-card:hover {
@@ -2027,8 +1990,7 @@ a.bento-card:hover .mini-tag {
     color: var(--accent-secondary);
     display: block;
     margin-bottom: .5rem;
-    line-height: 1;
-    /* Évite les décalages invisibles */
+    line-height: 1; /* Évite les décalages invisibles */
 }
 
 .stat-label {
@@ -2040,8 +2002,7 @@ a.bento-card:hover .mini-tag {
 
 /* --- CORRECTIF 3 : Espace Bouton CV --- */
 .cv-wrapper {
-    margin-top: 4rem;
-    /* Pousse le bouton vers le bas */
+    margin-top: 4rem; /* Pousse le bouton vers le bas */
     display: block;
 }
 
@@ -2051,7 +2012,7 @@ a.bento-card:hover .mini-tag {
     border-radius: 32px;
     padding: 10px;
     background: linear-gradient(45deg, rgba(79, 70, 229, .3), transparent 60%);
-    opacity: 1;
+    opacity: 1; 
     visibility: visible;
     transform: scale(1);
 }
@@ -2062,9 +2023,9 @@ a.bento-card:hover .mini-tag {
     background-size: cover;
     background-position: center;
     border-radius: 24px;
-
+    
     filter: grayscale(0%) contrast(1);
-
+    
     transition: filter .5s ease;
     box-shadow: 0 20px 40px -20px rgba(139, 92, 246, .5);
 }
@@ -2113,6 +2074,7 @@ a.bento-card:hover .mini-tag {
     .floating-obj,
     .floating-car,
     .floating-ball,
+    .desktop-nav,
     .glow-blob,
     .scroll-indicator,
     .marquee-content,
@@ -2141,9 +2103,26 @@ a.bento-card:hover .mini-tag {
         -webkit-backdrop-filter: none;
     }
 
-    /* Performance iOS : stopper l'animation infinie textShine pendant le scroll */
+    /* Performance iOS 120Hz (ProMotion) : background-clip:text + filter:drop-shadow
+       force le compositeur à calculer l'ombre depuis l'alpha du texte à 3x résolution.
+       À 120fps (8.3ms/frame) la texture GPU n'est pas prête → carré noir. */
+    h1.reveal-text {
+        background-image: none;
+        -webkit-background-clip: initial;
+        background-clip: initial;
+        color: #e4e4e7;
+    }
+
     .gradient-text {
         animation: none;
+        filter: none;
+    }
+
+    /* Performance iOS : supprimer les drop-shadow GPU sur les visuels bento */
+    .floating-obj,
+    .floating-car,
+    .floating-ball {
+        filter: none;
     }
 
     .cv-wrapper {
@@ -2155,30 +2134,18 @@ a.bento-card:hover .mini-tag {
     .marquee-primary {
         animation: marquee-left 30s linear infinite;
     }
-
     .marquee-secondary {
         animation: marquee-right 35s linear infinite;
     }
 }
 
 @keyframes marquee-left {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
-
 @keyframes marquee-right {
-    from {
-        transform: translateX(-50%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
 }
 
 /* Marquee Skills */
@@ -2195,8 +2162,8 @@ a.bento-card:hover .mini-tag {
 }
 
 .marquee-wrapper {
-    display: flex;
-    width: fit-content;
+    display: flex; 
+    width: fit-content; 
 }
 
 .marquee-content {
@@ -2300,7 +2267,7 @@ a.bento-card:hover .mini-tag {
     font-size: 1.15rem;
     line-height: 1.6;
     color: var(--text-muted);
-    margin: 2.5rem auto 3rem auto;
+    margin: 2.5rem auto 3rem auto; 
 }
 
 /* Metadata Projet */
@@ -2359,11 +2326,11 @@ a.bento-card:hover .mini-tag {
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     padding: 0 2rem;
     position: relative;
     z-index: 2;
-
+    
 }
 
 .project-hero-image img {
@@ -2374,7 +2341,6 @@ a.bento-card:hover .mini-tag {
     transform: translateZ(0);
     will-change: transform;
 }
-
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -2754,8 +2720,7 @@ a.bento-card:hover .mini-tag {
 
 .video-wrapper {
     position: relative;
-    padding-bottom: 56.25%;
-    /* 16:9 */
+    padding-bottom: 56.25%; /* 16:9 */
     height: 0;
     overflow: hidden;
     border-radius: 12px;
@@ -3386,7 +3351,6 @@ html:not(.lenis):not(:has(body.no-scroll)) {
 }
 
 @media (min-width: 1025px) {
-
     body.no-scroll .desktop-nav,
     body.no-scroll .burger-btn {
         opacity: 0 !important;
@@ -3458,10 +3422,6 @@ html:not(.lenis):not(:has(body.no-scroll)) {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(255, 255, 255, .08);
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0);
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
     }
 
     [data-theme="light"] .desktop-nav {
