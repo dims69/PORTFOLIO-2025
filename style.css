@@ -2045,6 +2045,22 @@ a.bento-card:hover .mini-tag {
         display: none;
     }
 
+    /* TEST 1 : will-change auto */
+    .bento-card,
+    .cv-btn,
+    .links a,
+    .magnetic-button,
+    .floating-obj,
+    .floating-car,
+    .floating-ball,
+    .desktop-nav,
+    .glow-blob,
+    .scroll-indicator,
+    .marquee-content,
+    .reveal-item {
+        will-change: auto;
+    }
+
     .cv-wrapper {
         margin-top: 3rem;
         text-align: center;
