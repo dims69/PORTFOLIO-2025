@@ -2045,19 +2045,14 @@ a.bento-card:hover .mini-tag {
         display: none;
     }
 
-    /* TEST 3 : will-change auto — hero OK, test éléments hors-hero */
+    /* TEST 4 : will-change auto — sous-groupe A */
     .desktop-nav,
     .glow-blob,
     .scroll-indicator,
     .bento-card,
     .cv-btn,
     .links a,
-    .magnetic-button,
-    .floating-obj,
-    .floating-car,
-    .floating-ball,
-    .marquee-content,
-    .reveal-item {
+    .magnetic-button {
         will-change: auto;
     }
 
