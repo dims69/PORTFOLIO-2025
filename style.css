@@ -2045,7 +2045,7 @@ a.bento-card:hover .mini-tag {
         display: none;
     }
 
-    /* TEST 5 : will-change auto — groupe A + floating seulement */
+    /* TEST 6 : will-change auto — sans floating-* */
     .desktop-nav,
     .glow-blob,
     .scroll-indicator,
@@ -2053,9 +2053,8 @@ a.bento-card:hover .mini-tag {
     .cv-btn,
     .links a,
     .magnetic-button,
-    .floating-obj,
-    .floating-car,
-    .floating-ball {
+    .marquee-content,
+    .reveal-item {
         will-change: auto;
     }
 
