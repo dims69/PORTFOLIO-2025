@@ -7,7 +7,8 @@
       "Bash(echo \"Updated $f\")",
       "Bash(done)",
       "Bash(python -c \":*)",
-      "Bash(while read:*)"
+      "Bash(while read:*)",
+      "Bash(find . -name \"*.html\" -exec sed -i 's/style\\\\.css?v=4/style.css?v=5/g' {} +)"
     ]
   }
 }
