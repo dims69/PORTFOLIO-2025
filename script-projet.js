@@ -102,8 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const isMobile = window.innerWidth <= 768;
 
         // Sur mobile, tout est visible immédiatement
+        // On évite gsap.set({ y: 0 }) pour ne pas créer de transforms GPU → carrés noirs iOS
         if (isMobile) {
-            gsap.set([".project-hero h1", ".project-tags-container", ".project-hero-description", ".project-meta", ".project-hero-image", ".context-section h2", ".context-section p", ".scroll-image-item"], { opacity: 1, y: 0 });
+            [".project-hero h1", ".project-tags-container", ".project-hero-description", ".project-meta", ".project-hero-image", ".context-section h2", ".context-section p", ".scroll-image-item"].forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.visibility = 'visible';
+                });
+            });
             return;
         }
 

@@ -483,13 +483,17 @@ function playHomeHeroAnimations(skipNavAndTitle) {
     const isMobileHero = window.innerWidth <= 768;
 
     // Sur mobile ou après preloader : tout visible immédiatement, pas d'animation
+    // On évite gsap.set({ y: 0 }) pour ne pas créer de transforms GPU sur mobile
     if (isMobileHero || skipNavAndTitle) {
-        gsap.set(".desktop-nav", { yPercent: 0, autoAlpha: 1 });
-        document.querySelectorAll("h1.reveal-text").forEach(el => gsap.set(el, { y: 0, autoAlpha: 1 }));
+        const nav = document.querySelector(".desktop-nav");
+        if (nav) { nav.style.opacity = '1'; nav.style.visibility = 'visible'; }
+        document.querySelectorAll("h1.reveal-text").forEach(el => {
+            el.style.opacity = '1'; el.style.visibility = 'visible';
+        });
         const sub = document.querySelector(".hero-subtitle");
-        if (sub) gsap.set(sub, { y: 0, autoAlpha: 1 });
+        if (sub) { sub.style.opacity = '1'; sub.style.visibility = 'visible'; }
         const scrollInd = document.querySelector(".scroll-indicator");
-        if (scrollInd) gsap.set(scrollInd, { y: 0, autoAlpha: 0.7 });
+        if (scrollInd) { scrollInd.style.opacity = '0.7'; scrollInd.style.visibility = 'visible'; }
         return;
     }
 
@@ -620,8 +624,8 @@ function initScrollHideNav() {
 // ========================================================
 
 function initBurgerMenu() {
-    if (window.innerWidth > 768) return;
-
+    // Pas de guard sur innerWidth : l'overlay est caché par CSS,
+    // mais le listener doit être prêt si l'utilisateur redimensionne en mobile.
     const burger = document.querySelector('.burger-btn');
     if (!burger) return;
 
@@ -690,6 +694,7 @@ function initBurgerMenu() {
 
     // Animation
     let isOpen = false;
+    let _menuScrollY = 0;
     const mobileLinks = overlay.querySelectorAll('.mobile-link');
 
     function openMenu() {
@@ -697,7 +702,9 @@ function initBurgerMenu() {
         burger.classList.add('active');
         overlay.classList.add('active');
 
-        // Bloquer le scroll
+        // Sauvegarder la position de scroll avant de bloquer
+        _menuScrollY = window.lenis ? Math.round(window.lenis.scroll) : window.scrollY;
+        document.body.style.top = `-${_menuScrollY}px`;
         document.body.classList.add('no-scroll');
         if (window.lenis) window.lenis.stop();
 
@@ -723,9 +730,14 @@ function initBurgerMenu() {
             }
         });
 
-        // Débloquer le scroll
+        // Restaurer la position de scroll
         document.body.classList.remove('no-scroll');
-        if (window.lenis) window.lenis.start();
+        document.body.style.top = '';
+        window.scrollTo(0, _menuScrollY);
+        if (window.lenis) {
+            window.lenis.start();
+            window.lenis.scrollTo(_menuScrollY, { immediate: true });
+        }
     }
 
     burger.addEventListener('click', () => {
@@ -747,10 +759,13 @@ function initBurgerMenu() {
 function initScrollReveals() {
     const isMobile = window.innerWidth <= 768;
 
-    // Sur mobile, rendre tout visible immédiatement sans animation
+    // Sur mobile, pas d'animation de reveal — les éléments sont déjà visibles via CSS.
+    // Important : ne PAS utiliser gsap.set({ y: 0 }) ici car cela crée des
+    // transform inline qui forcent des couches GPU → carrés noirs sur iOS Safari.
     if (isMobile) {
         document.querySelectorAll(".reveal, .reveal-item").forEach(el => {
-            gsap.set(el, { autoAlpha: 1, y: 0 });
+            el.style.opacity = '1';
+            el.style.visibility = 'visible';
         });
         return;
     }
