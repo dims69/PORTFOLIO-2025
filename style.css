@@ -730,6 +730,53 @@ a {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.visit-site-btn.secondary {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.85rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-muted);
+}
+
+.visit-site-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-main);
+    box-shadow: none;
+}
+
+.catalogue-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-start;
+}
+
+.catalogue-latest-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.catalogue-btns-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.catalogue-btns-row-label {
+    width: 100%;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
 .info-button {
     padding: .5rem 1rem;
     font-size: .8rem;

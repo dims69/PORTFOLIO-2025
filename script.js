@@ -95,6 +95,22 @@ function loadComponents() {
                 setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 100);
             }
         }
+
+        // Restaurer la position de scroll après un switch de langue
+        try {
+            const savedScroll = sessionStorage.getItem('langSwitchScroll');
+            if (savedScroll !== null) {
+                sessionStorage.removeItem('langSwitchScroll');
+                const y = parseInt(savedScroll, 10);
+                if (y > 0) {
+                    // Attendre que le layout soit stable (images, ScrollTrigger)
+                    requestAnimationFrame(() => {
+                        window.scrollTo(0, y);
+                        if (window.lenis) window.lenis.scrollTo(y, { immediate: true });
+                    });
+                }
+            }
+        } catch (e) {}
     });
 }
 
@@ -878,6 +894,9 @@ function initLangPill() {
 
             // Mémoriser le choix manuel pour ne plus rediriger automatiquement
             try { localStorage.setItem('langChoice', next); } catch (e) {}
+
+            // Sauvegarder la position de scroll pour la restaurer après navigation
+            try { sessionStorage.setItem('langSwitchScroll', String(window.scrollY || window.pageYOffset)); } catch (e) {}
 
             // Naviguer après l'animation
             setTimeout(() => {

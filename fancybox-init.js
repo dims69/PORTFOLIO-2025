@@ -31,7 +31,14 @@
                 document.body.style.top = '';
                 document.body.style.width = '';
                 window.scrollTo(0, savedScrollY);
-                if (window.lenis) window.lenis.start();
+
+                if (window.lenis) {
+                    // Attendre que le navigateur ait appliqué le scrollTo
+                    // avant de redémarrer Lenis (sinon Lenis lit scrollY=0)
+                    requestAnimationFrame(function () {
+                        window.lenis.start();
+                    });
+                }
             }
         }
     });
