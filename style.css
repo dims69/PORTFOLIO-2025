@@ -3292,6 +3292,13 @@ a.next-project-section:hover::before {
 }
 
 /* =========================================
+   FANCYBOX — z-index au-dessus de la nav
+   ========================================= */
+.fancybox__container {
+    z-index: 10100 !important;
+}
+
+/* =========================================
    SCROLL LOCK & GALERIE
    ========================================= */
 body.no-scroll {

@@ -86,6 +86,15 @@ function loadComponents() {
         initTouchPrefetch();
         ScrollTrigger.refresh();
         window.dispatchEvent(new Event('appReady'));
+
+        // Scroll vers l'ancre si présente dans l'URL (le footer est chargé en JS,
+        // donc le navigateur ne peut pas scroller vers #contact au chargement initial)
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 100);
+            }
+        }
     });
 }
 
@@ -640,17 +649,16 @@ function initBurgerMenu() {
     overlay.className = 'mobile-menu-overlay';
 
     // Liens — toujours pointer vers index.html avec ancre
-    const base = isEN ? 'index.html' : 'index.html';
     const links = isEN
         ? [
-            { label: 'Projects', href: base + '#projects' },
-            { label: 'About', href: base + '#about' },
-            { label: 'Contact', href: base + '#contact' }
+            { label: 'Projects', href: 'index.html#projects' },
+            { label: 'About', href: 'index.html#about' },
+            { label: 'Contact', href: 'index.html#contact' }
           ]
         : [
-            { label: 'Projets', href: base + '#projets' },
-            { label: 'Infos', href: base + '#infos' },
-            { label: 'Contact', href: base + '#contact' }
+            { label: 'Projets', href: 'index.html#projets' },
+            { label: 'Infos', href: 'index.html#infos' },
+            { label: 'Contact', href: 'index.html#contact' }
           ];
 
     const nav = document.createElement('nav');
@@ -830,6 +838,12 @@ function initScrollReveals() {
 // LANG PILL — Animation du toggle avant navigation
 // ========================================================
 function initLangPill() {
+    // Pages dont le nom diffère entre FR et EN
+    const pageMap = {
+        'mentions-legales.html': 'legal.html',
+        'legal.html': 'mentions-legales.html'
+    };
+
     document.querySelectorAll('.lang-pill').forEach(pill => {
         pill.addEventListener('click', function(e) {
             e.preventDefault();
@@ -838,7 +852,14 @@ function initLangPill() {
 
             // Calculer l'URL équivalente dans l'autre langue
             const path = window.location.pathname;
-            const page = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+            let page = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+
+            // Netlify clean URLs : ajouter .html si absent
+            if (page && !page.includes('.')) page += '.html';
+
+            // Mapping des pages au nom différent entre langues
+            if (pageMap[page]) page = pageMap[page];
+
             let target;
 
             if (current === 'fr') {
